@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     //variabili statiche
     public static TimerManager TimerManagerInstance { get; private set; }
 
-
     void Awake()
     {
         //ricordarsi di assegnare il valore delle variabili statiche
