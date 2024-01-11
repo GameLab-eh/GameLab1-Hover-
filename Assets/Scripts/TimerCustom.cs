@@ -28,4 +28,13 @@ namespace TimerCustom
             }
         }
     }
+
+    /*Esempio temporizzatore che stampa un messaggio dopo 3 secondi
+    
+    CustomTimer myTimer = new CustomTimer(() => { Debug.Log("Temporizzatore scaduto!"); }, 3f);
+    //Aggiungere il temporizzatore al TimerManager
+    TimerManager.AddTimer(myTimer);
+    
+    */
+
 }
