@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Min (0)] float movementSpeed;
     [SerializeField] float maxSpeed;
     [SerializeField] float rotationSpeed;
+    [SerializeField] float rotationDecayRate = 5.0f;
+    private float _currentRotationSpeed = 0.0f;
     private float _normalMaxSpeed; //used for store MaxSpeedVariable to restore to default when changed (currently not used)
 
     //for buff and malus variables
@@ -88,11 +90,30 @@ public class PlayerController : MonoBehaviour
             _isGrounded = true;
         }
     }
-
     private void rotate()
     {
-        float angle = _horizontal * rotationSpeed * Time.deltaTime;
-        transform.Rotate(Vector3.up, angle);
+        if (_horizontal != 0)
+        {
+            _currentRotationSpeed = _horizontal * rotationSpeed;
+            float angle = _currentRotationSpeed * Time.deltaTime;
+            transform.Rotate(Vector3.up, angle);
+        }
+        else if (_currentRotationSpeed != 0)
+        {
+            // Riduci gradualmente la velocità di rotazione nel tempo
+            float decay = rotationDecayRate * Time.deltaTime;
+            _currentRotationSpeed = Mathf.Lerp(_currentRotationSpeed, 0, decay);
+            transform.Rotate(Vector3.up, _currentRotationSpeed * Time.deltaTime);
+        }
+    }
+
+    private void rotatebeta()
+    {
+        if (_horizontal != 0)
+        {
+            float angle = _horizontal * rotationSpeed * Time.deltaTime;
+            transform.Rotate(Vector3.up, angle);
+        }
     }
 
     private void Move()
