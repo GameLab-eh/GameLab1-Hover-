@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float rotationSpeed;
     [SerializeField] float rotationDecayRate = 5.0f;
     private float _currentRotationSpeed = 0.0f;
+    [SerializeField, Min(0)] float _bounceForce = 500f;
     private float _normalMaxSpeed; //used for store MaxSpeedVariable to restore to default when changed (currently not used)
 
     //for buff and malus variables
@@ -83,13 +86,7 @@ public class PlayerController : MonoBehaviour
     {
         Move();
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag == "Ground")
-        {
-            _isGrounded = true;
-        }
-    }
+
     private void rotate()
     {
         if (_horizontal != 0)
@@ -100,21 +97,13 @@ public class PlayerController : MonoBehaviour
         }
         else if (_currentRotationSpeed != 0)
         {
-            // Riduci gradualmente la velocità di rotazione nel tempo
+            //gradualy reduce rotation speed over time
             float decay = rotationDecayRate * Time.deltaTime;
             _currentRotationSpeed = Mathf.Lerp(_currentRotationSpeed, 0, decay);
             transform.Rotate(Vector3.up, _currentRotationSpeed * Time.deltaTime);
         }
     }
 
-    private void rotatebeta()
-    {
-        if (_horizontal != 0)
-        {
-            float angle = _horizontal * rotationSpeed * Time.deltaTime;
-            transform.Rotate(Vector3.up, angle);
-        }
-    }
 
     private void Move()
     {
@@ -124,7 +113,20 @@ public class PlayerController : MonoBehaviour
             Rb.AddForce(move, ForceMode.Force);
         }
     }
-    
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            _isGrounded = true;
+        }
+        else if(collision.gameObject.tag == "Wall")
+        {
+            BounceOff(collision.contacts[0].normal);
+        }
+
+    }
+
     private void Jump()
     {
         if(_isGrounded && _jumpStack > 0)
@@ -151,5 +153,13 @@ public class PlayerController : MonoBehaviour
             _isInvisible = false;
             Debug.Log("hey non sono più invisibile");
         }
+    }
+    private void BounceOff(Vector3 wallNormal)
+    {
+        // Normalizza la direzione della normale del muro
+        Vector3 bounceDirection = wallNormal.normalized;
+
+        // Applica una forza di rimbalzo al giocatore
+        Rb.AddForce(bounceDirection * _bounceForce, ForceMode.Impulse);
     }
 }
