@@ -21,18 +21,12 @@ public class PlayerController : MonoBehaviour
     private bool _isInvisible = false;
 
     //general variables
-    [SerializeField] private Rigidbody rb;
     private bool isPlayerAbleToMove = true;
     private int _playerScore;
 
     //basic movement variables
     private float _horizontal;
     private float _vertical;
-
-    [SerializeField] float movementSpeed;
-    [SerializeField] float maxSpeed;
-    [SerializeField] float rotationSpeed;
-
 
     
 
@@ -76,16 +70,27 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-
-        if (isPlayerAbleToMove)
-
-        Debug.DrawRay(transform.position, -transform.up * _playerHeight);
         if (_isAlive)
-
         {
-            _horizontal = Input.GetAxisRaw("Horizontal");
-            _vertical = Input.GetAxisRaw("Vertical");
-            rotate();
+            if (_isAbleToMove)
+            {
+                _horizontal = Input.GetAxisRaw("Rotation");
+                _vertical = Input.GetAxisRaw("Move");
+                rotate();
+            }
+            if (Input.GetKeyDown(keyJump1) || Input.GetKeyDown(keyJump2))
+            {
+                Jump();
+            }
+            if (Input.GetKeyDown(keyWall1) || Input.GetKeyDown(keyWall2))
+            {
+                Wall();
+            }
+            if (Input.GetKeyDown(keyInvisibility1) || Input.GetKeyDown(keyInvisibility2))
+            {
+                Debug.Log(_isInvisible);
+                StartCoroutine(Invisibility());
+            }
         }
     }
 

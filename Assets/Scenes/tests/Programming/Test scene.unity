@@ -1100,15 +1100,21 @@ MonoBehaviour:
   keyWall2: 50
   keyInvisibility1: 108
   keyInvisibility2: 51
-  movementSpeed: 20
-  maxSpeed: 15
-  rotationSpeed: 60
-  rotationDecayRate: 5
-  _bounceForce: 0
-  jumpPower: 10
+  _movementSpeed: 0
+  _maxSpeed: 0
+  _rotationSpeed: 0
+  _rotationDecayRate: 5
+  _jumpPower: 0
   _jumpStack: 10
   _invisibilityStack: 10
+  _playerHeight: 0
   <Rb>k__BackingField: {fileID: 0}
+  _stairsUpperPoint: {fileID: 0}
+  _stairsLowerPoint: {fileID: 0}
+  _stairsJumps: 0.1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!54 &1999097001
 Rigidbody:
   m_ObjectHideFlags: 0
