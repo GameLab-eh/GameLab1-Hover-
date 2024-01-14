@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-<<<<<<< Updated upstream
-=======
+
     //for designer
     [Header("Input")]
     [SerializeField] KeyCode keyJump1 = KeyCode.J;
@@ -21,7 +20,6 @@ public class PlayerController : MonoBehaviour
     private bool _isGrounded => Physics.Raycast(transform.position, -transform.up, _playerHeight, groundLayer);
     private bool _isInvisible = false;
 
->>>>>>> Stashed changes
     //general variables
     [SerializeField] private Rigidbody rb;
     private bool isPlayerAbleToMove = true;
@@ -30,14 +28,14 @@ public class PlayerController : MonoBehaviour
     //basic movement variables
     private float _horizontal;
     private float _vertical;
-<<<<<<< Updated upstream
+
     [SerializeField] float movementSpeed;
     [SerializeField] float maxSpeed;
     [SerializeField] float rotationSpeed;
-    private float _normalMaxSpeed; //used for store MaxSpeedVariable to restore to default when changed (currently not used)
 
-    public Rigidbody Rb { get => rb; private set => rb = value; }
-=======
+
+    
+
     [Header("Physics")]
     
 
@@ -68,8 +66,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-   
->>>>>>> Stashed changes
+
 
     private void Awake()
     {
@@ -79,12 +76,12 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-<<<<<<< Updated upstream
+
         if (isPlayerAbleToMove)
-=======
+
         Debug.DrawRay(transform.position, -transform.up * _playerHeight);
         if (_isAlive)
->>>>>>> Stashed changes
+
         {
             _horizontal = Input.GetAxisRaw("Horizontal");
             _vertical = Input.GetAxisRaw("Vertical");
@@ -101,10 +98,7 @@ public class PlayerController : MonoBehaviour
 
     private void rotate()
     {
-<<<<<<< Updated upstream
-        float angle = _horizontal * rotationSpeed * Time.deltaTime;
-        transform.Rotate(Vector3.up, angle);
-=======
+
         if (_horizontal != 0)
         {
             _currentRotationSpeed = _horizontal * _rotationSpeed;
@@ -118,23 +112,20 @@ public class PlayerController : MonoBehaviour
             _currentRotationSpeed = Mathf.Lerp(_currentRotationSpeed, 0, decay);
             transform.Rotate(Vector3.up, _currentRotationSpeed * Time.deltaTime);
         }
->>>>>>> Stashed changes
+
     }
 
     private void Move()
     {
-<<<<<<< Updated upstream
-        if (rb.velocity.magnitude < maxSpeed)
-=======
+
         if (Rb.velocity.magnitude < _maxSpeed)
->>>>>>> Stashed changes
+
         {
             Vector3 move = transform.forward * _vertical * _movementSpeed;
             Rb.AddForce(move, ForceMode.Force);
         }
     }
-<<<<<<< Updated upstream
-=======
+
 
 
 
@@ -184,5 +175,5 @@ public class PlayerController : MonoBehaviour
 
     
 
->>>>>>> Stashed changes
+
 }
