@@ -36,7 +36,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float rotationSpeed;
     [SerializeField] float rotationDecayRate = 5.0f;
     private float _currentRotationSpeed = 0.0f;
-    [SerializeField, Min(0)] float _bounceForce = 500f;
     private float _normalMaxSpeed; //used for store MaxSpeedVariable to restore to default when changed (currently not used)
 
     //for buff and malus variables
@@ -120,10 +119,7 @@ public class PlayerController : MonoBehaviour
         {
             _isGrounded = true;
         }
-        else if(collision.gameObject.tag == "Wall")
-        {
-            BounceOff(collision.contacts[0].normal);
-        }
+
 
     }
 
@@ -154,12 +150,5 @@ public class PlayerController : MonoBehaviour
             Debug.Log("hey non sono più invisibile");
         }
     }
-    private void BounceOff(Vector3 wallNormal)
-    {
-        // Normalizza la direzione della normale del muro
-        Vector3 bounceDirection = wallNormal.normalized;
 
-        // Applica una forza di rimbalzo al giocatore
-        Rb.AddForce(bounceDirection * _bounceForce, ForceMode.Impulse);
-    }
 }
