@@ -166,13 +166,13 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(_stairsLowerPoint.position, transform.forward * 0.1f);
         Debug.DrawRay(_stairsUpperPoint.position, transform.forward * 0.5f);
         RaycastHit lowerHit;
-        if(Physics.Raycast(_stairsLowerPoint.position, transform.forward, out lowerHit, 0.1f, groundLayer))
+        if(Physics.Raycast(_stairsLowerPoint.position, transform.forward, out lowerHit, 0.2f, groundLayer))
         {
             
             RaycastHit upperHit;
             if (!Physics.Raycast(_stairsUpperPoint.position, transform.forward, out upperHit, 0.5f, groundLayer))
             {
-                Rb.position += new Vector3(0, _stairsJumps, 0);
+                Rb.position += new Vector3(0, _stairsJumps, 0.5f);
                 
             }
         }
