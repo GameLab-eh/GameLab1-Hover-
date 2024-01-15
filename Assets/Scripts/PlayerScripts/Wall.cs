@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Wall : MonoBehaviour
 {
-    [SerializeField] float secondBeforeDestroy = 5;
+    [SerializeField] float secondBeforeDestroy = 5f;
     private Vector3 _startingPosition;
     private bool _isSpawned;
 
