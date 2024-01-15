@@ -39,17 +39,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _rotationDecayRate = 5.0f;
     private float _currentRotationSpeed = 0.0f;
     private float _normalMaxSpeed; //used for store MaxSpeedVariable to restore to default when changed (currently not used)
-
-
+    [SerializeField, Min(0)] float _playerHeight;
+    [field: SerializeField] public Rigidbody Rb { get; private set; }
 
 
     //for buff and malus variables
     //jump
+    [Header("Buff")]
     [SerializeField] float _jumpPower;
     [SerializeField] float _jumpStack = 10;
+
+    //invisibility
     [SerializeField] float _invisibilityStack = 10;
-    [SerializeField,Min(0)] float _playerHeight;
-    [field: SerializeField] public Rigidbody Rb { get; private set; }
+
+
+    //wall
+    [SerializeField] float _wallStack = 10;
+    [SerializeField] Transform _wallPoint;
+
 
     //step on stairs variables
     [Header("Stairs variable")]
@@ -145,7 +152,10 @@ public class PlayerController : MonoBehaviour
 
     private void Wall()
     {
-        Debug.Log("ENTRA?!?!?!?");
+        GameObject wall = ObjectPooler.SharedInstance.GetPooledObject();
+        wall.SetActive(true);
+        wall.transform.position = _wallPoint.position;
+        wall.transform.rotation = _wallPoint.transform.rotation;
     }
 
     public IEnumerator Invisibility()
@@ -163,10 +173,10 @@ public class PlayerController : MonoBehaviour
     
     private void StairsClimb()
     {
-        Debug.DrawRay(_stairsLowerPoint.position, transform.forward * 0.1f);
-        Debug.DrawRay(_stairsUpperPoint.position, transform.forward * 0.5f);
         RaycastHit lowerHit;
-        if(Physics.Raycast(_stairsLowerPoint.position, transform.forward, out lowerHit, 0.2f, groundLayer))
+        RaycastHit lowerHit45;
+        RaycastHit lowerHitOther45;
+        if (Physics.Raycast(_stairsLowerPoint.position, transform.forward, out lowerHit, 0.2f, groundLayer))
         {
             
             RaycastHit upperHit;
@@ -176,6 +186,29 @@ public class PlayerController : MonoBehaviour
                 
             }
         }
+        else if (Physics.Raycast(_stairsLowerPoint.position, transform.TransformDirection(1.5f, 0, 1), out lowerHit45, 0.2f, groundLayer))
+        {
+
+            RaycastHit upperHit45;
+            if (!Physics.Raycast(_stairsUpperPoint.position, transform.TransformDirection(1.5f, 0, 1), out upperHit45, 0.5f, groundLayer))
+            {
+                Rb.position += new Vector3(0, _stairsJumps, 0.5f);
+
+            }
+        }
+        else if (Physics.Raycast(_stairsLowerPoint.position, transform.TransformDirection(-1.5f, 0, 1), out lowerHitOther45, 0.2f, groundLayer))
+        {
+
+            RaycastHit upperHitOther45;
+            if (!Physics.Raycast(_stairsUpperPoint.position, transform.TransformDirection(-1.5f, 0, 1), out upperHitOther45, 0.5f, groundLayer))
+            {
+                Rb.position += new Vector3(0, _stairsJumps, 0.5f);
+
+            }
+        }
+
+
+
     }
 
     

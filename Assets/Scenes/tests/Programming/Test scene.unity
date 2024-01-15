@@ -1481,11 +1481,12 @@ MonoBehaviour:
   _maxSpeed: 15
   _rotationSpeed: 60
   _rotationDecayRate: 5
+  _playerHeight: 2
+  <Rb>k__BackingField: {fileID: 0}
   _jumpPower: 10
   _jumpStack: 10
   _invisibilityStack: 10
-  _playerHeight: 2
-  <Rb>k__BackingField: {fileID: 0}
+  _wallStack: 10
   _stairsUpperPoint: {fileID: 96420946}
   _stairsLowerPoint: {fileID: 567217644}
   _stairsJumps: 1.2
@@ -1536,6 +1537,37 @@ Transform:
   - {fileID: 1587177268}
   - {fileID: 96420946}
   - {fileID: 567217644}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2045263485
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2045263486}
+  m_Layer: 0
+  m_Name: GAMECONTROLLER
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2045263486
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045263485}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -34.42139, y: 5.00041, z: -30.713062}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2116024718
@@ -1636,6 +1668,7 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 2045263486}
   - {fileID: 2116024720}
   - {fileID: 1677951477}
   - {fileID: 578097340}
