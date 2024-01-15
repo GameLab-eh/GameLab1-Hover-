@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
     //for buff and malus variables
     //jump
-    [Header("Buff")]
+    [Header("Buff and Debuff")]
     [SerializeField] float _jumpPower;
     [SerializeField] float _jumpStack = 10;
 
@@ -57,6 +57,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _wallStack = 10;
     [SerializeField] Transform _wallPoint;
 
+    //shield
+    [SerializeField] float _shieldStack = 10;
+
+    //Green and Red light
+    [SerializeField] float _speedChanger;
+    [SerializeField] float _timeSpeedChanger;
 
     //step on stairs variables
     [Header("Stairs variable")]
@@ -72,6 +78,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         Rb = GetComponent<Rigidbody>();
+        _normalMaxSpeed = _maxSpeed;
        
     }
 
@@ -178,40 +185,69 @@ public class PlayerController : MonoBehaviour
         RaycastHit lowerHitOther45;
         if (Physics.Raycast(_stairsLowerPoint.position, transform.forward, out lowerHit, 0.2f, groundLayer))
         {
-            
             RaycastHit upperHit;
             if (!Physics.Raycast(_stairsUpperPoint.position, transform.forward, out upperHit, 0.5f, groundLayer))
             {
                 Rb.position += new Vector3(0, _stairsJumps, 0.5f);
-                
             }
         }
         else if (Physics.Raycast(_stairsLowerPoint.position, transform.TransformDirection(1.5f, 0, 1), out lowerHit45, 0.2f, groundLayer))
         {
-
             RaycastHit upperHit45;
             if (!Physics.Raycast(_stairsUpperPoint.position, transform.TransformDirection(1.5f, 0, 1), out upperHit45, 0.5f, groundLayer))
             {
                 Rb.position += new Vector3(0, _stairsJumps, 0.5f);
-
             }
         }
         else if (Physics.Raycast(_stairsLowerPoint.position, transform.TransformDirection(-1.5f, 0, 1), out lowerHitOther45, 0.2f, groundLayer))
         {
-
             RaycastHit upperHitOther45;
             if (!Physics.Raycast(_stairsUpperPoint.position, transform.TransformDirection(-1.5f, 0, 1), out upperHitOther45, 0.5f, groundLayer))
             {
                 Rb.position += new Vector3(0, _stairsJumps, 0.5f);
-
             }
         }
 
 
 
     }
+    private void OnTriggerEnter(Collider collision)
+    {
+        int layer = collision.gameObject.layer;
 
-    
+        switch(layer)
+        {
+            case 6:
+                Debug.Log("random");
+                break;
+            case 7:
+                _jumpStack++;
+                break;
+            case 8:
+                _invisibilityStack++;
+                break;
+            case 9:
+                _wallStack++;
+                break;
+            case 10:
+                _shieldStack++;
+                break;
+            case 11:
+                _maxSpeed = _maxSpeed - _speedChanger;
+                Invoke("NormalizeMaxSpeedVar", _timeSpeedChanger);
+                break;
+            case 12:
+                _maxSpeed = _maxSpeed + _speedChanger;
+                Invoke("NormalizeMaxSpeedVar",_timeSpeedChanger);
+                break;
+        }
+    }
+    private void NormalizeMaxSpeedVar()
+    {
+        _maxSpeed = _normalMaxSpeed;
+    }
+
+
 
 
 }
