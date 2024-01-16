@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     private bool _isInvisible = false;
 
     //general variables
-    private bool isPlayerAbleToMove = true;
     private int _playerScore;
 
     //basic movement variables
@@ -70,7 +69,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform _stairsLowerPoint;
     [SerializeField] float _stairsJumps = 0.1f;
     [SerializeField] LayerMask _groundLayer;
-
+    
 
 
 
@@ -174,7 +173,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("hey sono invisibile");
             yield return new WaitForSeconds(5f);
             _isInvisible = false;
-            Debug.Log("hey non sono più invisibile");
+            Debug.Log("hey non sono piÃ¹ invisibile");
         }
     }
     
