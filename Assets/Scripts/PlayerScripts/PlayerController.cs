@@ -188,7 +188,7 @@ public class PlayerController : MonoBehaviour
             RaycastHit upperHit;
             if (!Physics.Raycast(_stairsUpperPoint.position, transform.forward, out upperHit, 0.5f, _groundLayer))
             {
-                Rb.position += new Vector3(0, _stairsJumps, 0.5f);
+                Rb.position += new Vector3(0, _stairsJumps, 0f);
             }
         }
         else if (Physics.Raycast(_stairsLowerPoint.position, transform.TransformDirection(1.5f, 0, 1), out lowerHit45, 0.2f, _groundLayer))
@@ -196,7 +196,7 @@ public class PlayerController : MonoBehaviour
             RaycastHit upperHit45;
             if (!Physics.Raycast(_stairsUpperPoint.position, transform.TransformDirection(1.5f, 0, 1), out upperHit45, 0.5f, _groundLayer))
             {
-                Rb.position += new Vector3(0, _stairsJumps, 0.5f);
+                Rb.position += new Vector3(0, _stairsJumps, 0f);
             }
         }
         else if (Physics.Raycast(_stairsLowerPoint.position, transform.TransformDirection(-1.5f, 0, 1), out lowerHitOther45, 0.2f, _groundLayer))
@@ -204,7 +204,7 @@ public class PlayerController : MonoBehaviour
             RaycastHit upperHitOther45;
             if (!Physics.Raycast(_stairsUpperPoint.position, transform.TransformDirection(-1.5f, 0, 1), out upperHitOther45, 0.5f, _groundLayer))
             {
-                Rb.position += new Vector3(0, _stairsJumps, 0.5f);
+                Rb.position += new Vector3(0, _stairsJumps, 0f);
             }
         }
 
