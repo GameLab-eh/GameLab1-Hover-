@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
     public static TimerManager TimerManagerInstance { get; private set; }
 
     //variabili globali
-    [SerializeField] private int score;
+    [SerializeField] private int flagPlayer;
+    [SerializeField] private int flagEnemy;
 
     void Awake()
     {
@@ -40,11 +41,16 @@ public class GameManager : MonoBehaviour
 
     public void IncrementScore(int value)
     {
-        score += value;
+        flagPlayer += value;
+    }
+    public void IncrementScoreE(int value)
+    {
+        flagEnemy += value;
     }
     public void OnEnable()
     {
         Flag.FlagHit += IncrementScore;
+        FlagE.FlagHit += IncrementScoreE;
     }
 
     #endregion
