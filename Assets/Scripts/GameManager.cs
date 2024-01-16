@@ -5,10 +5,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameManager Instance { get; private set; }
+    public static GameManager Instance { get; private set; }
 
     //variabili statiche
     public static TimerManager TimerManagerInstance { get; private set; }
+
+    //variabili globali
+    [SerializeField] private int score;
 
     void Awake()
     {
@@ -22,17 +25,28 @@ public class GameManager : MonoBehaviour
 
         #region Singleton
 
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(transform.root.gameObject);
-        }
-        else
+        if (Instance != null)
         {
             Destroy(transform.root.gameObject);
             return;
         }
+        Instance = this;
+        DontDestroyOnLoad(transform.root.gameObject);
 
         #endregion
     }
+
+    #region Event
+
+    public void IncrementScore(int value)
+    {
+        score += value;
+    }
+    public void OnEnable()
+    {
+        Flag.FlagHit += IncrementScore;
+    }
+
+    #endregion
+
 }
