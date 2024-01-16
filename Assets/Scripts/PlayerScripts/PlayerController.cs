@@ -179,10 +179,11 @@ public class PlayerController : MonoBehaviour
     
     private void StairsClimb()
     {
+
         RaycastHit lowerHit;
         RaycastHit lowerHit45;
         RaycastHit lowerHitOther45;
-        if (Physics.Raycast(_stairsLowerPoint.position, transform.forward, out lowerHit, 0.2f, _groundLayer))
+        if (Physics.Raycast(_stairsLowerPoint.position, transform.forward, out lowerHit, 0.1f, _groundLayer))
         {
             RaycastHit upperHit;
             if (!Physics.Raycast(_stairsUpperPoint.position, transform.forward, out upperHit, 0.5f, _groundLayer))
@@ -190,7 +191,7 @@ public class PlayerController : MonoBehaviour
                 Rb.position += new Vector3(0, _stairsJumps, 0f);
             }
         }
-        else if (Physics.Raycast(_stairsLowerPoint.position, transform.TransformDirection(1.5f, 0, 1), out lowerHit45, 0.2f, _groundLayer))
+        else if (Physics.Raycast(_stairsLowerPoint.position, transform.TransformDirection(1.5f, 0, 1), out lowerHit45, 0.1f, _groundLayer))
         {
             RaycastHit upperHit45;
             if (!Physics.Raycast(_stairsUpperPoint.position, transform.TransformDirection(1.5f, 0, 1), out upperHit45, 0.5f, _groundLayer))
@@ -198,7 +199,7 @@ public class PlayerController : MonoBehaviour
                 Rb.position += new Vector3(0, _stairsJumps, 0f);
             }
         }
-        else if (Physics.Raycast(_stairsLowerPoint.position, transform.TransformDirection(-1.5f, 0, 1), out lowerHitOther45, 0.2f, _groundLayer))
+        else if (Physics.Raycast(_stairsLowerPoint.position, transform.TransformDirection(-1.5f, 0, 1), out lowerHitOther45, 0.1f, _groundLayer))
         {
             RaycastHit upperHitOther45;
             if (!Physics.Raycast(_stairsUpperPoint.position, transform.TransformDirection(-1.5f, 0, 1), out upperHitOther45, 0.5f, _groundLayer))
