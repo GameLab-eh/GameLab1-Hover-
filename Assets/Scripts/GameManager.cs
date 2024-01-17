@@ -59,6 +59,9 @@ public class GameManager : MonoBehaviour
         #endregion
     }
 
+
+ 
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -67,6 +70,7 @@ public class GameManager : MonoBehaviour
             PauseGame();
         }
     }
+
 
     #region Event
 

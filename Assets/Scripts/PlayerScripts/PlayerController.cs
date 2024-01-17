@@ -220,12 +220,12 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider collision)
     {
         int layer = collision.gameObject.layer;
-
+        if (layer == 6)
+        {
+            layer = Random.Range(7, 13);
+        }
         switch (layer)
         {
-            case 6:
-                Debug.Log("random");
-                break;
             case 7:
                 _jumpStack++;
                 break;
@@ -247,6 +247,7 @@ public class PlayerController : MonoBehaviour
                 Invoke("NormalizeMaxSpeedVar", _timeSpeedChanger);
                 break;
         }
+        
     }
     private void NormalizeMaxSpeedVar()
     {
