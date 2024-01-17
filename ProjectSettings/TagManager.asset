@@ -9,9 +9,16 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
+  - Random
+  - Jump
+  - Invisibility
+  - Wall
+  - Shield
+  - Red Light
+  - Green Light
   - 
   - 
   - 
@@ -28,16 +35,9 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - MiniMap
+  - Enemy
+  - Player
   m_SortingLayers:
   - name: Default
     uniqueID: 0
