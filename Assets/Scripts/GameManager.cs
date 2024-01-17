@@ -52,6 +52,11 @@ public class GameManager : MonoBehaviour
         Flag.FlagHit += IncrementScore;
         FlagE.FlagHit += IncrementScoreE;
     }
+    public void OnDisable()
+    {
+        Flag.FlagHit -= IncrementScore;
+        FlagE.FlagHit -= IncrementScoreE;
+    }
 
     #endregion
 
