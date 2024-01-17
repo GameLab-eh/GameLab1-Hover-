@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Flag : MonoBehaviour
@@ -13,6 +14,7 @@ public class Flag : MonoBehaviour
     [SerializeField, Range(0, 10)] float _delayStartSpawn = 0f;
     [SerializeField, Range(0, 10)] float _delaySpawn = 0f;
     [SerializeField] Collider _collider;
+    [SerializeField] GameObject _mesh;
 
     //general variables
     int _scoreOnHit = 1;
@@ -22,7 +24,7 @@ public class Flag : MonoBehaviour
 
     private void Awake()
     {
-        _collider = GetComponent<Collider>();
+        _collider = _mesh.GetComponent<Collider>();
 
         //check Designer error
         if (!_ListObj.Any()) Debug.LogError("The spawn points list for the flag object is empty.");
@@ -30,17 +32,24 @@ public class Flag : MonoBehaviour
 
     private void Start()
     {
-        Invoke(nameof(spawn), _delayStartSpawn);
+        StartCoroutine(DelayCoroutine(_delayStartSpawn));
+        _mesh.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 31) /*31 = player*/
         {
-            Invoke(nameof(spawn), _delaySpawn);
             FlagHit?.Invoke(_scoreOnHit);
-            gameObject.SetActive(false);
+            _mesh.gameObject.SetActive(false);
+            StartCoroutine(DelayCoroutine(_delaySpawn));
         }
+    }
+
+    IEnumerator DelayCoroutine(float value)
+    {
+        yield return new WaitForSeconds(value);
+        spawn();
     }
 
     private void spawn()
@@ -62,6 +71,6 @@ public class Flag : MonoBehaviour
         }
 
         this.transform.position = _newPosition;
-        gameObject.SetActive(true);
+        _mesh.gameObject.SetActive(true);
     }
 }
