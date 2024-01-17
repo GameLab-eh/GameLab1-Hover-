@@ -694,6 +694,11 @@ MonoBehaviour:
   flagEnemy: 0
   score: 0
   playerSpeed: 0
+  difficulty: 1
+  _flagValue: 900
+  _flagEnemyValue: -500
+  _difficultyScoreValue: []
+  Levels: []
 --- !u!1 &803308189
 GameObject:
   m_ObjectHideFlags: 0
