@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
         #endregion
     }
 
+ 
     #region Event
 
     public void IncrementFlagCount(int value)
