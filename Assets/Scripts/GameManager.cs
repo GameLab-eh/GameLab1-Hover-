@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.Scripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -76,6 +77,7 @@ public class GameManager : MonoBehaviour
 
         if (value == Levels[_currentLevel].flagsToCapture)
         {
+            //win
             gameIsEnded = true;
             EndGame();
         }
@@ -84,6 +86,13 @@ public class GameManager : MonoBehaviour
     {
         flagEnemy += value;
         score += value * _flagEnemyValue;
+
+        if (value == Levels[_currentLevel].flagsEnemy)
+        {
+            //lose
+            gameIsEnded = true;
+            EndGame();
+        }
     }
     public void IncrementScore(int value)
     {
@@ -175,16 +184,18 @@ public class Level
 {
     public GameObject gameObject;
     public int flagsToCapture;
+    public int flagsEnemy;
     public int levelBonus;
 
     //Bot
     public int botGreen;
     public int botBlue;
 
-    public Level(GameObject gameObject, int flagsToCapture, int levelBonus, int botGreen, int botBlue)
+    public Level(GameObject gameObject, int flagsToCapture, int flagsEnemy, int levelBonus, int botGreen, int botBlue)
     {
         this.gameObject = gameObject;
         this.flagsToCapture = flagsToCapture;
+        this.flagsEnemy = flagsEnemy;
         this.levelBonus = levelBonus;
         this.botGreen = botGreen;
         this.botBlue = botBlue;
