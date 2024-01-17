@@ -18,6 +18,10 @@ public class GameManager : MonoBehaviour
     [SerializeField, Tooltip("It's the speed of the player")] private float playerSpeed;
     [SerializeField, Range(0, 2), Tooltip("Level of Difficulty")] private int difficulty = 1;
 
+    //Local variables
+    [Header("Local Variables")]
+    [SerializeField] static bool gameIsPaused;
+    [SerializeField] static bool gameIsEnded;
 
     //for Designer
     [Header("Value for score")]
@@ -27,6 +31,7 @@ public class GameManager : MonoBehaviour
 
     //Levels variables
     [Header("Level Settings")]
+    [SerializeField] int _currentLevel;
     [SerializeField] List<Level> Levels;
 
 
@@ -53,13 +58,31 @@ public class GameManager : MonoBehaviour
         #endregion
     }
 
+
  
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            gameIsPaused = !gameIsPaused;
+            PauseGame();
+        }
+    }
+
+
     #region Event
 
     public void IncrementFlagCount(int value)
     {
         flagPlayer += value;
         score += value * _flagValue;
+
+        if (value == Levels[_currentLevel].flagsToCapture)
+        {
+            gameIsEnded = true;
+            EndGame();
+        }
     }
     public void IncrementFlagCountEnemy(int value)
     {
@@ -108,6 +131,29 @@ public class GameManager : MonoBehaviour
 
 
     #endregion
+
+    void PauseGame()
+    {
+        if (gameIsPaused)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+    }
+    void EndGame()
+    {
+        if (gameIsEnded)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+    }
 
 }
 
