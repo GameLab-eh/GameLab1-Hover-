@@ -27,12 +27,12 @@ public class PlayerController : MonoBehaviour
     private float _horizontal;
     private float _vertical;
 
-    
+
 
     [Header("Physics")]
-    
 
-    [SerializeField, Min (0)] float _movementSpeed;
+
+    [SerializeField, Min(0)] float _movementSpeed;
     [SerializeField] float _maxSpeed;
     [SerializeField] float _rotationSpeed;
     [SerializeField] float _rotationDecayRate = 5.0f;
@@ -69,16 +69,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform _stairsLowerPoint;
     [SerializeField] float _stairsJumps = 0.1f;
     [SerializeField] LayerMask _groundLayer;
-    
 
-
+    //UI
+    public delegate void Speed(float score);
+    public static event Speed PlayerSpeed = null;
 
 
     private void Awake()
     {
         Rb = GetComponent<Rigidbody>();
         _normalMaxSpeed = _maxSpeed;
-       
+
     }
 
     private void Update()
@@ -105,6 +106,11 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(Invisibility());
             }
         }
+
+        //UI
+        Vector3 _tmpVelocity = Rb.velocity;
+        PlayerSpeed?.Invoke(Mathf.Clamp((Mathf.Round(((_tmpVelocity.magnitude / _maxSpeed) * 75f) * 10f) / 10f), 0f, 100f));
+
     }
 
 
@@ -149,7 +155,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if(_isGrounded && _jumpStack > 0)
+        if (_isGrounded && _jumpStack > 0)
         {
             Rb.AddForce(transform.up * _jumpPower, ForceMode.Impulse);
             _jumpStack--;
@@ -166,7 +172,7 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator Invisibility()
     {
-        if(!_isInvisible)
+        if (!_isInvisible)
         {
             _invisibilityStack--;
             _isInvisible = true;
@@ -176,7 +182,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("hey non sono più invisibile");
         }
     }
-    
+
     private void StairsClimb()
     {
 
@@ -215,7 +221,7 @@ public class PlayerController : MonoBehaviour
     {
         int layer = collision.gameObject.layer;
 
-        switch(layer)
+        switch (layer)
         {
             case 6:
                 Debug.Log("random");
@@ -238,7 +244,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case 12:
                 _maxSpeed = _maxSpeed + _speedChanger;
-                Invoke("NormalizeMaxSpeedVar",_timeSpeedChanger);
+                Invoke("NormalizeMaxSpeedVar", _timeSpeedChanger);
                 break;
         }
     }
@@ -246,9 +252,5 @@ public class PlayerController : MonoBehaviour
     {
         _maxSpeed = _normalMaxSpeed;
     }
-
-
-
-
 
 }

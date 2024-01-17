@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int flagPlayer;
     [SerializeField] private int flagEnemy;
     [SerializeField] private int score;
+    [SerializeField] private float playerSpeed;
 
     void Awake()
     {
@@ -52,15 +53,21 @@ public class GameManager : MonoBehaviour
     {
         score += value;
     }
+    public void PlayerSpeed(float value)
+    {
+        playerSpeed = value;
+    }
     public void OnEnable()
     {
         Flag.FlagHit += IncrementScore;
         FlagE.FlagHit += IncrementFlagCountEnemy;
+        PlayerController.PlayerSpeed += PlayerSpeed;
     }
     public void OnDisable()
     {
         Flag.FlagHit -= IncrementScore;
         FlagE.FlagHit -= IncrementFlagCountEnemy;
+        PlayerController.PlayerSpeed -= PlayerSpeed;
     }
 
     #endregion
@@ -70,6 +77,11 @@ public class GameManager : MonoBehaviour
     public int GetScore()
     {
         return score;
+    }
+
+    public float GetPlayerSpeed()
+    {
+        return playerSpeed;
     }
 
     #endregion
