@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     //variabili globali
     [SerializeField] private int flagPlayer;
     [SerializeField] private int flagEnemy;
+    [SerializeField] private int score;
 
     void Awake()
     {
@@ -39,23 +40,36 @@ public class GameManager : MonoBehaviour
 
     #region Event
 
-    public void IncrementScore(int value)
+    public void IncrementFlagCount(int value)
     {
         flagPlayer += value;
     }
-    public void IncrementScoreE(int value)
+    public void IncrementFlagCountEnemy(int value)
     {
         flagEnemy += value;
+    }
+    public void IncrementScore(int value)
+    {
+        score += value;
     }
     public void OnEnable()
     {
         Flag.FlagHit += IncrementScore;
-        FlagE.FlagHit += IncrementScoreE;
+        FlagE.FlagHit += IncrementFlagCountEnemy;
     }
     public void OnDisable()
     {
         Flag.FlagHit -= IncrementScore;
-        FlagE.FlagHit -= IncrementScoreE;
+        FlagE.FlagHit -= IncrementFlagCountEnemy;
+    }
+
+    #endregion
+
+    #region return
+
+    public int GetScore()
+    {
+        return score;
     }
 
     #endregion
