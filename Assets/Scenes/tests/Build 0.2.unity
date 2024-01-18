@@ -4805,9 +4805,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6962a0b5cd01bc04a8956efcfd0f5fb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _momentun: {fileID: 1461337327}
+  _momentum: {fileID: 1461337327}
   _player: {fileID: 200435772}
-  direzioneDesiderata: {x: 0, y: 0, z: 1}
+  _mainCamera: {fileID: 412952441}
+  dampingFactor: 5
 --- !u!1 &1340480151
 GameObject:
   m_ObjectHideFlags: 0

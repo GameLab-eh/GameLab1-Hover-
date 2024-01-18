@@ -6,24 +6,25 @@ using UnityEngine.UI;
 public class Momentum : MonoBehaviour
 {
     [Header("Variables")]
-    [SerializeField] GameObject _momentun;
+    [SerializeField] GameObject _momentum;
     [SerializeField] GameObject _player;
-    public Vector3 direzioneDesiderata = Vector3.forward;
+    [SerializeField] Camera _mainCamera;
+    public float dampingFactor = 5f;
 
     void Update()
     {
-        if (_player.transform == null || _momentun == null)
-        {
-            Debug.LogWarning("Assegna tutti i riferimenti nell'Inspector.");
-            return;
-        }
+        Rigidbody rb = _player.GetComponent<Rigidbody>();
 
-        direzioneDesiderata.Normalize();
+        Vector3 velocity = rb.velocity;
+        Vector3 dir = velocity.normalized;
 
-        // Crea la rotazione in base alla direzione desiderata
-        Quaternion rotazioneDesiderata = Quaternion.LookRotation(direzioneDesiderata);
+        Vector3 _visualDirection = _mainCamera.transform.forward;
+        _visualDirection.Normalize();
 
-        // Applica la rotazione all'oggetto
-        _momentun.transform.rotation = rotazioneDesiderata;
+        float _angleBetweenDirections = Vector3.SignedAngle(_visualDirection, dir, Vector3.up);
+
+        float _angleDamped = Mathf.LerpAngle(_momentum.transform.eulerAngles.z, _angleBetweenDirections, Time.deltaTime * dampingFactor);
+
+        _momentum.transform.rotation = Quaternion.Euler(0f, 0f, _angleDamped);
     }
 }
