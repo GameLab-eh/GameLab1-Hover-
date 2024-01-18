@@ -8,7 +8,7 @@ public class MiniMapZoom : MonoBehaviour
     [Header("Variables")]
     [SerializeField, Range(0, 100)] float _maxZoom = 10f;
     [SerializeField, Range(0, 99)] float _minZoom = 0f;
-    [SerializeField] float _defaultZoom;
+    [SerializeField, Range(0, 100)] float _defaultZoom;
     [SerializeField] float _speedZoom;
 
     [Header("Debug")]

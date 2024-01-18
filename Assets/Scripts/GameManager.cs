@@ -5,11 +5,12 @@ using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Scripting;
 
+[RequireComponent(typeof(GameManager))]
 public class GameManager : MonoBehaviour
 {
     //Static variables
     public static GameManager Instance { get; private set; }
-    public static TimerManager TimerManagerInstance { get; private set; }
+    public static TimerManager TimerManagerInstance { get; private set; }    
 
     //Global variables
     [Header("Game Variables")]
@@ -38,11 +39,8 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        //ricordarsi di assegnare il valore delle variabili statiche
-
         if (TimerManagerInstance == null)
         {
-            // Aggiungi il componente TimerManager dinamicamente al GameObject associato al GameManager
             TimerManagerInstance = gameObject.AddComponent<TimerManager>();
         }
 
