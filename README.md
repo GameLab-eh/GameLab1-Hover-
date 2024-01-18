@@ -8,19 +8,24 @@ Il nostro progetto è un [inserire breve descrizione del gioco] sviluppato utili
 
 ## Istruzioni per l'Installazione
 
+
+
 Designers:
 - Battaglia
 - Crapanzano
 - Comad
 - Consiglieri
+
 3D Artists:
 - Bianchini
 - Blanco
 - Bolla
 - Bigatel
+
 Programmers:
 - Frigerio
 - Cantatore
+
 Concept Artists:
 - Bonfadini
 - Bricchi
