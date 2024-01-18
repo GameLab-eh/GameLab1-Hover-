@@ -1,32 +1,34 @@
 # GameLab1-Hover-
 
-Benvenuto nel progetto del gruppo di Game Programming! Questo repository contiene il codice sorgente e le risorse associate al nostro gioco.
+Welcome to the Game Programming Group Project! This repository contains the source code and resources associated with our game.
 
-## Descrizione del Progetto
+## Project Description
 
-Il nostro progetto è un [inserire breve descrizione del gioco] sviluppato utilizzando [inserire il motore di gioco utilizzato, ad esempio Unity o Unreal Engine].
+Our project is the remake of the renowned game "Hover!" from 1995, originally developed and published by Microsoft. This recreation aims to capture the essence of the classic title while incorporating modern enhancements and features.
 
-## Istruzioni per l'Installazione
+## Installation Instructions
 
+https://github.com/GameLab-eh/GameLab1-Hover-/releases/tag/AlphaVersion
 
+## Contributors classmates
 
-Designers:
+### Designers:
 - Battaglia
 - Crapanzano
 - Comad
 - Consiglieri
 
-3D Artists:
+### 3D Artists:
 - Bianchini
 - Blanco
 - Bolla
 - Bigatel
 
-Programmers:
+### Programmers:
 - Frigerio
 - Cantatore
 
-Concept Artists:
+### Concept Artists:
 - Bonfadini
 - Bricchi
 - Dimaculangan
@@ -35,5 +37,3 @@ Concept Artists:
 - Landolina
 - Marone
 
-Licenza
-Questo progetto è concesso in licenza con la Licenza [inserire il tipo di licenza, ad esempio MIT License] - vedere il file LICENSE.md per i dettagli.
