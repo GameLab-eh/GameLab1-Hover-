@@ -3407,6 +3407,9 @@ MonoBehaviour:
   score: 0
   playerSpeed: 0
   difficulty: 1
+  inputSystem: 0
+  _wallDelayDestroy: 5
+  _invisibilityDuration: 5
   _flagValue: 900
   _flagEnemyValue: 0
   _difficultyScoreValue: []
@@ -6147,6 +6150,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1385723017}
+  - component: {fileID: 1385723018}
   m_Layer: 5
   m_Name: PowerUpsInventory
   m_TagString: Untagged
@@ -6176,6 +6180,40 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1385723018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385723016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3258a4f1344715049bde04cf533f9de9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _indicator:
+  - {fileID: 383036748}
+  - {fileID: 1211942456}
+  - {fileID: 60125188}
+  _numberDisplay:
+  - {fileID: 29819758}
+  - {fileID: 358137355}
+  - {fileID: 994353715}
+  _buttonDisplay:
+  - {fileID: 546380791}
+  - {fileID: 2128339468}
+  - {fileID: 45907493}
+  _player: {fileID: 200435772}
+  _ground: {x: 0, y: 0, z: 0}
+  _maxAltitude: 12
+  _Altitude: 0
+  _opz1: 1
+  _opz1alt: j
+  _opz2: 2
+  _opz2alt: k
+  _opz3: 3
+  _opz3alt: l
 --- !u!1001 &1389308440
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7134,7 +7172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pooledObjects: []
-  objectToPool: {fileID: 8646387190746711661, guid: 7b00664c0a6e925448450809e576b421, type: 3}
+  objectToPool: {fileID: 3659716639797108736, guid: 376a5b5c9b091fc43a7ecd57e0123321, type: 3}
   amountToPool: 0
 --- !u!4 &1622114075 stripped
 Transform:

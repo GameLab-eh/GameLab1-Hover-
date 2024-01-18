@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Wall : MonoBehaviour
 {
-    [SerializeField] float secondBeforeDestroy = 5f;
+    private float secondBeforeDestroy;
     private Vector3 _startingPosition;
     private bool _isSpawned;
 
+    private void Start()
+    {
+        secondBeforeDestroy = GameManager.Instance.GetWallDelayDestroy();
+    }
     private void Update()
     {
         if (!_isSpawned)
@@ -25,5 +30,4 @@ public class Wall : MonoBehaviour
         gameObject.SetActive(false);
         _isSpawned = false;
     }
-
 }

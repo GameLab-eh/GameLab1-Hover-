@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
 
     //invisibility
     [SerializeField] float _invisibilityStack = 10;
-
+    float _invisibilityDuration;
 
     //wall
     [SerializeField] float _wallStack = 10;
@@ -74,12 +74,24 @@ public class PlayerController : MonoBehaviour
     public delegate void Speed(float score);
     public static event Speed PlayerSpeed = null;
 
+    public delegate void JumpStack(int score);
+    public static event JumpStack Stack1 = null;
+
+    public delegate void InvisibilityStack(int score);
+    public static event InvisibilityStack Stack2 = null;
+
+    public delegate void WallStack(int score);
+    public static event WallStack Stack3 = null;
+
+    public delegate void ShieldStack(int score);
+    public static event ShieldStack Stack4 = null;
+
 
     private void Awake()
     {
         Rb = GetComponent<Rigidbody>();
         _normalMaxSpeed = _maxSpeed;
-
+        _invisibilityDuration = GameManager.Instance.GetInvisibilityDuration();
     }
 
     private void Update()
@@ -95,10 +107,12 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(keyJump1) || Input.GetKeyDown(keyJump2))
             {
                 Jump();
+                Stack1?.Invoke((int)_jumpStack);
             }
             if (Input.GetKeyDown(keyWall1) || Input.GetKeyDown(keyWall2))
             {
                 Wall();
+                Stack2?.Invoke((int)_wallStack);
             }
             if (Input.GetKeyDown(keyInvisibility1) || Input.GetKeyDown(keyInvisibility2))
             {
@@ -150,9 +164,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-
-
     private void Jump()
     {
         if (_isGrounded && _jumpStack > 0)
@@ -168,16 +179,19 @@ public class PlayerController : MonoBehaviour
         wall.SetActive(true);
         wall.transform.position = _wallPoint.position;
         wall.transform.rotation = _wallPoint.transform.rotation;
+
+        _wallStack--;
     }
 
     public IEnumerator Invisibility()
     {
         if (!_isInvisible)
         {
+            Stack3?.Invoke((int)_invisibilityStack);
             _invisibilityStack--;
             _isInvisible = true;
             Debug.Log("hey sono invisibile");
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(_invisibilityDuration);
             _isInvisible = false;
             Debug.Log("hey non sono più invisibile");
         }
@@ -213,10 +227,8 @@ public class PlayerController : MonoBehaviour
                 Rb.position += new Vector3(0, _stairsJumps, 0f);
             }
         }
-
-
-
     }
+
     private void OnTriggerEnter(Collider collision)
     {
         int layer = collision.gameObject.layer;
@@ -228,15 +240,19 @@ public class PlayerController : MonoBehaviour
         {
             case 7:
                 _jumpStack++;
+                Stack1?.Invoke((int)_jumpStack);
                 break;
             case 8:
                 _invisibilityStack++;
+                Stack3?.Invoke((int)_invisibilityStack);
                 break;
             case 9:
                 _wallStack++;
+                Stack2?.Invoke((int)_wallStack);
                 break;
             case 10:
                 _shieldStack++;
+                Stack4?.Invoke((int)_shieldStack);
                 break;
             case 11:
                 _maxSpeed = _maxSpeed - _speedChanger;
@@ -247,7 +263,7 @@ public class PlayerController : MonoBehaviour
                 Invoke("NormalizeMaxSpeedVar", _timeSpeedChanger);
                 break;
         }
-        if (collision.gameObject.tag == "Flag") return; //Exception for Flag
+        if (collision.gameObject.CompareTag("Flag")) return; //Exception for Flag
         Destroy(collision.gameObject);
     }
     private void NormalizeMaxSpeedVar()
