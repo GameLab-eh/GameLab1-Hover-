@@ -10,18 +10,21 @@ public class EnemyFlagGenerator : MonoBehaviour
     [SerializeField] List<GameObject> _ListObj;
 
     [Header("Variables")]
-    [SerializeField, Range(0, 50)] int _numberFlags;
     [SerializeField] GameObject _flagEnemyModel;
+
+    private int _numberFlags;
 
     private void Awake()
     {
         //check Designer error
         if (!_ListObj.Any()) Debug.LogError("The spawn points list for the Enemy Flag Generator object is empty.");
+        _numberFlags = GameManager.Instance.GetNumberFlagsEnemy();
     }
 
     private void Start()
     {
         _numberFlags = Mathf.Clamp(_numberFlags, 0, _ListObj.Count);
+        GameManager.Instance.SetNumberFlagsEnemy(_numberFlags);
         List<GameObject> _tmpList = _ListObj;
         for (int i = 0; i < _numberFlags; i++)
         {

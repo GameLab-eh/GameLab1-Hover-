@@ -247,7 +247,12 @@ public class PlayerController : MonoBehaviour
                 Invoke("NormalizeMaxSpeedVar", _timeSpeedChanger);
                 break;
         }
+<<<<<<< Updated upstream
         
+=======
+        if (collision.gameObject.tag == "Flag") return; //Exception for Flag
+        Destroy(collision.gameObject);
+>>>>>>> Stashed changes
     }
     private void NormalizeMaxSpeedVar()
     {

@@ -59,9 +59,6 @@ public class GameManager : MonoBehaviour
         #endregion
     }
 
-
- 
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -71,7 +68,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     #region Event
 
     public void IncrementFlagCount(int value)
@@ -79,9 +75,10 @@ public class GameManager : MonoBehaviour
         flagPlayer += value;
         score += value * _flagValue;
 
-        if (value == Levels[_currentLevel].flagsToCapture)
+        if (flagPlayer == Levels[_currentLevel].flagsToCapture)
         {
             //win
+            Debug.Log("win");
             gameIsEnded = true;
             EndGame();
         }
@@ -91,7 +88,7 @@ public class GameManager : MonoBehaviour
         flagEnemy += value;
         score += value * _flagEnemyValue;
 
-        if (value == Levels[_currentLevel].flagsEnemy)
+        if (flagEnemy == Levels[_currentLevel].flagsEnemy)
         {
             //lose
             gameIsEnded = true;
@@ -106,15 +103,35 @@ public class GameManager : MonoBehaviour
     {
         playerSpeed = value;
     }
+    public int GetFlagsToCapture()
+    {
+        return flagPlayer;
+    }
+    public int GetFlagsEnemy()
+    {
+        return flagEnemy;
+    }
+    public int GetNumberFlagsToCapture()
+    {
+        return Levels[_currentLevel].flagsToCapture;
+    }
+    public int GetNumberFlagsEnemy()
+    {
+        return Levels[_currentLevel].flagsEnemy;
+    }
+    public void SetNumberFlagsEnemy(int value)
+    {
+        Levels[_currentLevel].flagsEnemy = value;
+    }
     public void OnEnable()
     {
-        Flag.FlagHit += IncrementScore;
+        Flag.FlagHit += IncrementFlagCount;
         FlagE.FlagHit += IncrementFlagCountEnemy;
         PlayerController.PlayerSpeed += PlayerSpeed;
     }
     public void OnDisable()
     {
-        Flag.FlagHit -= IncrementScore;
+        Flag.FlagHit -= IncrementFlagCount;
         FlagE.FlagHit -= IncrementFlagCountEnemy;
         PlayerController.PlayerSpeed -= PlayerSpeed;
     }
@@ -186,7 +203,6 @@ public class Difficulty
 [Serializable]
 public class Level
 {
-    public GameObject gameObject;
     public int flagsToCapture;
     public int flagsEnemy;
     public int levelBonus;
@@ -195,9 +211,8 @@ public class Level
     public int botGreen;
     public int botBlue;
 
-    public Level(GameObject gameObject, int flagsToCapture, int flagsEnemy, int levelBonus, int botGreen, int botBlue)
+    public Level(int flagsToCapture, int flagsEnemy, int levelBonus, int botGreen, int botBlue)
     {
-        this.gameObject = gameObject;
         this.flagsToCapture = flagsToCapture;
         this.flagsEnemy = flagsEnemy;
         this.levelBonus = levelBonus;
