@@ -14,17 +14,10 @@ public class Momentum : MonoBehaviour
     void Update()
     {
         Rigidbody rb = _player.GetComponent<Rigidbody>();
-
         Vector3 velocity = rb.velocity;
         Vector3 dir = velocity.normalized;
-
         Vector3 _visualDirection = _mainCamera.transform.forward;
-        _visualDirection.Normalize();
-
-        float _angleBetweenDirections = Vector3.SignedAngle(_visualDirection, dir, Vector3.up);
-
-        float _angleDamped = Mathf.LerpAngle(_momentum.transform.eulerAngles.z, _angleBetweenDirections, Time.deltaTime * dampingFactor);
-
-        _momentum.transform.rotation = Quaternion.Euler(0f, 0f, _angleDamped);
+        float angle = Vector3.SignedAngle(dir, _visualDirection, Vector3.up);
+        _momentum.transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 }
