@@ -42,6 +42,7 @@ public class Flag : MonoBehaviour
         {
             FlagHit?.Invoke(_scoreOnHit);
             _mesh.SetActive(false);
+            this.GetComponent<Collider>().enabled = false;
             transform.GetChild(0).gameObject.SetActive(false);
             StartCoroutine(DelayCoroutine(_delaySpawn));
         }
@@ -73,5 +74,6 @@ public class Flag : MonoBehaviour
 
         this.transform.position = _newPosition;
         _mesh.SetActive(true);
+        this.GetComponent<Collider>().enabled = true;
     }
 }
