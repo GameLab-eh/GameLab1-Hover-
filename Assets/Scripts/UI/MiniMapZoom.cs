@@ -21,10 +21,14 @@ public class MiniMapZoom : MonoBehaviour
     {
         if (_maxZoom < _minZoom) _maxZoom = _minZoom + 1f;
         _defaultZoom = Mathf.Clamp(_defaultZoom, _minZoom, _maxZoom);
-        transform.position = new Vector3(0f, _defaultZoom, 0f);
 
         //Debug
         _zoom = transform.position.y;
+    }
+
+    private void Start()
+    {
+        transform.position = new Vector3(transform.parent.position.x, _defaultZoom, transform.parent.position.z);
     }
 
     void Update()
