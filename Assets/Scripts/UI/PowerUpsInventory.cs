@@ -48,25 +48,30 @@ public class PowerUpsInventory : MonoBehaviour
         PlayerController.Stack1 += SetStack1; //jump
         PlayerController.Stack2 += SetStack2; //wall
         PlayerController.Stack3 += SetStack3; //invisibility
+        PlayerController.StackUse += SetSlider;
     }
     public void OnDisable()
     {
         PlayerController.Stack1 -= SetStack1; //jump
         PlayerController.Stack2 -= SetStack2; //wall
         PlayerController.Stack3 -= SetStack3; //invisibility
+        PlayerController.StackUse -= SetSlider;
     }
 
     void SetStack1(int value) => _numberDisplay[0].text = "" + value;
     void SetStack2(int value)
     {
         _numberDisplay[1].text = "" + value;
-        StartCoroutine(DecrementSlider(1, _wallDestroyDelay));
     }
 
     void SetStack3(int value)
     {
         _numberDisplay[2].text = "" + value;
-        StartCoroutine(DecrementSlider(2, _invisibilityDuration));
+    }
+    void SetSlider(int value)
+    {
+        if (value == 1) StartCoroutine(DecrementSlider(1, _wallDestroyDelay));
+        else StartCoroutine(DecrementSlider(2, _invisibilityDuration));
     }
 
     private IEnumerator DecrementSlider(int value, float second)
@@ -80,7 +85,7 @@ public class PowerUpsInventory : MonoBehaviour
             initialPercentage--;
             _indicator[value].value = (float)initialPercentage / 1000;
 
-            yield return new WaitForSeconds(second / (Mathf.Pow(second, 2f) * 60));
+            yield return new WaitForSeconds(second / 1750);
         }
     }
 

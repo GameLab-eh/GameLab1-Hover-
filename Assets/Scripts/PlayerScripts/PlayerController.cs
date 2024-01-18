@@ -74,17 +74,12 @@ public class PlayerController : MonoBehaviour
     public delegate void Speed(float score);
     public static event Speed PlayerSpeed = null;
 
-    public delegate void JumpStack(int score);
-    public static event JumpStack Stack1 = null;
-
-    public delegate void InvisibilityStack(int score);
-    public static event InvisibilityStack Stack2 = null;
-
-    public delegate void WallStack(int score);
-    public static event WallStack Stack3 = null;
-
-    public delegate void ShieldStack(int score);
-    public static event ShieldStack Stack4 = null;
+    public delegate void PowerUpInfoInt(int score);
+    public static event PowerUpInfoInt Stack1 = null; //jump
+    public static event PowerUpInfoInt Stack2 = null; //wall
+    public static event PowerUpInfoInt Stack3 = null; //invisibility
+    public static event PowerUpInfoInt Stack4 = null; // shield
+    public static event PowerUpInfoInt StackUse = null; //wall & invisibility
 
 
     private void Awake()
@@ -112,7 +107,6 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(keyWall1) || Input.GetKeyDown(keyWall2))
             {
                 Wall();
-                Stack2?.Invoke((int)_wallStack);
             }
             if (Input.GetKeyDown(keyInvisibility1) || Input.GetKeyDown(keyInvisibility2))
             {
@@ -175,11 +169,11 @@ public class PlayerController : MonoBehaviour
 
     private void Wall()
     {
+        StackUse?.Invoke(1);
         GameObject wall = ObjectPooler.SharedInstance.GetPooledObject();
         wall.SetActive(true);
         wall.transform.position = _wallPoint.position;
         wall.transform.rotation = _wallPoint.transform.rotation;
-
         _wallStack--;
     }
 
@@ -187,7 +181,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!_isInvisible)
         {
-            Stack3?.Invoke((int)_invisibilityStack);
+            StackUse?.Invoke(2);
             _invisibilityStack--;
             _isInvisible = true;
             Debug.Log("hey sono invisibile");
