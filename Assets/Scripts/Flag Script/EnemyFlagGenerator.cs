@@ -18,11 +18,11 @@ public class EnemyFlagGenerator : MonoBehaviour
     {
         //check Designer error
         if (!_ListObj.Any()) Debug.LogError("The spawn points list for the Enemy Flag Generator object is empty.");
-        _numberFlags = GameManager.Instance.GetNumberFlagsEnemy();
     }
 
     private void Start()
     {
+        _numberFlags = GameManager.Instance.GetNumberFlagsEnemy();
         _numberFlags = Mathf.Clamp(_numberFlags, 0, _ListObj.Count);
         GameManager.Instance.SetNumberFlagsEnemy(_numberFlags);
         List<GameObject> _tmpList = _ListObj;
