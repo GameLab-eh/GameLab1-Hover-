@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Wall : MonoBehaviour
 {
     private float secondBeforeDestroy;
-    private Vector3 _startingPosition;
     private bool _isSpawned;
 
     private void Start()
