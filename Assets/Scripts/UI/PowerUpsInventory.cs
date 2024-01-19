@@ -11,6 +11,9 @@ public class PowerUpsInventory : MonoBehaviour
     [SerializeField] List<Slider> _indicator;
     [SerializeField] List<TMPro.TMP_Text> _numberDisplay;
     [SerializeField] List<TMPro.TMP_Text> _buttonDisplay;
+    [Header("Bottom-Left IU Area")]
+    [SerializeField] Slider _indicatorShield;
+    [SerializeField] List<Slider> _indicatorStoplight;
 
     [Header("Altitude")]
     [SerializeField] GameObject _player;
@@ -29,6 +32,8 @@ public class PowerUpsInventory : MonoBehaviour
     bool _inputSystem;
     float _invisibilityDuration;
     float _wallDestroyDelay;
+    float _shieldDuration;
+    float _stoplightDuration;
 
     private void Start()
     {
@@ -36,6 +41,8 @@ public class PowerUpsInventory : MonoBehaviour
         SetInputSystemDisplay();
         _invisibilityDuration = GameManager.Instance.GetInvisibilityDuration();
         _wallDestroyDelay = GameManager.Instance.GetWallDelayDestroy();
+        _shieldDuration = GameManager.Instance.GetShieldDuration();
+        _stoplightDuration = GameManager.Instance.GetStoplightDuration();
     }
 
     void Update()
@@ -45,45 +52,45 @@ public class PowerUpsInventory : MonoBehaviour
 
     public void OnEnable()
     {
-        PlayerController.Stack1 += SetStack1; //jump
-        PlayerController.Stack2 += SetStack2; //wall
-        PlayerController.Stack3 += SetStack3; //invisibility
+        PlayerController.Stack += SetStack;
         PlayerController.StackUse += SetSlider;
+        PlayerController.Shield += SetShieldSlider; //shield
+        PlayerController.Stoplight += SetStoplightSlider; //stoplight
     }
     public void OnDisable()
     {
-        PlayerController.Stack1 -= SetStack1; //jump
-        PlayerController.Stack2 -= SetStack2; //wall
-        PlayerController.Stack3 -= SetStack3; //invisibility
+        PlayerController.Stack -= SetStack;
         PlayerController.StackUse -= SetSlider;
+        PlayerController.Shield -= SetShieldSlider; //shield
+        PlayerController.Stoplight -= SetStoplightSlider; //stoplight
     }
 
-    void SetStack1(int value) => _numberDisplay[0].text = "" + value;
-    void SetStack2(int value)
+    void SetShieldSlider() => StartCoroutine(DecrementSlider(_indicatorShield, _shieldDuration));
+
+    void SetStoplightSlider(bool value)
     {
-        _numberDisplay[1].text = "" + value;
+        if (!value) StartCoroutine(DecrementSlider(_indicatorStoplight[0], _stoplightDuration)); //red
+        else StartCoroutine(DecrementSlider(_indicatorStoplight[1], _stoplightDuration)); //green
     }
 
-    void SetStack3(int value)
+    void SetStack(int t, int value) => _numberDisplay[t].text = "" + value;
+
+    void SetSlider(int t, int value)
     {
-        _numberDisplay[2].text = "" + value;
-    }
-    void SetSlider(int value)
-    {
-        if (value == 1) StartCoroutine(DecrementSlider(1, _wallDestroyDelay));
-        else StartCoroutine(DecrementSlider(2, _invisibilityDuration));
+        _numberDisplay[t].text = "" + value;
+        StartCoroutine(DecrementSlider(_indicator[t], _wallDestroyDelay));
     }
 
-    private IEnumerator DecrementSlider(int value, float second)
+    private IEnumerator DecrementSlider(Slider slider, float second)
     {
         float initialPercentage = 1000f;
 
-        _indicator[value].value = initialPercentage;
+        slider.value = initialPercentage;
 
         while (initialPercentage > 0f)
         {
             initialPercentage--;
-            _indicator[value].value = (float)initialPercentage / 1000;
+            slider.value = (float)initialPercentage / 1000;
 
             yield return new WaitForSeconds(second / 1750);
         }

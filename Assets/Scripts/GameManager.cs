@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     [Header("Power-Up  Settings")]
     [SerializeField, Min(0), Tooltip("is the duration of wall")] float _wallDelayDestroy;
     [SerializeField, Min(0), Tooltip("is the duration of invisibility")] float _invisibilityDuration;
+    [SerializeField, Min(0), Tooltip("is the duration of shield")] float _shieldDuration;
+    [SerializeField, Min(0), Tooltip("is the duration of stoplight")] float _stoplightDuration;
 
     [Header("Value for score")]
     [SerializeField, Min(0)] int _flagValue;
@@ -122,65 +124,35 @@ public class GameManager : MonoBehaviour
 
     #region Set
 
+    public void SetInputSystem(bool value) => inputSystem = value;
 
-    public void SetInputSystem(bool value)
-    {
-        inputSystem = value;
-    }
-
-    public void SetNumberFlagsEnemy(int value)
-    {
-        Levels[_currentLevel].flagsEnemy = value;
-    }
+    public void SetNumberFlagsEnemy(int value) => Levels[_currentLevel].flagsEnemy = value;
 
     #endregion
 
     #region Get
 
-    public float GetInvisibilityDuration()
-    {
-        return _invisibilityDuration;
-    }
+    public float GetShieldDuration() => _invisibilityDuration;
 
-    public float GetWallDelayDestroy()
-    {
-        return _wallDelayDestroy;
-    }
+    public float GetStoplightDuration() => _invisibilityDuration;
 
-    public bool GetInputSystem()
-    {
-        return inputSystem;
-    }
+    public float GetInvisibilityDuration() => _invisibilityDuration;
 
-    public int GetScore()
-    {
-        return score;
-    }
+    public float GetWallDelayDestroy() => _wallDelayDestroy;
 
-    public float GetPlayerSpeed()
-    {
-        return playerSpeed;
-    }
+    public bool GetInputSystem() => inputSystem;
 
-    public int GetFlagsToCapture()
-    {
-        return flagPlayer;
-    }
+    public int GetScore() => score;
 
-    public int GetFlagsEnemy()
-    {
-        return flagEnemy;
-    }
+    public float GetPlayerSpeed() => playerSpeed;
 
-    public int GetNumberFlagsToCapture()
-    {
-        return Levels[_currentLevel].flagsToCapture;
-    }
+    public int GetFlagsToCapture() => flagPlayer;
 
-    public int GetNumberFlagsEnemy()
-    {
-        return Levels[_currentLevel].flagsEnemy;
-    }
+    public int GetFlagsEnemy() => flagEnemy;
+
+    public int GetNumberFlagsToCapture() => Levels[_currentLevel].flagsToCapture;
+
+    public int GetNumberFlagsEnemy() => Levels[_currentLevel].flagsEnemy;
 
     #endregion
 
