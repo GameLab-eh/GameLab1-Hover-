@@ -6,7 +6,7 @@ Welcome to the Game Programming Group Project! This repository contains the sour
 
 Our project is the remake of the renowned game "Hover!" from 1995, originally developed and published by Microsoft. This recreation aims to capture the essence of the classic title while incorporating modern enhancements and features.
 
-## Installation Instructions
+## Release
 
 https://github.com/GameLab-eh/GameLab1-Hover-/releases/tag/AlphaVersion
 
