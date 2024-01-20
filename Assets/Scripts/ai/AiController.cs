@@ -10,8 +10,8 @@ public class AiController : MonoBehaviour
 {
     //generals and checks
      
-    private NavMeshAgent _navMeshAgent;
-    private Transform _player;
+    [SerializeField] private NavMeshAgent _navMeshAgent;
+    [SerializeField] private Transform _player;
     
     
     
@@ -24,15 +24,14 @@ public class AiController : MonoBehaviour
     [SerializeField] private Transform _rayStartingPoint;
 
     [Header("checks and states of the patrolling/chasing")] 
-    [SerializeField] private float _visualAngle = 45f;
+    [SerializeField,Tooltip("always set it to half the angle u want (if u want 45° set it to 22.5)")] private float _visualAngle = 22.5f;
     private int _rayCountNumber = 5;
-    private float _raySpacing;
-    [SerializeField] private float _chaseRange;
+    
     [SerializeField] private float _visualRange;
 
     private void Awake()
     {
-        _raySpacing = _visualAngle / _rayCountNumber;
+        
         _player = GameObject.Find("Player").transform;
         _navMeshAgent = GetComponent<NavMeshAgent>();
     }
@@ -53,86 +52,45 @@ public class AiController : MonoBehaviour
 
     private void Patroling()
     {
+        if (!_isWalkSet)
+        {
+            WalkPointSet();
+            _isWalkSet = true;
+        }
+        if (_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance && !_navMeshAgent.pathPending)
+        {
+            
+            _isWalkSet = false;
+        }
         
-        
-
-        // if (!_isWalkSet)
-        // {
-        //     Vector3 randomPoint = Random.insideUnitSphere * _walkRadius;
-        //     NavMeshHit hit;
-        //     if (NavMesh.SamplePosition(randomPoint, out hit, _walkRadius, NavMesh.AllAreas))
-        //     {
-        //         NavMeshPath path = new NavMeshPath();
-        //         if (_navMeshAgent.CalculatePath(hit.position, path) && path.status == NavMeshPathStatus.PathComplete)
-        //         {
-        //             _navMeshAgent.SetDestination(hit.position);
-        //             _isWalkSet = true;
-        //         }
-        //         else
-        //         {
-        //             WalkPointSet();
-        //         }
-        //     }
-        //     else
-        //     {
-        //         WalkPointSet();
-        //     }
-        //     
-        // }
-        // if (Vector3.Distance(_navMeshAgent.destination,transform.position)<0.1f)
-        // {
-        //     _isWalkSet = false;
-        // }
         
     }
 
     private Vector3 GetRandomPoint() 
     {
-        Vector3 randomPoint = Random.insideUnitSphere * _walkRadius;
         NavMeshHit hit;
-        NavMesh.SamplePosition(randomPoint, out hit, _walkRadius, NavMesh.AllAreas);
-        if (IsPointReachable(hit.position))
+        Vector3 randomPoint;
+
+        do
         {
-            return hit.position;
-        }
-        return Vector3.zero; //rimuoverlo creando un ciclo che esce quando IsPointReachable ritorna true. (Farò riposare i miei neuorini per ora)
+            randomPoint = Random.onUnitSphere * _walkRadius; 
+        } while (!NavMesh.SamplePosition(randomPoint, out hit, _walkRadius, NavMesh.AllAreas));
+
+        return hit.position; 
     }
-    private void GoToPosition(Vector3 pointToGo)
-    {
-        _navMeshAgent.SetDestination(pointToGo);
-    }
+
     private bool IsPointReachable(Vector3 pointToVerify)
     {
         NavMeshPath path = new NavMeshPath();
         return (_navMeshAgent.CalculatePath(pointToVerify, path) && path.status == NavMeshPathStatus.PathComplete);
+        
     }
     
     
     
     private void WalkPointSet()
     {
-        Vector3 randomPoint = Random.insideUnitSphere * _walkRadius;
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(randomPoint, out hit, _walkRadius, NavMesh.AllAreas))
-        {
-            NavMeshPath path = new NavMeshPath();
-            if (_navMeshAgent.CalculatePath(hit.position, path))
-            {
-                _navMeshAgent.SetDestination(hit.position);
-            }
-            else
-            {
-                WalkPointSet();
-            }
-        }
-        else
-        {
-            WalkPointSet();
-        }
-
-        
-            
-
+        _navMeshAgent.SetDestination(GetRandomPoint());
     }
 
     private void Chase()
@@ -141,21 +99,27 @@ public class AiController : MonoBehaviour
     }
     private bool IsPlayerInRange()
     {
-        for (int i = 0; i < _rayCountNumber; i++)
+        //distance between me and player
+        Vector3 toPlayer = (_player.position - transform.position);
+        
+        //check maxDistance
+        if (toPlayer.sqrMagnitude > _visualRange * _visualRange)
         {
-            float angle = -_visualAngle / 2 + i * _raySpacing;
-            
-            float angleInRadians = angle * Mathf.Deg2Rad;
-            
-            Quaternion rotation = Quaternion.Euler(0, angle, 0);
-            Vector3 rayDirection = transform.rotation * rotation * transform.forward;
-            
-            Debug.DrawRay(_rayStartingPoint.position,transform.TransformDirection(rayDirection) * _visualRange,Color.green,_playerLayer);
-            if (Physics.Raycast(_rayStartingPoint.position, transform.TransformDirection(rayDirection), _visualRange, _playerLayer))
-            {
-                return true;
-            }
+            return false;
         }
-        return false;
+        toPlayer.Normalize();
+        
+        //calculate angle, my direction / player direction
+        float angleToPlayer = Vector3.Angle(transform.forward, toPlayer);
+        
+        //check if angle is inside 45° angle degree
+        if (angleToPlayer <= _visualAngle)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
