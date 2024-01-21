@@ -21,11 +21,11 @@ public class AiController : MonoBehaviour
     [SerializeField, Tooltip("max range the enemy can chose a point to move")] private float walkRange;
 
     [SerializeField] private LayerMask _playerLayer;
-    [SerializeField] private Transform _rayStartingPoint;
+    
 
     [Header("checks and states of the patrolling/chasing")] 
     [SerializeField,Tooltip("always set it to half the angle u want (if u want 45° set it to 22.5)")] private float _visualAngle = 22.5f;
-    private int _rayCountNumber = 5;
+    
     
     [SerializeField] private float _visualRange;
 
