@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 2175900523667999281}
   - component: {fileID: 7907401070110817282}
   - component: {fileID: 7892791784106782026}
-  m_Layer: 0
+  m_Layer: 28
   m_Name: FlagE
   m_TagString: Flag
   m_Icon: {fileID: 0}
