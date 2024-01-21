@@ -170,13 +170,16 @@ public class PlayerController : MonoBehaviour
 
     private void Wall()
     {
-        _wallStack--;
-        StackUse?.Invoke(1, (int)_wallStack);
-        GameObject wall = ObjectPooler.SharedInstance.GetPooledObject();
-        wall.SetActive(true);
-        wall.transform.position = _wallPoint.position;
-        wall.transform.rotation = _wallPoint.transform.rotation;
-        _wallStack--;
+        if (_wallStack > 0)
+        {
+            _wallStack--;
+            StackUse?.Invoke(1, (int)_wallStack);
+            GameObject wall = ObjectPooler.SharedInstance.GetPooledObject();
+            wall.SetActive(true);
+            wall.transform.position = _wallPoint.position;
+            wall.transform.rotation = _wallPoint.transform.rotation;
+        }
+        
     }
 
     public IEnumerator Invisibility()
