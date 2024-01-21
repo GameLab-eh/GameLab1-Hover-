@@ -74,49 +74,54 @@ public class GameManager : MonoBehaviour
 
     #region Event
 
-    public void IncrementFlagCount(int value)
+    public void IncrementFlagCount(bool isEnemy)
     {
-        flagPlayer += value;
-        score += value * _flagValue;
-
-        if (flagPlayer == Levels[_currentLevel].flagsToCapture)
+        if (!isEnemy)
         {
-            //win
-            Debug.Log("win");
-            gameIsEnded = true;
-            EndGame();
-        }
-    }
-    public void IncrementFlagCountEnemy(int value)
-    {
-        flagEnemy += value;
-        score += value * _flagEnemyValue;
+            flagPlayer++;
+            score += _flagValue;
 
-        if (flagEnemy == Levels[_currentLevel].flagsEnemy)
-        {
-            //lose
-            gameIsEnded = true;
-            EndGame();
+            if (flagPlayer == Levels[_currentLevel].flagsToCapture)
+            {
+                //win
+                Debug.Log("win");
+                gameIsEnded = true;
+                EndGame();
+            }
         }
+        else
+        {
+            flagEnemy++;
+            score += _flagEnemyValue;
+
+            if (flagEnemy == Levels[_currentLevel].flagsEnemy)
+            {
+                //lose
+                gameIsEnded = true;
+                EndGame();
+            }
+        }
+
     }
+
     public void IncrementScore(int value)
     {
         score += value;
     }
+
     public void PlayerSpeed(float value)
     {
         playerSpeed = value;
     }
+
     public void OnEnable()
     {
-        Flag.FlagHit += IncrementFlagCount;
-        FlagE.FlagHit += IncrementFlagCountEnemy;
+        FlagMechanic.FlagHit += IncrementFlagCount;
         PlayerController.PlayerSpeed += PlayerSpeed;
     }
     public void OnDisable()
     {
-        Flag.FlagHit -= IncrementFlagCount;
-        FlagE.FlagHit -= IncrementFlagCountEnemy;
+        FlagMechanic.FlagHit -= IncrementFlagCount;
         PlayerController.PlayerSpeed -= PlayerSpeed;
     }
 

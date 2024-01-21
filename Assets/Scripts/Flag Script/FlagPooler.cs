@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class EnemyFlagGenerator : MonoBehaviour
+public class FlagPooler : MonoBehaviour
 {
     //for Designer
     [Header("Flag Spawn Point")]
@@ -17,7 +17,7 @@ public class EnemyFlagGenerator : MonoBehaviour
     private void Awake()
     {
         //check Designer error
-        if (!_ListObj.Any()) Debug.LogError("The spawn points list for the Enemy Flag Generator object is empty.");
+        if (!_ListObj.Any()) Debug.LogError("The spawn points list Flag Generator object is empty");
     }
 
     private void Start()
