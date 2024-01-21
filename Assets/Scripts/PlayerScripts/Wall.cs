@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Wall : MonoBehaviour
 {
-    [SerializeField] float secondBeforeDestroy = 5f;
-    private Vector3 _startingPosition;
+    private float secondBeforeDestroy;
     private bool _isSpawned;
 
+    private void Start()
+    {
+        secondBeforeDestroy = GameManager.Instance.GetWallDelayDestroy();
+    }
     private void Update()
     {
         if (!_isSpawned)
@@ -25,5 +28,4 @@ public class Wall : MonoBehaviour
         gameObject.SetActive(false);
         _isSpawned = false;
     }
-
 }

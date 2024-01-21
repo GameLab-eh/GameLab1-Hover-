@@ -33,7 +33,7 @@ public class Flag : MonoBehaviour
     private void Start()
     {
         StartCoroutine(DelayCoroutine(_delayStartSpawn));
-        _mesh.gameObject.SetActive(false);
+        _mesh.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -41,7 +41,9 @@ public class Flag : MonoBehaviour
         if (other.gameObject.layer == 31) /*31 = player*/
         {
             FlagHit?.Invoke(_scoreOnHit);
-            _mesh.gameObject.SetActive(false);
+            _mesh.SetActive(false);
+            this.GetComponent<Collider>().enabled = false;
+            transform.GetChild(0).gameObject.SetActive(false);
             StartCoroutine(DelayCoroutine(_delaySpawn));
         }
     }
@@ -49,10 +51,10 @@ public class Flag : MonoBehaviour
     IEnumerator DelayCoroutine(float value)
     {
         yield return new WaitForSeconds(value);
-        spawn();
+        Spawn();
     }
 
-    private void spawn()
+    private void Spawn()
     {
         Vector3 _olfPosition = this.transform.position;
         Vector3 _newPosition;
@@ -71,6 +73,7 @@ public class Flag : MonoBehaviour
         }
 
         this.transform.position = _newPosition;
-        _mesh.gameObject.SetActive(true);
+        _mesh.SetActive(true);
+        this.GetComponent<Collider>().enabled = true;
     }
 }

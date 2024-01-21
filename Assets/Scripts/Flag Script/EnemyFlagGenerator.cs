@@ -10,8 +10,9 @@ public class EnemyFlagGenerator : MonoBehaviour
     [SerializeField] List<GameObject> _ListObj;
 
     [Header("Variables")]
-    [SerializeField, Range(0, 50)] int _numberFlags;
     [SerializeField] GameObject _flagEnemyModel;
+
+    private int _numberFlags;
 
     private void Awake()
     {
@@ -21,7 +22,9 @@ public class EnemyFlagGenerator : MonoBehaviour
 
     private void Start()
     {
+        _numberFlags = GameManager.Instance.GetNumberFlagsEnemy();
         _numberFlags = Mathf.Clamp(_numberFlags, 0, _ListObj.Count);
+        GameManager.Instance.SetNumberFlagsEnemy(_numberFlags);
         List<GameObject> _tmpList = _ListObj;
         for (int i = 0; i < _numberFlags; i++)
         {

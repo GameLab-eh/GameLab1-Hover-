@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
 
     //invisibility
     [SerializeField] float _invisibilityStack = 10;
-
+    float _invisibilityDuration;
 
     //wall
     [SerializeField] float _wallStack = 10;
@@ -74,12 +74,22 @@ public class PlayerController : MonoBehaviour
     public delegate void Speed(float score);
     public static event Speed PlayerSpeed = null;
 
+    public delegate void PowerUpInfoInt(int t, int value);
+    public static event PowerUpInfoInt Stack = null; //jump
+    public static event PowerUpInfoInt StackUse = null; //wall & invisibility
+
+    public delegate void PowerUpInfoBool(bool value);
+    public static event PowerUpInfoBool Stoplight = null;
+
+    public delegate void PowerUpInfo();
+    public static event PowerUpInfo Shield = null; // shield
+
 
     private void Awake()
     {
         Rb = GetComponent<Rigidbody>();
         _normalMaxSpeed = _maxSpeed;
-
+        _invisibilityDuration = GameManager.Instance.GetInvisibilityDuration();
     }
 
     private void Update()
@@ -95,6 +105,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(keyJump1) || Input.GetKeyDown(keyJump2))
             {
                 Jump();
+                Stack?.Invoke(0, (int)_jumpStack);
             }
             if (Input.GetKeyDown(keyWall1) || Input.GetKeyDown(keyWall2))
             {
@@ -141,17 +152,12 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-
         if (Rb.velocity.magnitude < _maxSpeed)
-
         {
             Vector3 move = transform.forward * _vertical * _movementSpeed;
             Rb.AddForce(move, ForceMode.Force);
         }
     }
-
-
-
 
     private void Jump()
     {
@@ -164,6 +170,8 @@ public class PlayerController : MonoBehaviour
 
     private void Wall()
     {
+        _wallStack--;
+        StackUse?.Invoke(1, (int)_wallStack);
         GameObject wall = ObjectPooler.SharedInstance.GetPooledObject();
         wall.SetActive(true);
         wall.transform.position = _wallPoint.position;
@@ -176,9 +184,10 @@ public class PlayerController : MonoBehaviour
         if (!_isInvisible)
         {
             _invisibilityStack--;
+            StackUse?.Invoke(2, (int)_invisibilityStack);
             _isInvisible = true;
             Debug.Log("hey sono invisibile");
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(_invisibilityDuration);
             _isInvisible = false;
             Debug.Log("hey non sono più invisibile");
         }
@@ -214,10 +223,8 @@ public class PlayerController : MonoBehaviour
                 Rb.position += new Vector3(0, _stairsJumps, 0f);
             }
         }
-
-
-
     }
+
     private void OnTriggerEnter(Collider collision)
     {
         int layer = collision.gameObject.layer;
@@ -229,25 +236,36 @@ public class PlayerController : MonoBehaviour
         {
             case 7:
                 _jumpStack++;
+                Stack?.Invoke(0, (int)_jumpStack);
                 break;
             case 8:
                 _invisibilityStack++;
+                Stack?.Invoke(2, (int)_invisibilityStack);
                 break;
             case 9:
                 _wallStack++;
+                Stack?.Invoke(1, (int)_wallStack);
                 break;
             case 10:
                 _shieldStack++;
+                Shield?.Invoke();
                 break;
             case 11:
+                //red
                 _maxSpeed = _maxSpeed - _speedChanger;
                 Invoke("NormalizeMaxSpeedVar", _timeSpeedChanger);
+                Stoplight?.Invoke(false);
                 break;
             case 12:
+                //green
                 _maxSpeed = _maxSpeed + _speedChanger;
                 Invoke("NormalizeMaxSpeedVar", _timeSpeedChanger);
+                Stoplight?.Invoke(true);
                 break;
         }
+
+        if (collision.gameObject.CompareTag("Flag")) return; //Exception for Flag
+
         Destroy(collision.gameObject);
     }
     private void NormalizeMaxSpeedVar()

@@ -5,6 +5,7 @@ using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Scripting;
 
+[RequireComponent(typeof(GameManager))]
 public class GameManager : MonoBehaviour
 {
     //Static variables
@@ -18,31 +19,34 @@ public class GameManager : MonoBehaviour
     [SerializeField, Tooltip("It's the game score")] private int score;
     [SerializeField, Tooltip("It's the speed of the player")] private float playerSpeed;
     [SerializeField, Range(0, 2), Tooltip("Level of Difficulty")] private int difficulty = 1;
+    [SerializeField] bool inputSystem;
+
+    //for Designer
+    [Header("Power-Up  Settings")]
+    [SerializeField, Min(0), Tooltip("is the duration of wall")] float _wallDelayDestroy;
+    [SerializeField, Min(0), Tooltip("is the duration of invisibility")] float _invisibilityDuration;
+    [SerializeField, Min(0), Tooltip("is the duration of shield")] float _shieldDuration;
+    [SerializeField, Min(0), Tooltip("is the duration of stoplight")] float _stoplightDuration;
+
+    [Header("Value for score")]
+    [SerializeField, Min(0)] int _flagValue;
+    [SerializeField, Min(0)] int _flagEnemyValue;
+    [SerializeField] List<Difficulty> _difficultyScoreValue;
+
+    [Header("Level Settings")]
+    [SerializeField] int _currentLevel;
+    [SerializeField] List<Level> Levels;
 
     //Local variables
     [Header("Local Variables")]
     [SerializeField] static bool gameIsPaused;
     [SerializeField] static bool gameIsEnded;
 
-    //for Designer
-    [Header("Value for score")]
-    [SerializeField, Min(0)] int _flagValue;
-    [SerializeField, Min(0)] int _flagEnemyValue;
-    [SerializeField] List<Difficulty> _difficultyScoreValue;
-
-    //Levels variables
-    [Header("Level Settings")]
-    [SerializeField] int _currentLevel;
-    [SerializeField] List<Level> Levels;
-
 
     void Awake()
     {
-        //ricordarsi di assegnare il valore delle variabili statiche
-
         if (TimerManagerInstance == null)
         {
-            // Aggiungi il componente TimerManager dinamicamente al GameObject associato al GameManager
             TimerManagerInstance = gameObject.AddComponent<TimerManager>();
         }
 
@@ -59,9 +63,6 @@ public class GameManager : MonoBehaviour
         #endregion
     }
 
-
- 
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -71,7 +72,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     #region Event
 
     public void IncrementFlagCount(int value)
@@ -79,9 +79,10 @@ public class GameManager : MonoBehaviour
         flagPlayer += value;
         score += value * _flagValue;
 
-        if (value == Levels[_currentLevel].flagsToCapture)
+        if (flagPlayer == Levels[_currentLevel].flagsToCapture)
         {
             //win
+            Debug.Log("win");
             gameIsEnded = true;
             EndGame();
         }
@@ -91,7 +92,7 @@ public class GameManager : MonoBehaviour
         flagEnemy += value;
         score += value * _flagEnemyValue;
 
-        if (value == Levels[_currentLevel].flagsEnemy)
+        if (flagEnemy == Levels[_currentLevel].flagsEnemy)
         {
             //lose
             gameIsEnded = true;
@@ -108,30 +109,50 @@ public class GameManager : MonoBehaviour
     }
     public void OnEnable()
     {
-        Flag.FlagHit += IncrementScore;
+        Flag.FlagHit += IncrementFlagCount;
         FlagE.FlagHit += IncrementFlagCountEnemy;
         PlayerController.PlayerSpeed += PlayerSpeed;
     }
     public void OnDisable()
     {
-        Flag.FlagHit -= IncrementScore;
+        Flag.FlagHit -= IncrementFlagCount;
         FlagE.FlagHit -= IncrementFlagCountEnemy;
         PlayerController.PlayerSpeed -= PlayerSpeed;
     }
 
     #endregion
 
-    #region return
+    #region Set
 
-    public int GetScore()
-    {
-        return score;
-    }
+    public void SetInputSystem(bool value) => inputSystem = value;
 
-    public float GetPlayerSpeed()
-    {
-        return playerSpeed;
-    }
+    public void SetNumberFlagsEnemy(int value) => Levels[_currentLevel].flagsEnemy = value;
+
+    #endregion
+
+    #region Get
+
+    public float GetShieldDuration() => _invisibilityDuration;
+
+    public float GetStoplightDuration() => _invisibilityDuration;
+
+    public float GetInvisibilityDuration() => _invisibilityDuration;
+
+    public float GetWallDelayDestroy() => _wallDelayDestroy;
+
+    public bool GetInputSystem() => inputSystem;
+
+    public int GetScore() => score;
+
+    public float GetPlayerSpeed() => playerSpeed;
+
+    public int GetFlagsToCapture() => flagPlayer;
+
+    public int GetFlagsEnemy() => flagEnemy;
+
+    public int GetNumberFlagsToCapture() => Levels[_currentLevel].flagsToCapture;
+
+    public int GetNumberFlagsEnemy() => Levels[_currentLevel].flagsEnemy;
 
     #endregion
 
@@ -186,7 +207,6 @@ public class Difficulty
 [Serializable]
 public class Level
 {
-    public GameObject gameObject;
     public int flagsToCapture;
     public int flagsEnemy;
     public int levelBonus;
@@ -195,9 +215,8 @@ public class Level
     public int botGreen;
     public int botBlue;
 
-    public Level(GameObject gameObject, int flagsToCapture, int flagsEnemy, int levelBonus, int botGreen, int botBlue)
+    public Level(int flagsToCapture, int flagsEnemy, int levelBonus, int botGreen, int botBlue)
     {
-        this.gameObject = gameObject;
         this.flagsToCapture = flagsToCapture;
         this.flagsEnemy = flagsEnemy;
         this.levelBonus = levelBonus;
