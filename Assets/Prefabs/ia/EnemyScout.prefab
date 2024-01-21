@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 6962989223339918208}
   - component: {fileID: 1644603860948477713}
   m_Layer: 0
-  m_Name: Enemy Scout
+  m_Name: EnemyScout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -485,7 +485,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ed1d32f6f0cf6544896bebbc77243f5e, type: 2}
+  - {fileID: 2100000, guid: a150692f8b1a5cb42ab0fbe95a7d4a1e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

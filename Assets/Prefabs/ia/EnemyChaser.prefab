@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 2740212713789596190}
   - component: {fileID: 347772108450660070}
   m_Layer: 0
-  m_Name: EnemyHover
+  m_Name: EnemyChaser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -353,7 +353,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ed1d32f6f0cf6544896bebbc77243f5e, type: 2}
+  - {fileID: 2100000, guid: bc5209d209732de40bc0cda3868a6a7d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

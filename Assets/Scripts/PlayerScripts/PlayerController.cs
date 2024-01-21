@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
 
         //UI
         Vector3 _tmpVelocity = Rb.velocity;
-        PlayerSpeed?.Invoke(Mathf.Clamp((Mathf.Round(((_tmpVelocity.magnitude / _maxSpeed) * 75f) * 10f) / 10f), 0f, 100f));
+        PlayerSpeed?.Invoke(Mathf.Clamp((Mathf.Round(((_tmpVelocity.magnitude / _normalMaxSpeed) * 75f) * 10f) / 10f), 0f, 100f));
 
     }
 
