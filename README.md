@@ -53,7 +53,7 @@ These steps should allow you to copy a Unity project from GitHub, set it up in U
 
 ## Release
 
-https://github.com/GameLab-eh/GameLab1-Hover-/releases/tag/AlphaVersion
+[Download](https://github.com/GameLab-eh/GameLab1-Hover-/releases/tag/AlphaVersion0.4)
 
 ## Contributors classmates
 
