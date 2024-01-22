@@ -7190,6 +7190,7 @@ GameObject:
   - component: {fileID: 6625487060883032019}
   - component: {fileID: 5188062742886700162}
   - component: {fileID: 5745947403516515535}
+  - component: {fileID: 6874898810153921965}
   - component: {fileID: 6874898810153921964}
   m_Layer: 0
   m_Name: GameManager
@@ -9776,6 +9777,21 @@ MonoBehaviour:
   - {fileID: 2052941231}
   - {fileID: 239466482}
   _spawnCounter: 4
+--- !u!114 &6874898810153921965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2542101662781988046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37612e9ce61d8a048a2393f3bcbb2856, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyPrefab: []
+  _spawnPointList: []
+  _spawnCounter: 0
 --- !u!1 &6876523441457135397
 GameObject:
   m_ObjectHideFlags: 0
