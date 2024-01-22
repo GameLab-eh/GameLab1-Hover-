@@ -89,6 +89,10 @@ public class PlayerController : MonoBehaviour
     {
         Rb = GetComponent<Rigidbody>();
         _normalMaxSpeed = _maxSpeed;
+    }
+
+    private void Start ()
+    {
         _invisibilityDuration = GameManager.Instance.GetInvisibilityDuration();
     }
 
