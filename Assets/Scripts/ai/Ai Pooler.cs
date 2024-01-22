@@ -13,7 +13,7 @@ public class AiPooler : MonoBehaviour
     [SerializeField, Tooltip("Number of spawns for each enemy")]
     private int _spawnCounter;
 
-    private void Awake()
+    private void Start()
     {
         if ((_enemyPrefab.Length * _spawnCounter) > _spawnPointList.Count)
         {
