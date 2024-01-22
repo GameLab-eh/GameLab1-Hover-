@@ -99,6 +99,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log (_isGrounded);
+
         if (_isAlive)
         {
             if (_isAbleToMove)
