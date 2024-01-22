@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,7 +19,7 @@ public class PlayerController : MonoBehaviour
     //checks
     private bool _isAbleToMove = true;
     private bool _isAlive = true;
-    private bool _isGrounded => Physics.Raycast(transform.position, -transform.up, _playerHeight, _groundLayer);
+    private bool _isGrounded;
     private bool _isInvisible = false;
 
     //general variables
@@ -168,6 +170,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_isGrounded && _jumpStack > 0)
         {
+            _isGrounded = false;
             Rb.AddForce(transform.up * _jumpPower, ForceMode.Impulse);
             _jumpStack--;
         }
@@ -230,6 +233,13 @@ public class PlayerController : MonoBehaviour
             {
                 Rb.position += new Vector3(0, _stairsJumps, 0f);
             }
+        }
+    }
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.layer == 3)
+        {
+            _isGrounded = true;
         }
     }
 
