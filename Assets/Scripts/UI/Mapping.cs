@@ -8,12 +8,12 @@ public class Mapping : MonoBehaviour
     [SerializeField] Camera _mainCamera;
     [SerializeField] Camera _backCamera;
     [SerializeField, Range(-5, 5)] float _heightPoisiton;
-    [SerializeField] int _density = 5;
-    [SerializeField] float _maxRayRange;
-    [SerializeField] bool _view;
+    [SerializeField, Tooltip("It's the number of raycasts to generate")] int _density = 5;
+    [SerializeField, Tooltip("It's the max distance to render the raycasts")] float _maxRayRange;
 
-    [Header("debug")]
-    [SerializeField] private List<GameObject> _miniMapObjActivated = new List<GameObject>();
+    [Header("Debug")]
+    [SerializeField, Tooltip("It's the list of active objects in minimap")] private List<GameObject> _miniMapObjActivated = new List<GameObject>();
+    [SerializeField, Tooltip("Debug viwe of raycast")] bool _view;
 
     private void Update()
     {
@@ -48,7 +48,8 @@ public class Mapping : MonoBehaviour
                 }
             }
             if (_view) Debug.DrawRay(ray.origin, ray.direction * hitInfo.distance, Color.red, 0.1f);
-            else Debug.DrawRay(ray.origin, ray.direction * (_maxRayRange - (_maxRayRange - hitInfo.distance)), Color.red, 0.1f);
+            else if (!_view && hitInfo.collider != null) Debug.DrawRay(ray.origin, ray.direction * hitInfo.distance, Color.red, 0.1f);
+            else Debug.DrawRay(ray.origin, ray.direction * _maxRayRange, Color.red, 0.1f);
         }
     }
 
