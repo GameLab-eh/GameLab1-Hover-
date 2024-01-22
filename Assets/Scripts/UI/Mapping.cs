@@ -12,6 +12,9 @@ public class Mapping : MonoBehaviour
     [SerializeField] float _maxRayRange;
     [SerializeField] bool _view;
 
+    [Header("debug")]
+    [SerializeField] private List<GameObject> _miniMapObjActivated = new List<GameObject>();
+
     private void Update()
     {
         RaycastMapping(_mainCamera);
@@ -40,6 +43,7 @@ public class Mapping : MonoBehaviour
                     if (childTransform != null && !childTransform.gameObject.activeSelf)
                     {
                         childTransform.gameObject.SetActive(true);
+                        _miniMapObjActivated.Add(childTransform.gameObject);
                     }
                 }
             }
@@ -47,4 +51,27 @@ public class Mapping : MonoBehaviour
             else Debug.DrawRay(ray.origin, ray.direction * (_maxRayRange - (_maxRayRange - hitInfo.distance)), Color.red, 0.1f);
         }
     }
+
+    #region Event
+
+    public void OnEnable()
+    {
+        PlayerController.EraseMap += EraseMap;
+    }
+    public void OnDisable()
+    {
+        PlayerController.EraseMap -= EraseMap;
+    }
+
+    #endregion
+
+    private void EraseMap()
+    {
+        foreach (GameObject obj in _miniMapObjActivated)
+        {
+            obj.gameObject.SetActive(false);
+        }
+        _miniMapObjActivated.Clear();
+    }
+
 }

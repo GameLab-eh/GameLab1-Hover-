@@ -305,6 +305,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2147483648
   _isEnemy: 0
+  _delay: 0.5
 --- !u!136 &9095724204248775503
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -83,6 +83,7 @@ public class PlayerController : MonoBehaviour
 
     public delegate void PowerUpInfo();
     public static event PowerUpInfo Shield = null; // shield
+    public static event PowerUpInfo EraseMap = null; //Erase Map
 
 
     private void Awake()
@@ -268,6 +269,9 @@ public class PlayerController : MonoBehaviour
                 _maxSpeed = _maxSpeed + _speedChanger;
                 Invoke("NormalizeMaxSpeedVar", _timeSpeedChanger);
                 Stoplight?.Invoke(true);
+                break;
+            case 13: //EraseMap
+                EraseMap?.Invoke();
                 break;
         }
 

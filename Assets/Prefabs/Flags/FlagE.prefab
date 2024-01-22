@@ -301,11 +301,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08d12cb78b8c48a4dac15b1f8ecb6409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collider: {fileID: 0}
   _layerMask:
     serializedVersion: 2
     m_Bits: 1073741824
   _isEnemy: 1
+  _delay: 0.5
 --- !u!136 &672397983515875003
 CapsuleCollider:
   m_ObjectHideFlags: 0
