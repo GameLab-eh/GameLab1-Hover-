@@ -10,7 +10,7 @@ public class FlagPooler : MonoBehaviour
     [SerializeField] List<GameObject> _ListObj;
 
     [Header("Variables")]
-    [SerializeField] GameObject _flagEnemyModel;
+    [SerializeField] GameObject _model;
 
     private int _numberFlags;
 
@@ -29,7 +29,7 @@ public class FlagPooler : MonoBehaviour
         for (int i = 0; i < _numberFlags; i++)
         {
             int _tmp = Random.Range(0, _tmpList.Count);
-            Instantiate(_flagEnemyModel, _tmpList[_tmp].transform.position, Quaternion.identity, transform);
+            Instantiate(_model, _tmpList[_tmp].transform.position, Quaternion.identity, transform);
             _tmpList.Remove(_tmpList[_tmp]);
         }
     }

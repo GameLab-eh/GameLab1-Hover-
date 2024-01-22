@@ -3795,7 +3795,7 @@ MonoBehaviour:
   - {fileID: 91384219}
   - {fileID: 2042151131}
   - {fileID: 2095030756}
-  _flagEnemyModel: {fileID: 6480053390177726706, guid: ee292302af2728641a0480bfc03d0c81, type: 3}
+  _model: {fileID: 6480053390177726706, guid: ee292302af2728641a0480bfc03d0c81, type: 3}
 --- !u!4 &1863741345 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7898824617824617695, guid: 737706ad91249f04fbc1cbc45293aabf, type: 3}
@@ -4467,7 +4467,7 @@ MonoBehaviour:
   - {fileID: 1685201423}
   - {fileID: 298950617}
   - {fileID: 1961346215}
-  _flagEnemyModel: {fileID: 6480053390177726706, guid: a9471b58aadd21c45aa5b5b9fefeb30d, type: 3}
+  _model: {fileID: 6480053390177726706, guid: a9471b58aadd21c45aa5b5b9fefeb30d, type: 3}
 --- !u!1 &16604908565866157
 GameObject:
   m_ObjectHideFlags: 0
