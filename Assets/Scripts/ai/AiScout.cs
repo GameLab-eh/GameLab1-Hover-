@@ -18,7 +18,7 @@ public class AiScout : MonoBehaviour
     [Header("checks and states of the patrolling/chasing")]
     [SerializeField, Tooltip("always set it to half the angle u want (if u want 45° set it to 22.5)")]
     private float _visualAngle = 22.5f;
-
+    [SerializeField] private float _knockBackForce;
     [SerializeField] private float _visualRange;
     private GameObject[] _enemyFlagArray;
 
@@ -154,6 +154,14 @@ public class AiScout : MonoBehaviour
         yield return new WaitForSeconds(1f);
         _enemyFlagArray = GameObject.FindGameObjectsWithTag("Flag");
         isArraySet = true;
+    }
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.layer == 31)
+        {
+            Vector3 knockbackDirection = (transform.position - other.transform.position).normalized;
+            GetComponent<Rigidbody>().AddForce(knockbackDirection * _knockBackForce, ForceMode.Impulse);
+        }
     }
 }
     
