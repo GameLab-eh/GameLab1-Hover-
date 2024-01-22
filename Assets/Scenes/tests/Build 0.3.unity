@@ -6687,7 +6687,7 @@ GameObject:
   - component: {fileID: 397164357461397576}
   - component: {fileID: 2826627121218361936}
   - component: {fileID: 235751982340254125}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: MiniMap Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7346,7 +7346,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7749835391694464271}
   - component: {fileID: 1591099600494333121}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: BackCam Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7362,7 +7362,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6866438369229681144}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: ReycastLower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7638,7 +7638,7 @@ GameObject:
   - component: {fileID: 8298561981752303262}
   - component: {fileID: 8678776746288495151}
   - component: {fileID: 5319189031098740487}
-  m_Layer: 29
+  m_Layer: 31
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8084,7 +8084,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5040062591554858008}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8907,7 +8907,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 68833049559737196}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: WallSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9057,7 +9057,7 @@ GameObject:
   - component: {fileID: 2110988976183991376}
   - component: {fileID: 2854637461853303281}
   - component: {fileID: 8849619817150048176}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9248,7 +9248,7 @@ GameObject:
   - component: {fileID: 2235716139933816572}
   - component: {fileID: 3238515404685299082}
   - component: {fileID: 5403838853210158634}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -9308,7 +9308,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5112804481874802422}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: ReycastUpper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11409,6 +11409,7 @@ MonoBehaviour:
   _rotationDecayRate: 4.5
   _playerHeight: 1.2
   <Rb>k__BackingField: {fileID: 0}
+  _knockBackForce: 10
   _jumpPower: 10
   _jumpStack: 10
   _invisibilityStack: 10
