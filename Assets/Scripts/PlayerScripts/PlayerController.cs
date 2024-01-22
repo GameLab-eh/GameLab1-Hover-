@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
@@ -42,7 +43,7 @@ public class PlayerController : MonoBehaviour
     private float _normalMaxSpeed; //used for store MaxSpeedVariable to restore to default when changed (currently not used)
     [SerializeField, Min(0)] float _playerHeight;
     [field: SerializeField] public Rigidbody Rb { get; private set; }
-
+    [SerializeField] private float _knockBackForce;
 
     //for buff and malus variables
     //jump
@@ -242,6 +243,11 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.layer == 3)
         {
             _isGrounded = true;
+        }
+        if (other.gameObject.layer == 30)
+        {
+            Vector3 knockbackDirection = (transform.position - other.transform.position).normalized;
+            GetComponent<Rigidbody>().AddForce(knockbackDirection * _knockBackForce, ForceMode.Impulse);
         }
     }
 
