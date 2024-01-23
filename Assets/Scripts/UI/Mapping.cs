@@ -8,8 +8,8 @@ public class Mapping : MonoBehaviour
     [SerializeField] Camera _mainCamera;
     [SerializeField] Camera _backCamera;
     [SerializeField, Range(-5, 5)] float _heightPoisiton;
-    [SerializeField, Tooltip("It's the number of raycasts to generate")] int _density = 5;
-    [SerializeField, Tooltip("It's the max distance to render the raycasts")] float _maxRayRange;
+    [SerializeField, Min(1), Tooltip("It's the number of raycasts to generate")] int _density = 5;
+    [SerializeField, Min(1), Tooltip("It's the max distance to render the raycasts")] float _maxRayRange;
 
     [Header("Debug")]
     [SerializeField, Tooltip("It's the list of active objects in minimap")] private List<GameObject> _miniMapObjActivated = new List<GameObject>();
