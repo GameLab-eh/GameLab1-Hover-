@@ -1,15 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Scripting;
-using UnityEngine.UIElements;
-using UnityEngine.XR;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 [RequireComponent(typeof(GameManager))]
 public class GameManager : MonoBehaviour
@@ -264,6 +256,8 @@ public class Difficulty
     }
 }
 
+#if UNITY_EDITOR
+
 [CustomPropertyDrawer(typeof(Difficulty))]
 public class DifficultyDrawer : PropertyDrawer
 {
@@ -300,3 +294,5 @@ public class DifficultyDrawer : PropertyDrawer
         EditorGUI.EndProperty();
     }
 }
+
+#endif
