@@ -23445,26 +23445,86 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94c65d1090a0dc245b86c846faa367f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  difficulty: 1
+  inputSystem: 0
   flagPlayer: 0
   flagEnemy: 0
   score: 0
   playerSpeed: 0
-  difficulty: 1
-  inputSystem: 0
   _wallDelayDestroy: 5
   _invisibilityDuration: 5
   _shieldDuration: 5
   _stoplightDuration: 5
-  _flagValue: 900
-  _flagEnemyValue: 0
-  _difficultyScoreValue: []
   _currentLevel: 0
   Levels:
-  - flagsToCapture: 3
-    flagsEnemy: 3
-    levelBonus: 0
-    botGreen: 0
-    botBlue: 0
+  - maze: Test
+    powerUp: 4
+    chaserBot: 3
+    scoutBot: 3
+    flags: 3
+    levelBonus:
+      easy: 0
+      medium: 0
+      hard: 0
+    flagCaptureBonus:
+      easy: 900
+      medium: 1000
+      hard: 1100
+    flagRemainBonus:
+      easy: 2250
+      medium: 2500
+      hard: 2750
+  - maze: Level 1
+    powerUp: 4
+    chaserBot: 1
+    scoutBot: 1
+    flags: 3
+    levelBonus:
+      easy: 0
+      medium: 0
+      hard: 0
+    flagCaptureBonus:
+      easy: 900
+      medium: 1000
+      hard: 1100
+    flagRemainBonus:
+      easy: 2250
+      medium: 2500
+      hard: 2750
+  - maze: Level 2
+    powerUp: 4
+    chaserBot: 1
+    scoutBot: 1
+    flags: 3
+    levelBonus:
+      easy: 4050
+      medium: 4500
+      hard: 4950
+    flagCaptureBonus:
+      easy: 1350
+      medium: 1500
+      hard: 1650
+    flagRemainBonus:
+      easy: 3375
+      medium: 3750
+      hard: 4125
+  - maze: S
+    powerUp: 0
+    chaserBot: 0
+    scoutBot: 0
+    flags: 1
+    levelBonus:
+      easy: 0
+      medium: 0
+      hard: 0
+    flagCaptureBonus:
+      easy: 0
+      medium: 0
+      hard: 0
+    flagRemainBonus:
+      easy: 0
+      medium: 0
+      hard: 0
 --- !u!222 &5231560683061741545
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -24562,7 +24622,6 @@ MonoBehaviour:
   - {fileID: 358988667}
   - {fileID: 2052941231}
   - {fileID: 239466482}
-  _spawnCounter: 4
 --- !u!114 &6874898810153921965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24589,7 +24648,6 @@ MonoBehaviour:
   - {fileID: 1057023605}
   - {fileID: 2064773952}
   - {fileID: 1329838689}
-  _spawnCounter: 3
 --- !u!1 &6876523441457135397
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,8 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Scripting;
+using UnityEngine.UIElements;
+using UnityEngine.XR;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 [RequireComponent(typeof(GameManager))]
 public class GameManager : MonoBehaviour
@@ -12,14 +18,15 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public static TimerManager TimerManagerInstance { get; private set; }
 
-    //Global variables
-    [Header("Game Variables")]
+    [Header("System Variables")]
+    [SerializeField, Range(0, 2), Tooltip("Level of Difficulty")] private int difficulty = 1;
+    [SerializeField] bool inputSystem;
+
+    [Header("UI Variables")]
     [SerializeField, Tooltip("It's count of Capture Flag")] private int flagPlayer;
     [SerializeField, Tooltip("It's count of Capture Flag from Enemy")] private int flagEnemy;
     [SerializeField, Tooltip("It's the game score")] private int score;
     [SerializeField, Tooltip("It's the speed of the player")] private float playerSpeed;
-    [SerializeField, Range(0, 2), Tooltip("Level of Difficulty")] private int difficulty = 1;
-    [SerializeField] bool inputSystem;
 
     //for Designer
     [Header("Power-Up  Settings")]
@@ -28,17 +35,11 @@ public class GameManager : MonoBehaviour
     [SerializeField, Min(0), Tooltip("is the duration of shield")] float _shieldDuration;
     [SerializeField, Min(0), Tooltip("is the duration of stoplight")] float _stoplightDuration;
 
-    [Header("Value for score")]
-    [SerializeField, Min(0)] int _flagValue;
-    [SerializeField, Min(0)] int _flagEnemyValue;
-    [SerializeField] List<Difficulty> _difficultyScoreValue;
-
     [Header("Level Settings")]
     [SerializeField] int _currentLevel;
     [SerializeField] List<Level> Levels;
 
-    //Local variables
-    [Header("Local Variables")]
+    [Header("Debug")]
     [SerializeField] static bool gameIsPaused;
     [SerializeField] static bool gameIsEnded;
 
@@ -67,6 +68,9 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            //to implement
+            //active/disactive pause screen
+
             gameIsPaused = !gameIsPaused;
             PauseGame();
         }
@@ -79,12 +83,36 @@ public class GameManager : MonoBehaviour
         if (!isEnemy)
         {
             flagPlayer++;
-            score += _flagValue;
+            switch (difficulty)
+            {
+                case 0:
+                    score += Levels[_currentLevel].flagCaptureBonus.easy;
+                    break;
+                case 1:
+                    score += Levels[_currentLevel].flagCaptureBonus.medium;
+                    break;
+                case 2:
+                    score += Levels[_currentLevel].flagCaptureBonus.hard;
+                    break;
+                default:
+                    break;
+            }
 
-            if (flagPlayer == Levels[_currentLevel].flagsToCapture)
+            if (flagPlayer == Levels[_currentLevel].flags)
             {
                 //win
                 Debug.Log("win");
+
+                //to implement
+                //activate gamewin screen
+                //timer
+                //_currentLevel++;
+                //if (_currentLevel == Levels.Count)
+                //{
+                //    SceneManager.LoadScene("/*menu scene*/");
+                //}
+                //SceneManager.LoadScene($"{Levels[_currentLevel].maze}");
+
                 gameIsEnded = true;
                 EndGame();
             }
@@ -92,11 +120,17 @@ public class GameManager : MonoBehaviour
         else
         {
             flagEnemy++;
-            score += _flagEnemyValue;
+            //score += _flagEnemyValue;
 
-            if (flagEnemy == Levels[_currentLevel].flagsEnemy)
+            if (flagEnemy == Levels[_currentLevel].flags)
             {
                 //lose
+
+                //to implement
+                //activate gameover screen
+                //timer
+                //SceneManager.LoadScene("/*menu scene*/");
+
                 gameIsEnded = true;
                 EndGame();
             }
@@ -131,7 +165,7 @@ public class GameManager : MonoBehaviour
 
     public void SetInputSystem(bool value) => inputSystem = value;
 
-    public void SetNumberFlagsEnemy(int value) => Levels[_currentLevel].flagsEnemy = value;
+    public void SetNumberFlagsEnemy(int value) => Levels[_currentLevel].flags = value;
 
     #endregion
 
@@ -155,9 +189,12 @@ public class GameManager : MonoBehaviour
 
     public int GetFlagsEnemy() => flagEnemy;
 
-    public int GetNumberFlagsToCapture() => Levels[_currentLevel].flagsToCapture;
+    public int GetNumberFlagsToCapture() => Levels[_currentLevel].flags;
 
-    public int GetNumberFlagsEnemy() => Levels[_currentLevel].flagsEnemy;
+    public int GetNumberFlagsEnemy() => Levels[_currentLevel].flags;
+    public int GetNumberPowerUp() => Levels[_currentLevel].powerUp;
+    public int GetNumberChaserBot() => Levels[_currentLevel].chaserBot;
+    public int GetNumberScoutBot() => Levels[_currentLevel].scoutBot;
 
     #endregion
 
@@ -193,39 +230,73 @@ public class GameManager : MonoBehaviour
 }
 
 [Serializable]
-public class Difficulty
+public class Level
 {
-    public GameObject gameObject;
-    public int easy;
-    public int medium;
-    public int hard;
+    [Header("Level")]
+    public string maze;
 
-    public Difficulty(GameObject obj, int v1, int v2, int v3)
-    {
-        gameObject = obj;
-        easy = v1;
-        medium = v2;
-        hard = v3;
-    }
+    [Header("Power-Up")]
+    [Min(0)] public int powerUp;
+
+    [Header("Object Counts")]
+    [Min(0)] public int chaserBot;
+    [Min(0)] public int scoutBot;
+    [Min(1)]public int flags;
+
+    [Header("Bonus by difficulty")]
+    public Difficulty levelBonus;
+    public Difficulty flagCaptureBonus;
+    public Difficulty flagRemainBonus;
 }
 
 [Serializable]
-public class Level
+public class Difficulty
 {
-    public int flagsToCapture;
-    public int flagsEnemy;
-    public int levelBonus;
+    [Min(0)] public int easy;
+    [Min(0)] public int medium;
+    [Min(0)] public int hard;
 
-    //Bot
-    public int botGreen;
-    public int botBlue;
-
-    public Level(int flagsToCapture, int flagsEnemy, int levelBonus, int botGreen, int botBlue)
+    public Difficulty(int easy, int medium, int hard)
     {
-        this.flagsToCapture = flagsToCapture;
-        this.flagsEnemy = flagsEnemy;
-        this.levelBonus = levelBonus;
-        this.botGreen = botGreen;
-        this.botBlue = botBlue;
+        this.easy = easy;
+        this.medium = medium;
+        this.hard = hard;
+    }
+}
+
+[CustomPropertyDrawer(typeof(Difficulty))]
+public class DifficultyDrawer : PropertyDrawer
+{
+    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    {
+        EditorGUI.BeginProperty(position, label, property);
+
+        // Mostra i campi della difficoltà come campi di un Vector3
+        EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
+        EditorGUI.indentLevel = 0;
+
+        var easy = property.FindPropertyRelative("easy");
+        var medium = property.FindPropertyRelative("medium");
+        var hard = property.FindPropertyRelative("hard");
+
+        position.x += EditorGUIUtility.labelWidth;
+        position.width -= EditorGUIUtility.labelWidth;
+
+        float labelWidth = 30f;
+        float spacing = 5f;
+
+        EditorGUIUtility.labelWidth = labelWidth;
+
+        position.width = (position.width - 2 * spacing) / 3f;
+
+        EditorGUI.PropertyField(position, easy, new GUIContent("Easy"));
+        position.x += position.width + spacing;
+
+        EditorGUI.PropertyField(position, medium, new GUIContent("Medium"));
+        position.x += position.width + spacing;
+
+        EditorGUI.PropertyField(position, hard, new GUIContent("Hard"));
+
+        EditorGUI.EndProperty();
     }
 }

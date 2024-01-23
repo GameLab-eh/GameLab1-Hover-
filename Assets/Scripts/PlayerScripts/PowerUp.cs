@@ -15,11 +15,12 @@ public class PowerUp : MonoBehaviour
 
     [SerializeField] private List<Transform> _spawnPointList;
 
-    [SerializeField, Tooltip("number of spawns for each power up")]
     private int _spawnCounter;
 
     private void Awake()
     {
+        _spawnCounter = GameManager.Instance.GetNumberPowerUp();
+
         if ((_powerUpPrefab.Length * _spawnCounter) > _spawnPointList.Count)
         {
             Debug.LogError("The number of spawn points in the power-up spawn point list is insufficient");

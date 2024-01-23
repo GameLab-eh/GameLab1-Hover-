@@ -70,7 +70,7 @@ public class Mapping : MonoBehaviour
     {
         foreach (GameObject obj in _miniMapObjActivated)
         {
-            obj.gameObject.SetActive(false);
+            obj.SetActive(false);
         }
         _miniMapObjActivated.Clear();
     }

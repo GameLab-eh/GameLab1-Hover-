@@ -5,29 +5,37 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 public class AiPooler : MonoBehaviour
 {
-    [Header("Spawn Settings")] [SerializeField, Tooltip("insert enemys")]
+    [Header("Spawn Settings")]
+    [SerializeField, Tooltip("insert enemys")]
     private GameObject[] _enemyPrefab;
 
     [SerializeField] private List<Transform> _spawnPointList;
 
-    [SerializeField, Tooltip("Number of spawns for each enemy")]
-    private int _spawnCounter;
+    private int[] _spawnCounter = new int[2];
 
     private void Start()
     {
-        if ((_enemyPrefab.Length * _spawnCounter) > _spawnPointList.Count)
+        _spawnCounter[0] = GameManager.Instance.GetNumberChaserBot();
+        _spawnCounter[1] = GameManager.Instance.GetNumberScoutBot();
+
+        int _spawnCounterTotal = _spawnCounter[0] + _spawnCounter[1];
+
+        if (_spawnCounterTotal > _spawnPointList.Count)
         {
             return;
         }
 
+        int tmp = 0;
         foreach (GameObject enemy in _enemyPrefab)
         {
-            for (int i = 0; i < _spawnCounter; i++)
+            for (int i = 0; i < _spawnCounter[tmp]; i++)
             {
                 int indexNumber = Random.Range(0, _spawnPointList.Count);
                 Instantiate(enemy, _spawnPointList[index: indexNumber]);
                 _spawnPointList.RemoveAt(indexNumber);
             }
+
+            tmp++;
         }
     }
 }
