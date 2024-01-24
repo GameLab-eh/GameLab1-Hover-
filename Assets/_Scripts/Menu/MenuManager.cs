@@ -15,7 +15,7 @@ public class MenuManager : MonoBehaviour
     [Header("Option Panel")]
     [SerializeField] CanvasGroup _panel;
     [SerializeField, Min(0)] float _duration;
-    bool _isVisible;
+    bool _isVisible = true;
 
     bool _checkOption;
 
