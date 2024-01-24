@@ -47,6 +47,8 @@ public class PowerUpsInventory : MonoBehaviour
     void Update()
     {
         _indicator[0].value = Mathf.Clamp((Mathf.Round(((_player.transform.position.y / _maxAltitude) * 100f) * 10f) / 10f), 0f, 100f) / 100f;
+        if (_inputSystem == GameManager.Instance.GetInputSystem()) SetInputSystemDisplay();
+        _inputSystem = GameManager.Instance.GetInputSystem();
     }
 
     public void OnEnable()
