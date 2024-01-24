@@ -65,6 +65,91 @@ public class GameManager : MonoBehaviour
 
     #region Event
 
+    public void OnEnable()
+    {
+        FlagMechanic.FlagHit += IncrementFlagCount;
+        PlayerController.PlayerSpeed += PlayerSpeed;
+        OptionManager.difficulty += SetDifficulty;
+        OptionManager.input += SetInputSystem;
+    }
+    public void OnDisable()
+    {
+        FlagMechanic.FlagHit -= IncrementFlagCount;
+        PlayerController.PlayerSpeed -= PlayerSpeed;
+        OptionManager.difficulty -= SetDifficulty;
+        OptionManager.input -= SetInputSystem;
+    }
+
+    #endregion
+
+    #region Set
+
+    public void SetInputSystem(bool value) => inputSystem = value;
+
+    public void SetNumberFlagsEnemy(int value) => Levels[_currentLevel].flags = value;
+
+    public void SetDifficulty(int value) => difficulty = value;
+
+    #endregion
+
+    #region Get
+
+    public float GetShieldDuration() => _invisibilityDuration;
+
+    public float GetStoplightDuration() => _invisibilityDuration;
+
+    public float GetInvisibilityDuration() => _invisibilityDuration;
+
+    public float GetWallDelayDestroy() => _wallDelayDestroy;
+
+    public bool GetInputSystem() => inputSystem;
+
+    public int GetScore() => score;
+
+    public float GetPlayerSpeed() => playerSpeed;
+
+    public int GetFlagsToCapture() => flagPlayer;
+
+    public int GetFlagsEnemy() => flagEnemy;
+
+    public int GetNumberFlagsToCapture() => Levels[_currentLevel].flags;
+
+    public int GetNumberFlagsEnemy() => Levels[_currentLevel].flags;
+    public int GetNumberPowerUp() => Levels[_currentLevel].powerUp;
+    public int GetNumberChaserBot() => Levels[_currentLevel].chaserBot;
+    public int GetNumberScoutBot() => Levels[_currentLevel].scoutBot;
+
+    #endregion
+
+    #region game mecchanic
+
+
+
+    #endregion
+
+    void PauseGame()
+    {
+        if (gameIsPaused)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+    }
+    void EndGame()
+    {
+        if (gameIsEnded)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+    }
+
     public void IncrementFlagCount(bool isEnemy)
     {
         if (!isEnemy)
@@ -135,85 +220,6 @@ public class GameManager : MonoBehaviour
         playerSpeed = value;
     }
 
-    public void OnEnable()
-    {
-        FlagMechanic.FlagHit += IncrementFlagCount;
-        PlayerController.PlayerSpeed += PlayerSpeed;
-    }
-    public void OnDisable()
-    {
-        FlagMechanic.FlagHit -= IncrementFlagCount;
-        PlayerController.PlayerSpeed -= PlayerSpeed;
-    }
-
-    #endregion
-
-    #region Set
-
-    public void SetInputSystem(bool value) => inputSystem = value;
-
-    public void SetNumberFlagsEnemy(int value) => Levels[_currentLevel].flags = value;
-
-    #endregion
-
-    #region Get
-
-    public float GetShieldDuration() => _invisibilityDuration;
-
-    public float GetStoplightDuration() => _invisibilityDuration;
-
-    public float GetInvisibilityDuration() => _invisibilityDuration;
-
-    public float GetWallDelayDestroy() => _wallDelayDestroy;
-
-    public bool GetInputSystem() => inputSystem;
-
-    public int GetScore() => score;
-
-    public float GetPlayerSpeed() => playerSpeed;
-
-    public int GetFlagsToCapture() => flagPlayer;
-
-    public int GetFlagsEnemy() => flagEnemy;
-
-    public int GetNumberFlagsToCapture() => Levels[_currentLevel].flags;
-
-    public int GetNumberFlagsEnemy() => Levels[_currentLevel].flags;
-    public int GetNumberPowerUp() => Levels[_currentLevel].powerUp;
-    public int GetNumberChaserBot() => Levels[_currentLevel].chaserBot;
-    public int GetNumberScoutBot() => Levels[_currentLevel].scoutBot;
-
-    #endregion
-
-    #region game mecchanic
-
-
-
-    #endregion
-
-    void PauseGame()
-    {
-        if (gameIsPaused)
-        {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1;
-        }
-    }
-    void EndGame()
-    {
-        if (gameIsEnded)
-        {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1;
-        }
-    }
-
 }
 
 [Serializable]
@@ -228,7 +234,7 @@ public class Level
     [Header("Object Counts")]
     [Min(0)] public int chaserBot;
     [Min(0)] public int scoutBot;
-    [Min(1)]public int flags;
+    [Min(0)]public int flags;
 
     [Header("Bonus by difficulty")]
     public Difficulty levelBonus;
