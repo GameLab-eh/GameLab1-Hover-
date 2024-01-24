@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     private bool _isAlive = true;
     private bool _isGrounded;
     private bool _isInvisible = false;
-    public static bool _isLegacy;
+    private bool _isModern;
     //general variables
     private int _playerScore;
 
@@ -100,23 +100,24 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        _isModern = GameManager.Instance.GetInputSystem();
         
-        if (_isLegacy)
+        if (_isModern)
+        {
+            keyJump1 = KeyCode.J;
+            keyWall1 = KeyCode.K;
+            keyInvisibility1 = KeyCode.L;
+        }
+        else
         {
             keyJump1 = KeyCode.A;
             keyWall1 = KeyCode.S;
             keyInvisibility1 = KeyCode.D;
         }
-        else
-        {
-            keyJump1 = KeyCode.J;
-            keyWall1 = KeyCode.K;
-            keyInvisibility1 = KeyCode.L;   
-        }
 
         if (_isAlive)
         {
-            if (_isAbleToMove && _isLegacy)
+            if (_isAbleToMove && !_isModern)
             {
                 _horizontal = Input.GetAxisRaw("RotationLegacy");
                 _vertical = Input.GetAxisRaw("MoveLegacy");
@@ -228,12 +229,14 @@ public class PlayerController : MonoBehaviour
     private void StairsClimb()
     {
         Vector3 rayDirection = transform.forward;
+        float stairsMovement = 0.5f;
         RaycastHit lowerHit;
         // RaycastHit lowerHit45;
         // RaycastHit lowerHitOther45;
         if (_vertical < 0)
         {
             rayDirection = -transform.forward;
+            stairsMovement = -0.5f;
         }
         
         
@@ -242,7 +245,7 @@ public class PlayerController : MonoBehaviour
             RaycastHit upperHit;
             if (!Physics.Raycast(_stairsUpperPoint.position, rayDirection, out upperHit, 1f, _groundLayer))
             {
-                Rb.position += new Vector3(0, _stairsJumps, 0.3f);
+                Rb.position += new Vector3(0, _stairsJumps, stairsMovement);
             }
         }
         // else if (Physics.Raycast(_stairsLowerPoint.position, transform.TransformDirection(1.5f, 0, 1), out lowerHit45, 0.3f, _groundLayer))
