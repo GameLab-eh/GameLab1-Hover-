@@ -228,12 +228,14 @@ public class PlayerController : MonoBehaviour
     private void StairsClimb()
     {
         Vector3 rayDirection = transform.forward;
+        float stairsMovement = 0.5f;
         RaycastHit lowerHit;
         // RaycastHit lowerHit45;
         // RaycastHit lowerHitOther45;
         if (_vertical < 0)
         {
             rayDirection = -transform.forward;
+            stairsMovement = -0.5f;
         }
         
         
@@ -242,7 +244,7 @@ public class PlayerController : MonoBehaviour
             RaycastHit upperHit;
             if (!Physics.Raycast(_stairsUpperPoint.position, rayDirection, out upperHit, 1f, _groundLayer))
             {
-                Rb.position += new Vector3(0, _stairsJumps, 0.3f);
+                Rb.position += new Vector3(0, _stairsJumps, stairsMovement);
             }
         }
         // else if (Physics.Raycast(_stairsLowerPoint.position, transform.TransformDirection(1.5f, 0, 1), out lowerHit45, 0.3f, _groundLayer))
