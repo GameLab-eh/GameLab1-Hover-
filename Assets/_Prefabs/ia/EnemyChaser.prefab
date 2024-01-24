@@ -196,6 +196,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2147483648
   _visualAngle: 90
+  secondsBeforeChasingAgain: 1
   _visualRange: 30
 --- !u!195 &347772108450660070
 NavMeshAgent:
