@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform _stairsLowerPoint;
     [SerializeField] float _stairsJumps = 0.1f;
     [SerializeField] LayerMask _groundLayer;
+    
 
     //UI
     public delegate void Speed(float score);
@@ -99,6 +100,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        
         if (_isLegacy)
         {
             keyJump1 = KeyCode.A;
@@ -225,17 +227,22 @@ public class PlayerController : MonoBehaviour
 
     private void StairsClimb()
     {
-
+        Vector3 rayDirection = transform.forward;
         RaycastHit lowerHit;
         // RaycastHit lowerHit45;
         // RaycastHit lowerHitOther45;
-        Vector3 rayDirection = Rb.velocity;
-        if (Physics.Raycast(_stairsLowerPoint.position, rayDirection, out lowerHit, 0.3f, _groundLayer))
+        if (_vertical < 0)
+        {
+            rayDirection = -transform.forward;
+        }
+        
+        
+        if (Physics.Raycast(_stairsLowerPoint.position, rayDirection, out lowerHit, 0.7f, _groundLayer))
         {
             RaycastHit upperHit;
-            if (!Physics.Raycast(_stairsUpperPoint.position, rayDirection, out upperHit, 0.5f, _groundLayer))
+            if (!Physics.Raycast(_stairsUpperPoint.position, rayDirection, out upperHit, 1f, _groundLayer))
             {
-                Rb.position += new Vector3(0, _stairsJumps, 0.1f);
+                Rb.position += new Vector3(0, _stairsJumps, 0.3f);
             }
         }
         // else if (Physics.Raycast(_stairsLowerPoint.position, transform.TransformDirection(1.5f, 0, 1), out lowerHit45, 0.3f, _groundLayer))
