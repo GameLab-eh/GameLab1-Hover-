@@ -11,18 +11,15 @@ public class PlayerController : MonoBehaviour
     //for designer
     [Header("Input")]
     [SerializeField] KeyCode keyJump1 = KeyCode.J;
-    [SerializeField] KeyCode keyJump2 = KeyCode.Alpha1;
     [SerializeField] KeyCode keyWall1 = KeyCode.K;
-    [SerializeField] KeyCode keyWall2 = KeyCode.Alpha2;
     [SerializeField] KeyCode keyInvisibility1 = KeyCode.L;
-    [SerializeField] KeyCode keyInvisibility2 = KeyCode.Alpha3;
-
+    
     //checks
     private bool _isAbleToMove = true;
     private bool _isAlive = true;
     private bool _isGrounded;
     private bool _isInvisible = false;
-
+    public bool _isLegacy;
     //general variables
     private int _playerScore;
 
@@ -102,26 +99,43 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-
+        if (_isLegacy)
+        {
+            keyJump1 = KeyCode.A;
+            keyWall1 = KeyCode.S;
+            keyInvisibility1 = KeyCode.D;
+        }
+        else
+        {
+            keyJump1 = KeyCode.J;
+            keyWall1 = KeyCode.K;
+            keyInvisibility1 = KeyCode.L;   
+        }
 
         if (_isAlive)
         {
-            if (_isAbleToMove)
+            if (_isAbleToMove && !_isLegacy)
             {
                 _horizontal = Input.GetAxisRaw("Rotation");
                 _vertical = Input.GetAxisRaw("Move");
                 rotate();
             }
-            if (Input.GetKeyDown(keyJump1) || Input.GetKeyDown(keyJump2))
+            else if (_isAbleToMove)
+            {
+                _horizontal = Input.GetAxisRaw("RotationLegacy");
+                _vertical = Input.GetAxisRaw("MoveLegacy");
+                rotate();
+            }
+            if (Input.GetKeyDown(keyJump1))
             {
                 Jump();
                 Stack?.Invoke(0, (int)_jumpStack);
             }
-            if (Input.GetKeyDown(keyWall1) || Input.GetKeyDown(keyWall2))
+            if (Input.GetKeyDown(keyWall1))
             {
                 Wall();
             }
-            if (Input.GetKeyDown(keyInvisibility1) || Input.GetKeyDown(keyInvisibility2))
+            if (Input.GetKeyDown(keyInvisibility1))
             {
                 Debug.Log(_isInvisible);
                 StartCoroutine(Invisibility());
