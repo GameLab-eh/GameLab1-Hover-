@@ -48,6 +48,6 @@ public class AutoMap : MonoBehaviour
 
         _newMesh.GetComponent<MeshRenderer>().material = _material;
 
-        _newMesh.SetActive(false);
+        _newMesh.SetActive(_debugview);
     }
 }
