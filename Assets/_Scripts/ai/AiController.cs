@@ -29,6 +29,9 @@ public class AiController : MonoBehaviour
     [SerializeField, Tooltip("always set it to half the angle u want (if u want 45° set it to 22.5)")]
     private float _visualAngle = 22.5f;
 
+    private bool _isPlayerHitted = false;
+    [SerializeField] private float secondsBeforeChasingAgain = 1f;
+    public static bool _isPlayerInvisible = false;
 
     [SerializeField] private float _visualRange;
 
@@ -40,7 +43,7 @@ public class AiController : MonoBehaviour
     }
     private void Update()
     {
-        if (IsPlayerInRange())
+        if (IsPlayerInRange() && !_isPlayerHitted && !_isPlayerInvisible)
         {
             Chase();
         }
@@ -132,6 +135,13 @@ public class AiController : MonoBehaviour
         {
             Vector3 knockbackDirection = (transform.position - other.transform.position).normalized;
             GetComponent<Rigidbody>().AddForce(knockbackDirection * _knockBackForce, ForceMode.Impulse);
+            StartCoroutine(playerHitted());
         }
+    }
+    private IEnumerator playerHitted()
+    {
+        _isPlayerHitted = true;
+        yield return new WaitForSeconds(secondsBeforeChasingAgain);
+        _isPlayerHitted = false;
     }
 }

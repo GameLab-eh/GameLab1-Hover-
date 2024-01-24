@@ -195,13 +195,15 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator Invisibility()
     {
-        if (!_isInvisible)
+        if (!_isInvisible && _invisibilityStack > 0)
         {
             _invisibilityStack--;
             StackUse?.Invoke(2, (int)_invisibilityStack);
+            AiController._isPlayerInvisible = true;
             _isInvisible = true;
             Debug.Log("hey sono invisibile");
             yield return new WaitForSeconds(_invisibilityDuration);
+            AiController._isPlayerInvisible = false;
             _isInvisible = false;
             Debug.Log("hey non sono più invisibile");
         }
