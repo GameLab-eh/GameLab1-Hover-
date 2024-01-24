@@ -26,6 +26,9 @@ public class GameManager : MonoBehaviour
     [SerializeField, Min(0), Tooltip("is the duration of shield")] float _shieldDuration;
     [SerializeField, Min(0), Tooltip("is the duration of stoplight")] float _stoplightDuration;
 
+    [Header("Menu")]
+    [SerializeField] GameObject _menu;
+
     [Header("Level Settings")]
     [SerializeField] int _currentLevel;
     [SerializeField] List<Level> Levels;
@@ -55,10 +58,6 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            //to implement
-            //active/disactive pause screen
-
-            gameIsPaused = !gameIsPaused;
             PauseGame();
         }
     }
@@ -127,16 +126,11 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    void PauseGame()
+    public void PauseGame()
     {
-        if (gameIsPaused)
-        {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1;
-        }
+        gameIsPaused = !gameIsPaused;
+        _menu.gameObject.SetActive(gameIsPaused);
+        Time.timeScale = gameIsPaused ? 0 : 1;
     }
     void EndGame()
     {

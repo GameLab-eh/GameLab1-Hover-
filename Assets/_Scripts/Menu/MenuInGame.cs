@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MenuManager : MonoBehaviour
+public class MenuInGame : MonoBehaviour
 {
     [Header("Buttons")]
-    [SerializeField] Button _play;
+    [SerializeField] Button _resume;
     [SerializeField] Button _option;
+    [SerializeField] Button _quitMenu;
     [SerializeField] Button _quit;
 
     [Header("Option Panel")]
@@ -21,24 +21,32 @@ public class MenuManager : MonoBehaviour
 
     private void OnEnable()
     {
-        _play.onClick.AddListener(Play);
+        _resume.onClick.AddListener(Resume);
         _option.onClick.AddListener(Option);
+        _quitMenu.onClick.AddListener(QuitMenu);
         _quit.onClick.AddListener(Quit);
     }
 
     private void OnDisable()
     {
-        _play?.onClick.RemoveListener(Play);
+        _resume?.onClick.RemoveListener(Resume);
         _option.onClick.RemoveListener(Option);
+        _quitMenu.onClick.AddListener(QuitMenu);
         _quit?.onClick.RemoveListener(Quit);
     }
 
-    public void Play()
+    public void Resume()
+    {
+        this.gameObject.SetActive(false);
+        GameManager.Instance.PauseGame();
+    }
+
+    public void QuitMenu()
     {
 #if UNITY_EDITOR
-        SceneManager.LoadScene("Build 0.3");
+        SceneManager.LoadScene("MainMenu");
 #else
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
 #endif
     }
 
@@ -63,7 +71,7 @@ public class MenuManager : MonoBehaviour
         while (elapsedTime < _duration)
         {
             _panel.alpha = Mathf.Lerp(startAlpha, targetAlpha, elapsedTime / _duration);
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.fixedDeltaTime;
             yield return null;
         }
 
