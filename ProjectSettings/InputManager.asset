@@ -406,7 +406,7 @@ InputManager:
     axis: 5
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Rotation
+    m_Name: RotationLegacy
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: left
