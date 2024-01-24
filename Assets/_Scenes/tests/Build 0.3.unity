@@ -24060,7 +24060,7 @@ Transform:
   m_GameObject: {fileID: 5446401876679388908}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.3, z: 0.5}
+  m_LocalPosition: {x: 0, y: 1.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25347,7 +25347,7 @@ Transform:
   m_GameObject: {fileID: 2101933001457163802}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26947,11 +26947,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyJump1: 106
-  keyJump2: 49
   keyWall1: 107
-  keyWall2: 50
   keyInvisibility1: 108
-  keyInvisibility2: 51
   _movementSpeed: 10
   _maxSpeed: 15
   _rotationSpeed: 69
