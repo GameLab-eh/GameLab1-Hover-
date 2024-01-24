@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     private bool _isAlive = true;
     private bool _isGrounded;
     private bool _isInvisible = false;
-    public static bool _isLegacy;
+    private bool _isModern;
     //general variables
     private int _playerScore;
 
@@ -100,23 +100,24 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        _isModern = GameManager.Instance.GetInputSystem();
         
-        if (_isLegacy)
+        if (_isModern)
+        {
+            keyJump1 = KeyCode.J;
+            keyWall1 = KeyCode.K;
+            keyInvisibility1 = KeyCode.L;
+        }
+        else
         {
             keyJump1 = KeyCode.A;
             keyWall1 = KeyCode.S;
             keyInvisibility1 = KeyCode.D;
         }
-        else
-        {
-            keyJump1 = KeyCode.J;
-            keyWall1 = KeyCode.K;
-            keyInvisibility1 = KeyCode.L;   
-        }
 
         if (_isAlive)
         {
-            if (_isAbleToMove && _isLegacy)
+            if (_isAbleToMove && !_isModern)
             {
                 _horizontal = Input.GetAxisRaw("RotationLegacy");
                 _vertical = Input.GetAxisRaw("MoveLegacy");
