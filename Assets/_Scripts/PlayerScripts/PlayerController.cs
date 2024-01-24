@@ -114,16 +114,16 @@ public class PlayerController : MonoBehaviour
 
         if (_isAlive)
         {
-            if (_isAbleToMove && !_isLegacy)
+            if (_isAbleToMove && _isLegacy)
             {
-                _horizontal = Input.GetAxisRaw("Rotation");
-                _vertical = Input.GetAxisRaw("Move");
+                _horizontal = Input.GetAxisRaw("RotationLegacy");
+                _vertical = Input.GetAxisRaw("MoveLegacy");
                 rotate();
             }
             else if (_isAbleToMove)
             {
-                _horizontal = Input.GetAxisRaw("RotationLegacy");
-                _vertical = Input.GetAxisRaw("MoveLegacy");
+                _horizontal = Input.GetAxisRaw("RotationModern");
+                _vertical = Input.GetAxisRaw("MoveModern");
                 rotate();
             }
             if (Input.GetKeyDown(keyJump1))
