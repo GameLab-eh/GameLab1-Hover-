@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     private bool _isAlive = true;
     private bool _isGrounded;
     private bool _isInvisible = false;
-    public bool _isLegacy;
+    public static bool _isLegacy;
     //general variables
     private int _playerScore;
 
