@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
 {
     //Static variables
     public static GameManager Instance { get; private set; }
-    public static TimerManager TimerManagerInstance { get; private set; }
 
     [Header("System Variables")]
     [SerializeField, Range(0, 2), Tooltip("Level of Difficulty")] private int difficulty = 1;
@@ -38,10 +37,6 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        if (TimerManagerInstance == null)
-        {
-            TimerManagerInstance = gameObject.AddComponent<TimerManager>();
-        }
 
         #region Singleton
 
