@@ -95,14 +95,14 @@ public class PlayerController : MonoBehaviour
         _normalMaxSpeed = _maxSpeed;
     }
 
-    private void Start ()
+    private void Start()
     {
         _invisibilityDuration = GameManager.Instance.GetInvisibilityDuration();
     }
 
     private void Update()
     {
-        
+
 
         if (_isAlive)
         {
@@ -190,7 +190,7 @@ public class PlayerController : MonoBehaviour
             wall.transform.position = _wallPoint.position;
             wall.transform.rotation = _wallPoint.transform.rotation;
         }
-        
+
     }
 
     public IEnumerator Invisibility()
@@ -278,14 +278,14 @@ public class PlayerController : MonoBehaviour
                 break;
             case 11:
                 //red
-                _maxSpeed = _maxSpeed - _speedChanger;
-                Invoke("NormalizeMaxSpeedVar", _timeSpeedChanger);
+                _maxSpeed -= _speedChanger;
+                Invoke(nameof(NormalizeMaxSpeedVar), _timeSpeedChanger);
                 Stoplight?.Invoke(false);
                 break;
             case 12:
                 //green
-                _maxSpeed = _maxSpeed + _speedChanger;
-                Invoke("NormalizeMaxSpeedVar", _timeSpeedChanger);
+                _maxSpeed += _speedChanger;
+                Invoke(nameof(NormalizeMaxSpeedVar), _timeSpeedChanger);
                 Stoplight?.Invoke(true);
                 break;
             case 13: //EraseMap
@@ -294,6 +294,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if (collision.gameObject.CompareTag("Flag")) return; //Exception for Flag
+        if (collision.gameObject.CompareTag("Traps")) return; //Exception for Flag
 
         Destroy(collision.gameObject);
     }

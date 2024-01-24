@@ -265,7 +265,6 @@ public class DifficultyDrawer : PropertyDrawer
     {
         EditorGUI.BeginProperty(position, label, property);
 
-        // Mostra i campi della difficoltà come campi di un Vector3
         EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
         EditorGUI.indentLevel = 0;
 

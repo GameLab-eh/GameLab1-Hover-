@@ -40,8 +40,8 @@ public class MiniMapZoom : MonoBehaviour
     private void Zoom()
     {
         Vector3 _newPosition = transform.position + Vector3.down * _miniMapZoom;
-        //if (_newPosition.y > _maxZoom) return;
-        //else if (_newPosition.y < _minZoom) return;
+        //if (_newPosition.quicksand > _maxZoom) return;
+        //else if (_newPosition.quicksand < _minZoom) return;
         _newPosition.y = Mathf.Clamp(_newPosition.y, _minZoom, _maxZoom);
         transform.position = Vector3.Lerp(transform.position, _newPosition, _speedZoom * Time.deltaTime);
 
