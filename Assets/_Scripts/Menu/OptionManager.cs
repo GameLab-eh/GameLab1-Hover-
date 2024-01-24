@@ -27,7 +27,7 @@ public class OptionManager : MonoBehaviour
 
     private void OnEnable()
     {
-        _difficulty.onValueChanged.AddListener(SliderDifficulty);
+        if(_difficulty != null) _difficulty.onValueChanged.AddListener(SliderDifficulty);
         _input.onValueChanged.AddListener(SliderInputSystem);
         _master.onValueChanged.AddListener(SliderMaster);
         _music.onValueChanged.AddListener(SliderMusic);
@@ -36,7 +36,7 @@ public class OptionManager : MonoBehaviour
 
     private void OnDisable()
     {
-        _difficulty.onValueChanged.RemoveListener(SliderDifficulty);
+        if (_difficulty != null) _difficulty.onValueChanged.RemoveListener(SliderDifficulty);
         _input.onValueChanged.RemoveListener(SliderInputSystem);
         _master.onValueChanged.RemoveListener(SliderMaster);
         _music.onValueChanged.RemoveListener(SliderMusic);
