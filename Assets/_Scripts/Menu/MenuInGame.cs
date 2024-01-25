@@ -44,12 +44,12 @@ public class MenuInGame : MonoBehaviour
 
     public void QuitMenu()
     {
+        GameManager.Instance.ReturnToMainMenu();
 #if UNITY_EDITOR
         SceneManager.LoadScene("MainMenu");
 #else
         SceneManager.LoadScene(0);
 #endif
-        GameManager.Instance.ReturnToMainMenu();
     }
 
     public void Option()

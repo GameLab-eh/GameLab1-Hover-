@@ -144,7 +144,6 @@ public class GameManager : MonoBehaviour
         gameIsPaused = false;
         _menu.SetActive(gameIsPaused);
         Time.timeScale = 1f;
-
         Reset();
     }
 
@@ -158,41 +157,32 @@ public class GameManager : MonoBehaviour
     {
         GameObject panel = isWin ? _gameWin : _gameOver;
         gameIsPaused = true;
-        panel.SetActive(gameIsPaused);
+        //panel.SetActive(gameIsPaused);
         Time.timeScale = gameIsPaused ? 0f : 1f;
         StartCoroutine(EndGameTimer());
         gameIsPaused = false;
-        panel.SetActive(gameIsPaused);
+        //panel.SetActive(gameIsPaused);
         Time.timeScale = gameIsPaused ? 0f : 1f;
 
+#if UNITY_EDITOR
+        String nextScene = "MainMenu";
+#else
+        int nextScene = 0;
+#endif
         if (isWin)
         {
             _currentLevel++;
             if (_currentLevel == Levels.Count)
             {
 #if UNITY_EDITOR
-                SceneManager.LoadScene($"{Levels[_currentLevel].maze}");
+                nextScene = "{Levels[_currentLevel].maze}";
 #else
-                SceneManager.LoadScene(_currentLevel);
+                nextScene = _currentLevel;
 #endif
             }
-
-
-#if UNITY_EDITOR
-            SceneManager.LoadScene("MainMenu");
-#else
-            SceneManager.LoadScene(0);
-#endif
-        }
-        else
-        {
-#if UNITY_EDITOR
-            SceneManager.LoadScene("MainMenu");
-#else
-            SceneManager.LoadScene(0);
-#endif
         }
         Reset();
+        SceneManager.LoadScene(nextScene);
     }
 
     IEnumerator EndGameTimer()
