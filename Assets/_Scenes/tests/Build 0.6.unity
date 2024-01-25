@@ -25034,7 +25034,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6721695598570737007, guid: 701c2679f00011446bc563bdd8d4b877, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 77
+      value: 81.43
       objectReference: {fileID: 0}
     - target: {fileID: 6721695598570737007, guid: 701c2679f00011446bc563bdd8d4b877, type: 3}
       propertyPath: m_LocalPosition.y
@@ -27750,8 +27750,8 @@ MonoBehaviour:
   _mainCamera: {fileID: 2235716139933816572}
   _backCamera: {fileID: 1591099600494333121}
   _heightPoisiton: -0.5
-  _density: 5
-  _maxRayRange: 40
+  _density: 15
+  _maxRayRange: 200
   _miniMapObjActivated: []
   _view: 1
 --- !u!222 &236530317843437887
@@ -28458,7 +28458,7 @@ Camera:
     height: 1
   near clip plane: 0.2
   far clip plane: 500
-  field of view: 70
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -30065,7 +30065,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 536870912
   _material: {fileID: 2100000, guid: 0a66bb68fdc441a4a81fac15769b0934, type: 2}
-  _debugview: 1
+  _debugview: 0
 --- !u!1 &4217822694470737883 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 518623254889313886, guid: f1051a17b1f4dc141986463cbc12c060, type: 3}
