@@ -1455,40 +1455,6 @@ MonoBehaviour:
       easy: 2250
       medium: 2500
       hard: 2750
-  - maze: Level 2
-    powerUp: 4
-    chaserBot: 1
-    scoutBot: 1
-    flags: 3
-    levelBonus:
-      easy: 4050
-      medium: 4500
-      hard: 4950
-    flagCaptureBonus:
-      easy: 1350
-      medium: 1500
-      hard: 1650
-    flagRemainBonus:
-      easy: 3375
-      medium: 3750
-      hard: 4125
-  - maze: S
-    powerUp: 0
-    chaserBot: 0
-    scoutBot: 0
-    flags: 1
-    levelBonus:
-      easy: 0
-      medium: 0
-      hard: 0
-    flagCaptureBonus:
-      easy: 0
-      medium: 0
-      hard: 0
-    flagRemainBonus:
-      easy: 0
-      medium: 0
-      hard: 0
 --- !u!4 &2103318602
 Transform:
   m_ObjectHideFlags: 0
