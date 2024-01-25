@@ -75,6 +75,7 @@ public class GameManager : MonoBehaviour
         PlayerController.PlayerSpeed += PlayerSpeed;
         OptionManager.difficulty += SetDifficulty;
         OptionManager.input += SetInputSystem;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
     public void OnDisable()
     {
@@ -82,6 +83,7 @@ public class GameManager : MonoBehaviour
         PlayerController.PlayerSpeed -= PlayerSpeed;
         OptionManager.difficulty -= SetDifficulty;
         OptionManager.input -= SetInputSystem;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     #endregion
@@ -166,9 +168,6 @@ public class GameManager : MonoBehaviour
         panel.SetActive(gameIsPaused);
         Time.timeScale = gameIsPaused ? 0f : 1f;
         yield return new WaitForSecondsRealtime(2f);
-        gameIsPaused = false;
-        panel.SetActive(gameIsPaused);
-        Time.timeScale = gameIsPaused ? 0f : 1f;
 
 #if UNITY_EDITOR
         String nextScene = "MainMenu";
@@ -189,6 +188,15 @@ public class GameManager : MonoBehaviour
         }
         Reset();
         SceneManager.LoadScene(nextScene);
+
+        gameIsPaused = false;
+        Time.timeScale = gameIsPaused ? 1f : 0f;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        _gameWin.SetActive(false);
+        _gameOver.SetActive(false);
     }
 
     #endregion
