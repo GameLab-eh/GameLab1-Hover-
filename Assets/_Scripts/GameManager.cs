@@ -1,8 +1,11 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEngine.Rendering.DebugUI;
 
 [RequireComponent(typeof(GameManager))]
 public class GameManager : MonoBehaviour
@@ -28,6 +31,8 @@ public class GameManager : MonoBehaviour
     [SerializeField, Min(0), Tooltip("is the duration of stoplight")] float _stoplightDuration;
 
     [SerializeField] GameObject _menu;
+    [SerializeField] GameObject _gameWin;
+    [SerializeField] GameObject _gameOver;
 
     [Header("Level Settings")]
     [SerializeField] int _currentLevel;
@@ -126,15 +131,21 @@ public class GameManager : MonoBehaviour
 
     #region game mecchanic
 
-
-
-    #endregion
+    private void Reset()
+    {
+        difficulty = 1;
+        score = 0;
+        flagPlayer = 0;
+        flagEnemy = 0;
+    }
 
     public void ReturnToMainMenu()
     {
         gameIsPaused = false;
         _menu.SetActive(gameIsPaused);
         Time.timeScale = 1f;
+
+        Reset();
     }
 
     public void PauseGame()
@@ -143,23 +154,53 @@ public class GameManager : MonoBehaviour
         _menu.SetActive(gameIsPaused);
         Time.timeScale = gameIsPaused ? 0f : 1f;
     }
-    void EndGame()
+    void EndGame(bool isWin)
     {
-#if UNITY_EDITOR
-        SceneManager.LoadScene("MainMenu");
-#else
-        SceneManager.LoadScene(0);
-#endif
+        GameObject panel = isWin ? _gameWin : _gameOver;
+        gameIsPaused = true;
+        panel.SetActive(gameIsPaused);
+        Time.timeScale = gameIsPaused ? 0f : 1f;
+        StartCoroutine(EndGameTimer());
+        gameIsPaused = false;
+        panel.SetActive(gameIsPaused);
+        Time.timeScale = gameIsPaused ? 0f : 1f;
 
-        //if (gameIsEnded)
-        //{
-        //    Time.timeScale = 0f;
-        //}
-        //else
-        //{
-        //    Time.timeScale = 1;
-        //}
+        if (isWin)
+        {
+            _currentLevel++;
+            if (_currentLevel == Levels.Count)
+            {
+#if UNITY_EDITOR
+                SceneManager.LoadScene($"{Levels[_currentLevel].maze}");
+#else
+                SceneManager.LoadScene(_currentLevel);
+#endif
+            }
+
+
+#if UNITY_EDITOR
+            SceneManager.LoadScene("MainMenu");
+#else
+            SceneManager.LoadScene(0);
+#endif
+        }
+        else
+        {
+#if UNITY_EDITOR
+            SceneManager.LoadScene("MainMenu");
+#else
+            SceneManager.LoadScene(0);
+#endif
+        }
+        Reset();
     }
+
+    IEnumerator EndGameTimer()
+    {
+        yield return new WaitForSeconds(2f);
+    }
+
+    #endregion
 
     public void IncrementFlagCount(bool isEnemy)
     {
@@ -181,44 +222,17 @@ public class GameManager : MonoBehaviour
                     break;
             }
 
-            if (flagPlayer == Levels[_currentLevel].flags)
-            {
-                //win
-                Debug.Log("win");
-
-                //to implement
-                //activate gamewin screen
-                //timer
-                //_currentLevel++;
-                //if (_currentLevel == Levels.Count)
-                //{
-                //    SceneManager.LoadScene("/*menu scene*/");
-                //}
-                //SceneManager.LoadScene($"{Levels[_currentLevel].maze}");
-
-                gameIsEnded = true;
-                EndGame();
-            }
+            gameIsEnded = flagPlayer == Levels[_currentLevel].flags;
         }
         else
         {
             flagEnemy++;
             //score += _flagEnemyValue;
 
-            if (flagEnemy == Levels[_currentLevel].flags)
-            {
-                //lose
-
-                //to implement
-                //activate gameover screen
-                //timer
-                //SceneManager.LoadScene("/*menu scene*/");
-
-                gameIsEnded = true;
-                EndGame();
-            }
+            gameIsEnded = flagEnemy == Levels[_currentLevel].flags;
         }
 
+        if (gameIsEnded) EndGame(flagPlayer == Levels[_currentLevel].flags);
     }
 
     public void IncrementScore(int value)

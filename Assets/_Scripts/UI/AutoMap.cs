@@ -30,6 +30,7 @@ public class AutoMap : MonoBehaviour
         float angle = Mathf.Rad2Deg * Mathf.Atan2(width, length);
 
         GameObject _newMesh = GameObject.CreatePrimitive(PrimitiveType.Quad);
+        _newMesh.GetComponent<MeshCollider>().enabled = false;
         _newMesh.name = "Mesh";
 
         _newMesh.transform.localScale = new Vector3(0.5f, _hypotenuse, 0.5f);
