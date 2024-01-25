@@ -155,13 +155,18 @@ public class GameManager : MonoBehaviour
     }
     void EndGame(bool isWin)
     {
+        StartCoroutine(EndGameTimer(isWin));
+    }
+
+    IEnumerator EndGameTimer(bool isWin)
+    {
         GameObject panel = isWin ? _gameWin : _gameOver;
         gameIsPaused = true;
-        //panel.SetActive(gameIsPaused);
+        panel.SetActive(gameIsPaused);
         Time.timeScale = gameIsPaused ? 0f : 1f;
-        StartCoroutine(EndGameTimer());
+        yield return new WaitForSecondsRealtime(2f);
         gameIsPaused = false;
-        //panel.SetActive(gameIsPaused);
+        panel.SetActive(gameIsPaused);
         Time.timeScale = gameIsPaused ? 0f : 1f;
 
 #if UNITY_EDITOR
@@ -172,10 +177,10 @@ public class GameManager : MonoBehaviour
         if (isWin)
         {
             _currentLevel++;
-            if (_currentLevel == Levels.Count)
+            if (_currentLevel < Levels.Count)
             {
 #if UNITY_EDITOR
-                nextScene = "{Levels[_currentLevel].maze}";
+                nextScene = $"{Levels[_currentLevel].maze}";
 #else
                 nextScene = _currentLevel;
 #endif
@@ -183,11 +188,6 @@ public class GameManager : MonoBehaviour
         }
         Reset();
         SceneManager.LoadScene(nextScene);
-    }
-
-    IEnumerator EndGameTimer()
-    {
-        yield return new WaitForSeconds(2f);
     }
 
     #endregion
