@@ -126,6 +126,7 @@ public class GameManager : MonoBehaviour
     public int GetNumberPowerUp() => Levels[_currentLevel].powerUp;
     public int GetNumberChaserBot() => Levels[_currentLevel].chaserBot;
     public int GetNumberScoutBot() => Levels[_currentLevel].scoutBot;
+    public int GetLevel() => Levels.Count;
 
     #endregion
 
