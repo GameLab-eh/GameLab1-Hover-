@@ -148,9 +148,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2351663297371520602}
   - component: {fileID: 6962989223339918208}
-  - component: {fileID: 1644603860948477713}
   - component: {fileID: -8370729719287884732}
   - component: {fileID: 5870586887902870885}
+  - component: {fileID: 7566197433000498582}
   m_Layer: 30
   m_Name: EnemyScout
   m_TagString: Untagged
@@ -197,24 +197,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1644603860948477713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4940847928529169209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 090a9d9a285857d408394830524b73f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _navMeshAgent: {fileID: 0}
-  _walkRadius: 180
-  walkRange: 20
-  _visualAngle: 22.5
-  _knockBackForce: 10
-  _visualRange: 30
 --- !u!54 &-8370729719287884732
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -263,6 +245,29 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 8, y: 5, z: 11.5}
   m_Center: {x: 0, y: 2, z: 0.5}
+--- !u!114 &7566197433000498582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4940847928529169209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9736f233864fc6241a1dfaf33000d751, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _navMeshAgent: {fileID: 0}
+  _player: {fileID: 0}
+  _knockBackForce: 10
+  _walkRadius: 180
+  walkRange: 20
+  _playerLayer:
+    serializedVersion: 2
+    m_Bits: 2147483648
+  _visualAngle: 90
+  secondsBeforeChasingAgain: 1
+  _visualRange: 30
 --- !u!1001 &1874113821053841729
 PrefabInstance:
   m_ObjectHideFlags: 0
