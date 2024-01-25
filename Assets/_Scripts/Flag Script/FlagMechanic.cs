@@ -26,6 +26,11 @@ public class FlagMechanic : MonoBehaviour
     {
         if ((_layerMask.value & (1 << other.gameObject.layer)) != 0)
         {
+            if (_isEnemy)
+            {
+                Renderer rend = other.gameObject.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Renderer>();
+                rend.material.color = Color.yellow;
+            }
             FlagHit?.Invoke(_isEnemy);
             gameObject.SetActive(false);
         }
