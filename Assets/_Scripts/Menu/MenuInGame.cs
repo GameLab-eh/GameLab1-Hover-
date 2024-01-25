@@ -49,7 +49,7 @@ public class MenuInGame : MonoBehaviour
 #else
         SceneManager.LoadScene(0);
 #endif
-        GameManager.Instance.Resume();
+        GameManager.Instance.ReturnToMainMenu();
     }
 
     public void Option()
