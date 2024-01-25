@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -48,6 +49,7 @@ public class MenuInGame : MonoBehaviour
 #else
         SceneManager.LoadScene(0);
 #endif
+        GameManager.Instance.Resume();
     }
 
     public void Option()

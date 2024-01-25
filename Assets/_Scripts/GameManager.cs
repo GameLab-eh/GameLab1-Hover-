@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(GameManager))]
 public class GameManager : MonoBehaviour
@@ -26,7 +27,6 @@ public class GameManager : MonoBehaviour
     [SerializeField, Min(0), Tooltip("is the duration of shield")] float _shieldDuration;
     [SerializeField, Min(0), Tooltip("is the duration of stoplight")] float _stoplightDuration;
 
-    [Header("Menu")]
     [SerializeField] GameObject _menu;
 
     [Header("Level Settings")]
@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && _currentLevel != 0)
         {
             PauseGame();
         }
@@ -82,8 +82,12 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Set
+    public void SetGameMenu(GameObject gameMenu) => _menu = gameMenu;
 
     public void SetInputSystem(bool value) => inputSystem = value;
+
+    public void SetCurrentLevel(int value) => _currentLevel = value;
+    public void IncrementCurrentLeve() => _currentLevel++;
 
     public void SetNumberFlagsEnemy(int value) => Levels[_currentLevel].flags = value;
 
@@ -126,22 +130,35 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+    public void ReturnToMainMenu()
+    {
+        gameIsPaused = false;
+        _menu.SetActive(gameIsPaused);
+        Time.timeScale = 1f;
+    }
+
     public void PauseGame()
     {
         gameIsPaused = !gameIsPaused;
-        _menu.gameObject.SetActive(gameIsPaused);
-        Time.timeScale = gameIsPaused ? 0 : 1;
+        _menu.SetActive(gameIsPaused);
+        Time.timeScale = gameIsPaused ? 0f : 1f;
     }
     void EndGame()
     {
-        if (gameIsEnded)
-        {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1;
-        }
+#if UNITY_EDITOR
+        SceneManager.LoadScene("MainMenu");
+#else
+        SceneManager.LoadScene(0);
+#endif
+
+        //if (gameIsEnded)
+        //{
+        //    Time.timeScale = 0f;
+        //}
+        //else
+        //{
+        //    Time.timeScale = 1;
+        //}
     }
 
     public void IncrementFlagCount(bool isEnemy)
@@ -228,7 +245,7 @@ public class Level
     [Header("Object Counts")]
     [Min(0)] public int chaserBot;
     [Min(0)] public int scoutBot;
-    [Min(0)]public int flags;
+    [Min(0)] public int flags;
 
     [Header("Bonus by difficulty")]
     public Difficulty levelBonus;

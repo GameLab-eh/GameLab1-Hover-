@@ -19,6 +19,11 @@ public class MenuManager : MonoBehaviour
 
     bool _checkOption;
 
+    private void Start()
+    {
+        GameManager.Instance.SetCurrentLevel(0);
+    }
+
     private void OnEnable()
     {
         _play.onClick.AddListener(Play);
@@ -36,10 +41,11 @@ public class MenuManager : MonoBehaviour
     public void Play()
     {
 #if UNITY_EDITOR
-        SceneManager.LoadScene("Build 0.3");
+        SceneManager.LoadScene("Build 0.6");
 #else
         SceneManager.LoadScene(1);
 #endif
+        GameManager.Instance.IncrementCurrentLeve();
     }
 
     public void Option()
