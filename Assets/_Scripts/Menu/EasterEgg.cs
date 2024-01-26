@@ -28,6 +28,7 @@ public class EasterEgg : MonoBehaviour
 #else
             SceneManager.LoadScene(GameManager.Instance.GetLevel());
 #endif
+            GameManager.Instance.SetCurrentLevel(999);
         }
     }
 }

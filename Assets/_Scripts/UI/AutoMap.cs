@@ -33,13 +33,11 @@ public class AutoMap : MonoBehaviour
         _newMesh.GetComponent<MeshCollider>().enabled = false;
         _newMesh.name = "Mesh";
 
+        _newMesh.AddComponent<OriginLocalScale>();
+
         _newMesh.transform.localScale = new Vector3(0.5f, _hypotenuse, 0.5f);
 
-        if(originalObject.GetComponent<NegativeAngle>() != null) angle = -angle;
-        if (originalObject.GetComponent<Exception>() != null)
-        {
-            angle += originalObject.GetComponent<Exception>().isNegative ? +12f : -12f;
-        }
+        if (originalObject.GetComponent<NegativeAngle>() != null) angle = -angle;
 
         _newMesh.transform.SetPositionAndRotation(originalObject.transform.position, Quaternion.Euler(90f, angle, 0f));
 
@@ -48,7 +46,7 @@ public class AutoMap : MonoBehaviour
         _newMesh.transform.parent = originalObject.transform;
 
         _newMesh.GetComponent<MeshRenderer>().material = _material;
-
+        _newMesh.GetComponent<OriginLocalScale>().SetLocalScale(_newMesh.transform.localScale);
         _newMesh.SetActive(_debugview);
     }
 }

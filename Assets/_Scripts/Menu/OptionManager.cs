@@ -32,6 +32,8 @@ public class OptionManager : MonoBehaviour
         _master.onValueChanged.AddListener(SliderMaster);
         _music.onValueChanged.AddListener(SliderMusic);
         _effects.onValueChanged.AddListener(SliderEffects);
+
+        AudioManager.VolumeChanged += SliderUpdate;
     }
 
     private void OnDisable()
@@ -63,5 +65,12 @@ public class OptionManager : MonoBehaviour
     public void SliderEffects(float value)
     {
         effects?.Invoke(value);
+    }
+
+    void SliderUpdate(float master, float music, float effects)
+    {
+        _master.value = master;
+        _music.value = music;
+        _effects.value = effects;
     }
 }

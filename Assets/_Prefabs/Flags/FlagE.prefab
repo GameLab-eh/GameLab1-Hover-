@@ -160,6 +160,8 @@ GameObject:
   - component: {fileID: 179320391182853652}
   - component: {fileID: 43593712830695205}
   - component: {fileID: 6752771209998267527}
+  - component: {fileID: 8850606677496783169}
+  - component: {fileID: 7311792981734410018}
   m_Layer: 29
   m_Name: Quad
   m_TagString: Untagged
@@ -254,6 +256,30 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &8850606677496783169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5224979980911540875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3449f8b9b5a9d1d4d9e3488f92e089a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7311792981734410018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5224979980911540875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9a3dd9a9d5294844b83075591223648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6480053390177726706
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,7 +293,7 @@ GameObject:
   - component: {fileID: 672397983515875003}
   m_Layer: 28
   m_Name: FlagE
-  m_TagString: Flag
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -48,4 +48,7 @@ public class MiniMapZoom : MonoBehaviour
         //Debug
         _zoom = transform.position.y;
     }
+
+    public float GetMinZoom() { return _minZoom; }
+    public float GetMaxZoom() { return _maxZoom; }
 }

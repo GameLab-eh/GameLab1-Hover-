@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -188,6 +189,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        GameManager.Instance.AudioManager.PlayEffect("jump");
         if (_isGrounded && _jumpStack > 0)
         {
             _isGrounded = false;
@@ -198,6 +200,7 @@ public class PlayerController : MonoBehaviour
 
     private void Wall()
     {
+        GameManager.Instance.AudioManager.PlayEffect("wall");
         if (_wallStack > 0)
         {
             _wallStack--;
@@ -276,6 +279,9 @@ public class PlayerController : MonoBehaviour
             Vector3 knockbackDirection = (transform.position - other.transform.position).normalized;
             GetComponent<Rigidbody>().AddForce(knockbackDirection * _knockBackForce, ForceMode.Impulse);
         }
+
+        if (other.gameObject.CompareTag("Wood")) GameManager.Instance.AudioManager.PlayEffect("woodCrash");
+        else GameManager.Instance.AudioManager.PlayEffect("crash");
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -294,6 +300,7 @@ public class PlayerController : MonoBehaviour
             case 8:
                 _invisibilityStack++;
                 Stack?.Invoke(2, (int)_invisibilityStack);
+                GameManager.Instance.AudioManager.PlayEffect("invisibility");
                 break;
             case 9:
                 _wallStack++;
@@ -302,6 +309,7 @@ public class PlayerController : MonoBehaviour
             case 10:
                 _shieldStack++;
                 Shield?.Invoke();
+                GameManager.Instance.AudioManager.PlayEffect("shield");
                 break;
             case 11:
                 //red
@@ -319,10 +327,10 @@ public class PlayerController : MonoBehaviour
                 EraseMap?.Invoke();
                 break;
         }
-
         if (collision.gameObject.CompareTag("Flag")) return; //Exception for Flag
-        if (collision.gameObject.CompareTag("Traps")) return; //Exception for Flag
+        if (collision.gameObject.CompareTag("Traps")) return; //Exception for Traps
 
+        GameManager.Instance.AudioManager.PlayEffect("power-up");
         Destroy(collision.gameObject);
     }
     private void NormalizeMaxSpeedVar()

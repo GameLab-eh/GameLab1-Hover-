@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/_Scenes/MainMenu.unity
     guid: c19b8a48b1f6a55418fbac3dc148d0fc
   - enabled: 1
-    path: Assets/_Scenes/tests/Build 0.6.unity
+    path: Assets/_Scenes/tests/Build 0.8.unity
     guid: d05b219be5c79fa4db47323cf61f9304
   - enabled: 1
     path: Assets/_Scenes/EasterEgg.unity

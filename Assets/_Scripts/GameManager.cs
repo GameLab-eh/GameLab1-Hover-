@@ -2,16 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static UnityEngine.Rendering.DebugUI;
 
 [RequireComponent(typeof(GameManager))]
 public class GameManager : MonoBehaviour
 {
     //Static variables
     public static GameManager Instance { get; private set; }
+    public AudioManager AudioManager { get => _audioManager; set => _audioManager = value; }
 
     [Header("System Variables")]
     [SerializeField, Range(0, 2), Tooltip("Level of Difficulty")] private int difficulty = 1;
@@ -33,6 +32,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject _menu;
     [SerializeField] GameObject _gameWin;
     [SerializeField] GameObject _gameOver;
+
+    [Header("Audio Settings")]
+    [SerializeField] AudioManager _audioManager;
+
 
     [Header("Level Settings")]
     [SerializeField] int _currentLevel;
@@ -94,8 +97,11 @@ public class GameManager : MonoBehaviour
     public void SetInputSystem(bool value) => inputSystem = value;
 
     public void SetCurrentLevel(int value) => _currentLevel = value;
-    public void IncrementCurrentLeve() => _currentLevel++;
-
+    public void IncrementCurrentLeve()
+    {
+        _currentLevel++;
+        ScoreCalculator(Levels[_currentLevel].levelBonus);
+    }
     public void SetNumberFlagsEnemy(int value) => Levels[_currentLevel].flags = value;
 
     public void SetDifficulty(int value) => difficulty = value;
@@ -140,6 +146,7 @@ public class GameManager : MonoBehaviour
         score = 0;
         flagPlayer = 0;
         flagEnemy = 0;
+        Time.timeScale = 1f;
     }
 
     public void ReturnToMainMenu()
@@ -158,12 +165,17 @@ public class GameManager : MonoBehaviour
     }
     void EndGame(bool isWin)
     {
+        for (int i = 0; i < Levels[_currentLevel].flags - flagEnemy; i++)
+        {
+            ScoreCalculator(Levels[_currentLevel].flagCaptureBonus);
+        }
         StartCoroutine(EndGameTimer(isWin));
     }
 
     IEnumerator EndGameTimer(bool isWin)
     {
         GameObject panel = isWin ? _gameWin : _gameOver;
+        GameManager.Instance.AudioManager.PlayEffect(isWin ? "" : "");
         gameIsPaused = true;
         panel.SetActive(gameIsPaused);
         Time.timeScale = gameIsPaused ? 0f : 1f;
@@ -206,28 +218,13 @@ public class GameManager : MonoBehaviour
         if (!isEnemy)
         {
             flagPlayer++;
-            switch (difficulty)
-            {
-                case 0:
-                    score += Levels[_currentLevel].flagCaptureBonus.easy;
-                    break;
-                case 1:
-                    score += Levels[_currentLevel].flagCaptureBonus.medium;
-                    break;
-                case 2:
-                    score += Levels[_currentLevel].flagCaptureBonus.hard;
-                    break;
-                default:
-                    break;
-            }
+            ScoreCalculator(Levels[_currentLevel].flagCaptureBonus);
 
             gameIsEnded = flagPlayer == Levels[_currentLevel].flags;
         }
         else
         {
             flagEnemy++;
-            //score += _flagEnemyValue;
-
             gameIsEnded = flagEnemy == Levels[_currentLevel].flags;
         }
 
@@ -244,6 +241,24 @@ public class GameManager : MonoBehaviour
         playerSpeed = value;
     }
 
+    private float ScoreCalculator(Difficulty value)
+    {
+        switch (difficulty)
+        {
+            case 0:
+                score += value.easy;
+                break;
+            case 1:
+                score += value.medium;
+                break;
+            case 2:
+                score += value.hard;
+                break;
+            default:
+                break;
+        }
+        return score;
+    }
 }
 
 [Serializable]

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Mapping : MonoBehaviour
@@ -14,11 +15,21 @@ public class Mapping : MonoBehaviour
     [Header("Debug")]
     [SerializeField, Tooltip("It's the list of active objects in minimap")] private List<GameObject> _miniMapObjActivated = new List<GameObject>();
     [SerializeField, Tooltip("Debug viwe of raycast")] bool _view;
+    [SerializeField] float _factor = 10f;
 
-    private void Update()
+    float _minZoom;
+
+    private void Start()
+    {
+        _minZoom = this.GetComponent<MiniMapZoom>().GetMinZoom();
+    }
+
+    private void FixedUpdate()
     {
         RaycastMapping(_mainCamera);
         RaycastMapping(_backCamera);
+
+        Resize(this.transform.position.y);
     }
 
     void RaycastMapping(Camera _camera)
@@ -73,6 +84,20 @@ public class Mapping : MonoBehaviour
             obj.SetActive(false);
         }
         _miniMapObjActivated.Clear();
+    }
+
+    private void Resize(float zoom)
+    {
+        float scaleFactor = 1f + (zoom - _minZoom) / (_minZoom * _factor);
+
+        foreach (GameObject obj in _miniMapObjActivated)
+        {
+            Vector3 localScale = obj.GetComponent<OriginLocalScale>().GetLocalScale();
+
+            float newX = localScale.x * scaleFactor;
+
+            obj.transform.localScale = new Vector3(newX, localScale.y, newX);
+        }
     }
 
 }

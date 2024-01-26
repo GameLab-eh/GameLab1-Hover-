@@ -254,6 +254,8 @@ GameObject:
   - component: {fileID: 2554159540307680914}
   - component: {fileID: 1431605712577637388}
   - component: {fileID: 3947511400741431985}
+  - component: {fileID: 3444419162568923228}
+  - component: {fileID: 6963521782909251095}
   m_Layer: 29
   m_Name: Mesh Map
   m_TagString: Untagged
@@ -326,6 +328,30 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3444419162568923228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4891590070804897366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3449f8b9b5a9d1d4d9e3488f92e089a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6963521782909251095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4891590070804897366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9a3dd9a9d5294844b83075591223648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6377552146720068059
 GameObject:
   m_ObjectHideFlags: 0

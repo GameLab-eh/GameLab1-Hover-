@@ -31,6 +31,10 @@ public class FlagMechanic : MonoBehaviour
                 Renderer rend = other.gameObject.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Renderer>();
                 rend.material.color = Color.yellow;
             }
+            else
+            {
+                GameManager.Instance.AudioManager.PlayEffect("flag");
+            }
             FlagHit?.Invoke(_isEnemy);
             gameObject.SetActive(false);
         }
