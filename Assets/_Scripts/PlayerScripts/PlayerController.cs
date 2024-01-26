@@ -58,7 +58,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform _wallPoint;
 
     //shield
-    [SerializeField] float _shieldStack = 10;
+    private bool _isShielded = false;
+    [SerializeField] private float _shieldTimer;
 
     //Green and Red light
     [SerializeField] float _speedChanger;
@@ -70,6 +71,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform _stairsLowerPoint;
     [SerializeField] float _stairsJumps = 0.1f;
     [SerializeField] LayerMask _groundLayer;
+    
+    //ground variables
+    [Header("Ground power ups variables")] [SerializeField]
+    private float rotateTowardsSpeed;
+    [SerializeField] private float _boostForce;
+    [SerializeField] private float _secondBeforeBoost;
+    private float _keepBlockingIndex;
     
 
     //UI
@@ -116,15 +124,15 @@ public class PlayerController : MonoBehaviour
             keyInvisibility1 = KeyCode.D;
         }
 
-        if (_isAlive)
+        if (_isAlive && _isAbleToMove)
         {
-            if (_isAbleToMove && !_isModern)
+            if (!_isModern)
             {
                 _horizontal = Input.GetAxisRaw("RotationLegacy");
                 _vertical = Input.GetAxisRaw("MoveLegacy");
                 rotate();
             }
-            else if (_isAbleToMove)
+            else
             {
                 _horizontal = Input.GetAxisRaw("RotationModern");
                 _vertical = Input.GetAxisRaw("MoveModern");
@@ -155,7 +163,10 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Move();
+        if (_isAbleToMove)
+        {
+            Move();
+        }
         StairsClimb();
     }
 
@@ -279,7 +290,7 @@ public class PlayerController : MonoBehaviour
             Vector3 knockbackDirection = (transform.position - other.transform.position).normalized;
             GetComponent<Rigidbody>().AddForce(knockbackDirection * _knockBackForce, ForceMode.Impulse);
         }
-
+    
         if (other.gameObject.CompareTag("Wood")) GameManager.Instance.AudioManager.PlayEffect("woodCrash");
         else GameManager.Instance.AudioManager.PlayEffect("crash");
     }
@@ -307,7 +318,8 @@ public class PlayerController : MonoBehaviour
                 Stack?.Invoke(1, (int)_wallStack);
                 break;
             case 10:
-                _shieldStack++;
+                _isShielded = true;
+                StartCoroutine(ShieldRemover());
                 Shield?.Invoke();
                 GameManager.Instance.AudioManager.PlayEffect("shield");
                 break;
@@ -326,6 +338,13 @@ public class PlayerController : MonoBehaviour
             case 13: //EraseMap
                 EraseMap?.Invoke();
                 break;
+            case 26:
+                
+                if (!_isShielded)
+                {
+                    GroundBoost(collision.gameObject);
+                }
+                break;
         }
         if (collision.gameObject.CompareTag("Flag")) return; //Exception for Flag
         if (collision.gameObject.CompareTag("Traps")) return; //Exception for Traps
@@ -337,5 +356,35 @@ public class PlayerController : MonoBehaviour
     {
         _maxSpeed = _normalMaxSpeed;
     }
+    public IEnumerator ShieldRemover()
+    {
+        yield return new WaitForSeconds(_shieldTimer);
+        _isShielded = false;
+    }
+
+    private void GroundBoost(GameObject collObj)
+    {
+        
+        Rb.velocity = Vector3.zero;
+        Vector3 targetDirection = collObj.transform.forward;
+        StartCoroutine(RotateTowardsDirection(targetDirection, rotateTowardsSpeed));
+        
+        Vector3 push = collObj.transform.forward * _boostForce;
+        Rb.AddForce(push, ForceMode.Impulse);
+    }
+    private IEnumerator RotateTowardsDirection(Vector3 targetDirection, float rotateTowardsSpeed)
+    {
+        float angleToRotate = Vector3.Angle(transform.forward, targetDirection);
+
+        while (angleToRotate > 0.1f)
+        {
+            transform.forward = Vector3.RotateTowards(transform.forward, targetDirection, Time.deltaTime * rotateTowardsSpeed, 0.0f);
+            angleToRotate = Vector3.Angle(transform.forward, targetDirection);
+
+            yield return null;
+        }
+    }
+
+    
 
 }
