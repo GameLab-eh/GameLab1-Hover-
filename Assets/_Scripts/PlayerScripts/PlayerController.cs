@@ -73,19 +73,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask _groundLayer;
     
     //ground variables
-    [Header("Ground power ups variables")]
-    [SerializeField] private float rotateTowardsSpeed;
+    [Header("Ground power ups variables")] [SerializeField]
+    private float rotateTowardsSpeed;
     [SerializeField] private float _boostForce;
     [SerializeField] private float _secondBeforeBoost;
     private float _keepBlockingIndex;
-
-    [Header("QuickSand")] 
-    [SerializeField] private float _blockHeight;
-    [SerializeField] private float _blockDuration;
-    [SerializeField] private float _descentSpeed;
-    [SerializeField] private float quickSandMaxDistance;
-    private GameObject _camerasGO;
-    private float _camerasOriginPosition;
+    
 
     //UI
     public delegate void Speed(float score);
@@ -107,8 +100,6 @@ public class PlayerController : MonoBehaviour
     {
         Rb = GetComponent<Rigidbody>();
         _normalMaxSpeed = _maxSpeed;
-        _camerasGO = GameObject.Find("PlayerCameras");
-        _camerasOriginPosition = _camerasGO.transform.position.y;
     }
 
     private void Start()
@@ -347,20 +338,13 @@ public class PlayerController : MonoBehaviour
             case 13: //EraseMap
                 EraseMap?.Invoke();
                 break;
-            case 25:
-                if (!_isShielded && _isAbleToMove)
-                {
-                    Debug.Log("Dovrei scendere, addio");
-                    StartCoroutine(Quicksand(collision.gameObject));
-                }
-                break;
             case 26:
+                
                 if (!_isShielded)
                 {
                     GroundBoost(collision.gameObject);
                 }
                 break;
-            
         }
         if (collision.gameObject.CompareTag("Flag")) return; //Exception for Flag
         if (collision.gameObject.CompareTag("Traps")) return; //Exception for Traps
@@ -400,49 +384,7 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
     }
-    private IEnumerator Quicksand(GameObject collObj)
-    {
-        float startTime = Time.time;
-        float startAltitude = _camerasGO.transform.position.y;
 
-        while (_camerasGO.transform.position.y > _blockHeight)
-        {
-            if (IsOutQuicksand(collObj))
-            {
-                _camerasGO.transform.position = new Vector3(_camerasGO.transform.position.x, _camerasOriginPosition, _camerasGO.transform.position.z);
-                
-                yield break;                        //float closestDistance = Vector3.Distance(transform.position, actualClosestFlag.transform.position);
-            }
-            float progress = (Time.time - startTime) / _blockDuration;
-            float interpolation = Mathf.Pow(progress, 2);
-            float newY = Mathf.Lerp(startAltitude, _blockHeight, interpolation * _descentSpeed);
-            _camerasGO.transform.position = new Vector3(_camerasGO.transform.position.x, newY, _camerasGO.transform.position.z);
-
-            yield return null;
-        }
-        
-        Rb.velocity = Vector3.zero;
-        _isAbleToMove = false;
-        
-        yield return new WaitForSeconds(_blockDuration);
-        
-        _isAbleToMove = true;
-        _camerasGO.transform.position = new Vector3(_camerasGO.transform.position.x, _camerasOriginPosition, _camerasGO.transform.position.z);
-    }
-    private bool IsOutQuicksand(GameObject collObj)
-    {
-        if (Vector3.Distance(transform.position, collObj.transform.position) > quickSandMaxDistance)
-        {
-            Debug.Log("ho ritornato true");
-            return true;
-        }
-        else
-        {
-            Debug.Log("ho ritornato false");
-            return false;
-        }
-    }
-
-
+    
 
 }
