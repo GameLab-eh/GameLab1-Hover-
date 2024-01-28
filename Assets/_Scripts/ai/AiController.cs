@@ -44,7 +44,7 @@ public class AiController : MonoBehaviour
     [SerializeField] private float _descentSpeed;
     [SerializeField] private float quickSandMaxDistance;
     private float _originPosition;
-    private bool _isAbleToMove;
+    private bool _isAbleToMove = true;
 
     private void Awake()
     {
@@ -145,12 +145,16 @@ public class AiController : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other)
     {
+
         if (other.gameObject.layer == 31)
         {
             Vector3 knockbackDirection = (transform.position - other.transform.position).normalized;
             rb.AddForce(knockbackDirection * _knockBackForce, ForceMode.Impulse);
             StartCoroutine(playerHitted());
         }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
         if (other.gameObject.layer == 25)
         {
             StartCoroutine(Quicksand(other.gameObject));
@@ -159,7 +163,6 @@ public class AiController : MonoBehaviour
         {
             GroundBoost(other.gameObject);
         }
-
     }
     private IEnumerator playerHitted()
     {
@@ -169,8 +172,7 @@ public class AiController : MonoBehaviour
     }
     private void GroundBoost(GameObject collObj)
     {
-        
-        rb.velocity = Vector3.zero;
+        Debug.Log("almeno entro");
         Vector3 targetDirection = collObj.transform.forward;
         StartCoroutine(RotateTowardsDirection(targetDirection, rotateTowardsSpeed));
         Vector3 push = collObj.transform.forward * _boostForce;
@@ -212,19 +214,13 @@ public class AiController : MonoBehaviour
         _isAbleToMove = false;
         _navMeshAgent.SetDestination(transform.position);
         yield return new WaitForSeconds(_blockDuration);
-        
+
         _isAbleToMove = true;
         transform.position = new Vector3(transform.position.x, _originPosition, transform.position.z);
     }
     private bool IsOutQuicksand(GameObject collObj)
     {
-        if (Vector3.Distance(transform.position, collObj.transform.position) > quickSandMaxDistance)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        float verticalDistance = Mathf.Abs(transform.position.y - collObj.transform.position.y);
+        return verticalDistance > quickSandMaxDistance;
     }
 }

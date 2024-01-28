@@ -344,7 +344,7 @@ public class PlayerController : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Flag")) return; //Exception for Flag
         if (collision.gameObject.CompareTag("Traps")) return; //Exception for Traps
-
+        if (collision.gameObject.layer == 30) return;
         GameManager.Instance.AudioManager.PlayEffect("power-up");
         Destroy(collision.gameObject);
     }
