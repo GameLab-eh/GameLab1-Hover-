@@ -23,7 +23,7 @@ public class FlagCount : MonoBehaviour
     private void Start()
     {
         _flagToCapture = GameManager.Instance.GetNumberFlagsToCapture();
-        _flagsEnemy = GameManager.Instance.GetNumberFlagsEnemy();
+        _flagsEnemy = GameManager.Instance.GetNumberFlags();
         for (int i = 0; i < _flagToCapture; i++) _flagPlayer.text += _flagEmpty;
         for (int i = 0; i < _flagsEnemy; i++) _flagEnemy.text += _flagEmpty;
     }

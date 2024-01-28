@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     [SerializeField, Min(0), Tooltip("is the duration of shield")] float _shieldDuration;
     [SerializeField, Min(0), Tooltip("is the duration of stoplight")] float _stoplightDuration;
 
+    [Header("UI")]
     [SerializeField] GameObject _menu;
     [SerializeField] GameObject _gameWin;
     [SerializeField] GameObject _gameOver;
@@ -100,9 +101,8 @@ public class GameManager : MonoBehaviour
     public void IncrementCurrentLeve()
     {
         _currentLevel++;
-        ScoreCalculator(Levels[_currentLevel].levelBonus);
+        ScoreCalculator(Levels[_currentLevel].levelBonus, false);
     }
-    public void SetNumberFlagsEnemy(int value) => Levels[_currentLevel].flags = value;
 
     public void SetDifficulty(int value) => difficulty = value;
 
@@ -130,7 +130,7 @@ public class GameManager : MonoBehaviour
 
     public int GetNumberFlagsToCapture() => Levels[_currentLevel].flags;
 
-    public int GetNumberFlagsEnemy() => Levels[_currentLevel].flags;
+    public int GetNumberFlags() => Levels[_currentLevel].flags;
     public int GetNumberPowerUp() => Levels[_currentLevel].powerUp;
     public int GetNumberChaserBot() => Levels[_currentLevel].chaserBot;
     public int GetNumberScoutBot() => Levels[_currentLevel].scoutBot;
@@ -167,7 +167,7 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < Levels[_currentLevel].flags - flagEnemy; i++)
         {
-            ScoreCalculator(Levels[_currentLevel].flagCaptureBonus);
+            ScoreCalculator(Levels[_currentLevel].flagCaptureBonus, false);
         }
         StartCoroutine(EndGameTimer(isWin));
     }
@@ -218,7 +218,7 @@ public class GameManager : MonoBehaviour
         if (!isEnemy)
         {
             flagPlayer++;
-            ScoreCalculator(Levels[_currentLevel].flagCaptureBonus);
+            ScoreCalculator(Levels[_currentLevel].flagCaptureBonus, false);
 
             gameIsEnded = flagPlayer == Levels[_currentLevel].flags;
         }
@@ -239,7 +239,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         flagPlayer--;
-        ScoreCalculator(Levels[_currentLevel].flagCaptureBonus);
+        ScoreCalculator(Levels[_currentLevel].flagCaptureBonus, true);
     }
 
     public void IncrementScore(int value)
@@ -252,18 +252,18 @@ public class GameManager : MonoBehaviour
         playerSpeed = value;
     }
 
-    private float ScoreCalculator(Difficulty value)
+    private float ScoreCalculator(Difficulty value, bool isNegative)
     {
         switch (difficulty)
         {
             case 0:
-                score += value.easy;
+                score += isNegative ? -value.easy : value.easy;
                 break;
             case 1:
-                score += value.medium;
+                score += isNegative ? -value.medium : value.medium;
                 break;
             case 2:
-                score += value.hard;
+                score += isNegative ? -value.hard : value.hard;
                 break;
             default:
                 break;

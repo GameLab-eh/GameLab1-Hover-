@@ -204,9 +204,9 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        GameManager.Instance.AudioManager.PlayEffect("jump");
         if (_isGrounded && _jumpStack > 0)
         {
+            GameManager.Instance.AudioManager.PlayEffect("jump");
             _isGrounded = false;
             Rb.AddForce(transform.up * _jumpPower, ForceMode.Impulse);
             _jumpStack--;
@@ -215,9 +215,9 @@ public class PlayerController : MonoBehaviour
 
     private void Wall()
     {
-        GameManager.Instance.AudioManager.PlayEffect("wall");
         if (_wallStack > 0)
         {
+            GameManager.Instance.AudioManager.PlayEffect("wall");
             _wallStack--;
             StackUse?.Invoke(1, (int)_wallStack);
             GameObject wall = ObjectPooler.SharedInstance.GetPooledObject();
@@ -232,6 +232,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!_isInvisible && _invisibilityStack > 0)
         {
+            GameManager.Instance.AudioManager.PlayEffect("invisibility");
             _invisibilityStack--;
             StackUse?.Invoke(2, (int)_invisibilityStack);
             AiController._isPlayerInvisible = true;
@@ -300,7 +301,6 @@ public class PlayerController : MonoBehaviour
             case 8:
                 _invisibilityStack++;
                 Stack?.Invoke(2, (int)_invisibilityStack);
-                GameManager.Instance.AudioManager.PlayEffect("invisibility");
                 break;
             case 9:
                 _wallStack++;
