@@ -231,6 +231,17 @@ public class GameManager : MonoBehaviour
         if (gameIsEnded) EndGame(flagPlayer == Levels[_currentLevel].flags);
     }
 
+    public void DecrementFlagCount(bool isEnemy)
+    {
+        if (isEnemy)
+        {
+            flagEnemy--;
+            return;
+        }
+        flagPlayer--;
+        ScoreCalculator(Levels[_currentLevel].flagCaptureBonus);
+    }
+
     public void IncrementScore(int value)
     {
         score += value;

@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class FlagRemover : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (other.gameObject.GetComponent<CountFlag>() != null)
+        {
+            other.gameObject.GetComponent<CountFlag>().Decrement(other.gameObject.layer == 30);
+        }
     }
 }
