@@ -5,18 +5,24 @@ using UnityEngine;
 public class CountFlag : MonoBehaviour
 {
     [Header("Debug")]
-    [SerializeField] int flagCount;
+    [SerializeField] List<GameObject> _flag;
 
-    public void Increment()
+    public void Increment(GameObject flag)
     {
-        flagCount++;
+        _flag.Add(flag);
     }
     public void Decrement(bool isEnemy)
     {
-        if (flagCount > 0)
+        if (_flag.Count > 0)
         {
-            flagCount--;
+            _flag.RemoveAt(_flag.Count - 1);
             GameManager.Instance.DecrementFlagCount(isEnemy);
         }
+    }
+
+    public GameObject GetModel()
+    {
+        if (_flag.Count > 0) return _flag[_flag.Count - 1];
+        return null;
     }
 }

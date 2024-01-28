@@ -37,7 +37,7 @@ public class FlagMechanic : MonoBehaviour
                 GameManager.Instance.AudioManager.PlayEffect("flag");
             }
             FlagHit?.Invoke(_isEnemy);
-            other.gameObject.GetComponent<CountFlag>().Increment();
+            other.gameObject.GetComponent<CountFlag>().Increment(gameObject);
             gameObject.SetActive(false);
         }
     }

@@ -31,17 +31,21 @@ public class FlagPooler : MonoBehaviour
     {
         _numberFlags = GameManager.Instance.GetNumberFlags();
 
-
-        Spawn(_playerPoints, _player, _numberFlags);
-        Spawn(_enemyPoints, _enemy, _numberFlags);
+        Spawn(_playerPoints, _player, _numberFlags, false);
+        Spawn(_enemyPoints, _enemy, _numberFlags, false);
     }
 
-    private void Spawn(List<GameObject> _ListObj, GameObject _model, int _toSpawn)
+    private void Spawn(List<GameObject> _ListObj, GameObject _model, int _toSpawn, bool _isOld)
     {
         for (int i = 0; i < _toSpawn; i++)
         {
             int _tmp = Random.Range(0, _ListObj.Count);
-            Instantiate(_model, _ListObj[_tmp].transform.position, Quaternion.identity, transform);
+            if (_isOld)
+            {
+                _model.transform.position = _ListObj[_tmp].transform.position;
+                _model.SetActive(true);
+            }
+            else Instantiate(_model, _ListObj[_tmp].transform.position, Quaternion.identity, transform);
             _ListObj.Remove(_ListObj[_tmp]);
         }
     }
@@ -56,11 +60,15 @@ public class FlagPooler : MonoBehaviour
         FlagRemover.Remove -= ReSpawn;
     }
 
-    void ReSpawn(bool isEnemy)
+    void ReSpawn(CountFlag container, bool isEnemy)
     {
+        if (container.GetModel() == null) return;
+
         if (!_playerPoints.Any()) _playerPoints = _clonePlayerPoints;
         if (!_enemyPoints.Any()) _enemyPoints = _cloneEnemyPoints;
 
-        Spawn(isEnemy ? _enemyPoints : _playerPoints, isEnemy ? _enemy : _player, 1);
+        Spawn(isEnemy ? _enemyPoints : _playerPoints, container.GetModel(), 1, true);
+
+        container.Decrement(isEnemy);
     }
 }
