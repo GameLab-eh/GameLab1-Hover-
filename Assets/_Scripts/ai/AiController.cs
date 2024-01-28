@@ -36,27 +36,15 @@ public class AiController : MonoBehaviour
 
     [SerializeField] private float _visualRange;
     
-    [SerializeField] private float rotateTowardsSpeed;
-    [SerializeField] private float _boostForce;
-    
-    [SerializeField] private float _blockHeight;
-    [SerializeField] private float _blockDuration;
-    [SerializeField] private float _descentSpeed;
-    [SerializeField] private float quickSandMaxDistance;
-    private float _originPosition;
-    private bool _isAbleToMove = true;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         _player = GameObject.Find("Player").transform;
         _navMeshAgent = GetComponent<NavMeshAgent>();
-        _originPosition = transform.position.y;
     }
     private void Update()
     {
-        if (_isAbleToMove)
-        {
             if (IsPlayerInRange() && !_isPlayerHitted && !_isPlayerInvisible)
             {
                 Chase();
@@ -65,7 +53,7 @@ public class AiController : MonoBehaviour
             {
                 Patroling();
             }
-        }
+        
 
     }
 
@@ -153,74 +141,12 @@ public class AiController : MonoBehaviour
             StartCoroutine(playerHitted());
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == 25)
-        {
-            StartCoroutine(Quicksand(other.gameObject));
-        }
-        if (other.gameObject.layer == 26)
-        {
-            GroundBoost(other.gameObject);
-        }
-    }
+
     private IEnumerator playerHitted()
     {
         _isPlayerHitted = true;
         yield return new WaitForSeconds(secondsBeforeChasingAgain);
         _isPlayerHitted = false;
     }
-    private void GroundBoost(GameObject collObj)
-    {
-        Debug.Log("almeno entro");
-        Vector3 targetDirection = collObj.transform.forward;
-        StartCoroutine(RotateTowardsDirection(targetDirection, rotateTowardsSpeed));
-        Vector3 push = collObj.transform.forward * _boostForce;
-        rb.AddForce(push, ForceMode.Impulse);
-    }
-    private IEnumerator RotateTowardsDirection(Vector3 targetDirection, float rotateTowardsSpeed)
-    {
-        float angleToRotate = Vector3.Angle(transform.forward, targetDirection);
 
-        while (angleToRotate > 0.1f)
-        {
-            transform.forward = Vector3.RotateTowards(transform.forward, targetDirection, Time.deltaTime * rotateTowardsSpeed, 0.0f);
-            angleToRotate = Vector3.Angle(transform.forward, targetDirection);
-
-            yield return null;
-        }
-    }
-    private IEnumerator Quicksand(GameObject collObj)
-    {
-        float startTime = Time.time;
-        float startAltitude = transform.transform.position.y;
-
-        while (transform.position.y > _blockHeight)
-        {
-            if (IsOutQuicksand(collObj))
-            {
-                transform.position = new Vector3(transform.position.x, _originPosition, transform.position.z);
-                
-                yield break;                        //float closestDistance = Vector3.Distance(transform.position, actualClosestFlag.transform.position);
-            }
-            float progress = (Time.time - startTime) / _blockDuration;
-            float interpolation = Mathf.Pow(progress, 2);
-            float newY = Mathf.Lerp(startAltitude, _blockHeight, interpolation * _descentSpeed);
-            transform.position = new Vector3(transform.position.x, newY, transform.position.z);
-
-            yield return null;
-        }
-        
-        _isAbleToMove = false;
-        _navMeshAgent.SetDestination(transform.position);
-        yield return new WaitForSeconds(_blockDuration);
-
-        _isAbleToMove = true;
-        transform.position = new Vector3(transform.position.x, _originPosition, transform.position.z);
-    }
-    private bool IsOutQuicksand(GameObject collObj)
-    {
-        float verticalDistance = Mathf.Abs(transform.position.y - collObj.transform.position.y);
-        return verticalDistance > quickSandMaxDistance;
-    }
 }

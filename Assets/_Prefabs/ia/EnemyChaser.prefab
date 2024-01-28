@@ -103,7 +103,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -132,12 +132,6 @@ MonoBehaviour:
   _visualAngle: 90
   secondsBeforeChasingAgain: 2
   _visualRange: 30
-  rotateTowardsSpeed: 10
-  _boostForce: 5
-  _blockHeight: -0.5
-  _blockDuration: 2
-  _descentSpeed: 20
-  quickSandMaxDistance: 7
 --- !u!114 &979260889341785555
 MonoBehaviour:
   m_ObjectHideFlags: 0
