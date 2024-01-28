@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     [SerializeField, Min(0), Tooltip("is the duration of shield")] float _shieldDuration;
     [SerializeField, Min(0), Tooltip("is the duration of stoplight")] float _stoplightDuration;
 
+    [Header("UI")]
     [SerializeField] GameObject _menu;
     [SerializeField] GameObject _gameWin;
     [SerializeField] GameObject _gameOver;
