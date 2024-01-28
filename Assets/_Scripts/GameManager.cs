@@ -102,7 +102,6 @@ public class GameManager : MonoBehaviour
         _currentLevel++;
         ScoreCalculator(Levels[_currentLevel].levelBonus);
     }
-    public void SetNumberFlagsEnemy(int value) => Levels[_currentLevel].flags = value;
 
     public void SetDifficulty(int value) => difficulty = value;
 
@@ -130,7 +129,7 @@ public class GameManager : MonoBehaviour
 
     public int GetNumberFlagsToCapture() => Levels[_currentLevel].flags;
 
-    public int GetNumberFlagsEnemy() => Levels[_currentLevel].flags;
+    public int GetNumberFlags() => Levels[_currentLevel].flags;
     public int GetNumberPowerUp() => Levels[_currentLevel].powerUp;
     public int GetNumberChaserBot() => Levels[_currentLevel].chaserBot;
     public int GetNumberScoutBot() => Levels[_currentLevel].scoutBot;
