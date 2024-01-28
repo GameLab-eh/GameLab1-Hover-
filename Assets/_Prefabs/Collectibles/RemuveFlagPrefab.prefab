@@ -9,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6581276675049273021}
-  - component: {fileID: 1357909745999250818}
+  - component: {fileID: 4254231073222982498}
+  - component: {fileID: 6521815107417518336}
   m_Layer: 25
-  m_Name: QuicksandPrefab
+  m_Name: RemuveFlagPrefab
   m_TagString: Traps
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +34,7 @@ Transform:
   - {fileID: 6659742518074714215}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1357909745999250818
+--- !u!65 &4254231073222982498
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -54,6 +55,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10, y: 0.5, z: 10}
   m_Center: {x: 0, y: 0.25, z: 0}
+--- !u!114 &6521815107417518336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4123781284673335270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4cf32ca19948c34a9e346b8fd26fdeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4422150924876324356
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,7 +128,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 14b0642adb2232b409dd976717815352, type: 2}
+  - {fileID: 2100000, guid: 870cec891df79114e848e59eb08b4ecd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
