@@ -1,11 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 public class AiScout : MonoBehaviour
 {
+    private Rigidbody rb;
     [SerializeField] private NavMeshAgent _navMeshAgent;
     private bool isArraySet;
 
@@ -24,6 +24,7 @@ public class AiScout : MonoBehaviour
 
     private void Awake()
     {
+        rb = GetComponent<Rigidbody>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
@@ -73,10 +74,8 @@ public class AiScout : MonoBehaviour
             randomPoint = Random.onUnitSphere * _walkRadius;
             attempts++;
             hit = new NavMeshHit();
-            // Aggiungi una condizione per uscire dal ciclo dopo un numero massimo di tentativi
             if (attempts >= maxAttempts)
             {
-                Debug.LogWarning("Impossibile trovare una posizione valida dopo " + maxAttempts + " tentativi.");
                 break;
             }
         } while (!NavMesh.SamplePosition(randomPoint, out hit, _walkRadius, NavMesh.AllAreas));
@@ -160,7 +159,7 @@ public class AiScout : MonoBehaviour
         if (other.gameObject.layer == 31)
         {
             Vector3 knockbackDirection = (transform.position - other.transform.position).normalized;
-            GetComponent<Rigidbody>().AddForce(knockbackDirection * _knockBackForce, ForceMode.Impulse);
+            rb.AddForce(knockbackDirection * _knockBackForce, ForceMode.Impulse);
         }
     }
 }

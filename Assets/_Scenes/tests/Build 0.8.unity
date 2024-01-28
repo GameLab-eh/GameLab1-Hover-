@@ -26664,6 +26664,10 @@ PrefabInstance:
       propertyPath: m_CullingMask.m_Bits
       value: 1174413311
       objectReference: {fileID: 0}
+    - target: {fileID: 2830749499959210872, guid: 21f10671e7c5dfa41b5bdef48c5dac9c, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2932799364915675588, guid: 21f10671e7c5dfa41b5bdef48c5dac9c, type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 1174413311
@@ -26683,6 +26687,10 @@ PrefabInstance:
     - target: {fileID: 3156369117069811692, guid: 21f10671e7c5dfa41b5bdef48c5dac9c, type: 3}
       propertyPath: _blockDuration
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156369117069811692, guid: 21f10671e7c5dfa41b5bdef48c5dac9c, type: 3}
+      propertyPath: _knockBackForce
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3156369117069811692, guid: 21f10671e7c5dfa41b5bdef48c5dac9c, type: 3}
       propertyPath: _secondBeforeBoost

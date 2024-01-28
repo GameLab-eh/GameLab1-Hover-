@@ -1,9 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
@@ -19,7 +15,7 @@ public class PlayerController : MonoBehaviour
     private bool _isAbleToMove = true;
     private bool _isAlive = true;
     private bool _isGrounded;
-    private bool _isInvisible = false;
+    private bool _isInvisible;
     private bool _isModern;
     //general variables
     private int _playerScore;
@@ -37,9 +33,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _maxSpeed;
     [SerializeField] float _rotationSpeed;
     [SerializeField] float _rotationDecayRate = 5.0f;
-    private float _currentRotationSpeed = 0.0f;
-    private float _normalMaxSpeed; //used for store MaxSpeedVariable to restore to default when changed (currently not used)
-    [SerializeField, Min(0)] float _playerHeight;
+    private float _currentRotationSpeed;
+    private float _normalMaxSpeed;
     [field: SerializeField] public Rigidbody Rb { get; private set; }
     [SerializeField] private float _knockBackForce;
 
@@ -58,7 +53,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform _wallPoint;
 
     //shield
-    private bool _isShielded = false;
+    private bool _isShielded;
     [SerializeField] private float _shieldTimer;
 
     //Green and Red light
@@ -76,7 +71,6 @@ public class PlayerController : MonoBehaviour
     [Header("Ground power ups variables")]
     [SerializeField] private float rotateTowardsSpeed;
     [SerializeField] private float _boostForce;
-    [SerializeField] private float _secondBeforeBoost;
     private float _keepBlockingIndex;
 
     [Header("QuickSand")] 
@@ -202,7 +196,8 @@ public class PlayerController : MonoBehaviour
     {
         if (Rb.velocity.magnitude < _maxSpeed)
         {
-            Vector3 move = transform.forward * _vertical * _movementSpeed;
+            float direction = _movementSpeed * _vertical;
+            Vector3 move = transform.forward * direction;
             Rb.AddForce(move, ForceMode.Force);
         }
     }
@@ -271,22 +266,7 @@ public class PlayerController : MonoBehaviour
                 Rb.position += new Vector3(0, _stairsJumps, stairsMovement);
             }
         }
-        // else if (Physics.Raycast(_stairsLowerPoint.position, transform.TransformDirection(1.5f, 0, 1), out lowerHit45, 0.3f, _groundLayer))
-        // {
-        //     RaycastHit upperHit45;
-        //     if (!Physics.Raycast(_stairsUpperPoint.position, transform.TransformDirection(1.5f, 0, 1), out upperHit45, 0.5f, _groundLayer))
-        //     {
-        //         Rb.position += new Vector3(0, _stairsJumps, 0f);
-        //     }
-        // }
-        // else if (Physics.Raycast(_stairsLowerPoint.position, transform.TransformDirection(-1.5f, 0, 1), out lowerHitOther45, 0.3f, _groundLayer))
-        // {
-        //     RaycastHit upperHitOther45;
-        //     if (!Physics.Raycast(_stairsUpperPoint.position, transform.TransformDirection(-1.5f, 0, 1), out upperHitOther45, 0.5f, _groundLayer))
-        //     {
-        //         Rb.position += new Vector3(0, _stairsJumps, 0f);
-        //     }
-        // }
+        
     }
     private void OnCollisionEnter(Collision other)
     {
@@ -384,7 +364,6 @@ public class PlayerController : MonoBehaviour
         Rb.velocity = Vector3.zero;
         Vector3 targetDirection = collObj.transform.forward;
         StartCoroutine(RotateTowardsDirection(targetDirection, rotateTowardsSpeed));
-        
         Vector3 push = collObj.transform.forward * _boostForce;
         Rb.AddForce(push, ForceMode.Impulse);
     }
@@ -433,12 +412,10 @@ public class PlayerController : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, collObj.transform.position) > quickSandMaxDistance)
         {
-            Debug.Log("ho ritornato true");
             return true;
         }
         else
         {
-            Debug.Log("ho ritornato false");
             return false;
         }
     }

@@ -10,6 +10,7 @@ public class AiController : MonoBehaviour
 {
     //generals and checks
 
+    private Rigidbody rb;
     [SerializeField] private NavMeshAgent _navMeshAgent;
     [SerializeField] private Transform _player;
     [SerializeField] private float _knockBackForce;
@@ -37,7 +38,7 @@ public class AiController : MonoBehaviour
 
     private void Awake()
     {
-
+        rb = GetComponent<Rigidbody>();
         _player = GameObject.Find("Player").transform;
         _navMeshAgent = GetComponent<NavMeshAgent>();
     }
@@ -134,7 +135,7 @@ public class AiController : MonoBehaviour
         if (other.gameObject.layer == 31)
         {
             Vector3 knockbackDirection = (transform.position - other.transform.position).normalized;
-            GetComponent<Rigidbody>().AddForce(knockbackDirection * _knockBackForce, ForceMode.Impulse);
+            rb.AddForce(knockbackDirection * _knockBackForce, ForceMode.Impulse);
             StartCoroutine(playerHitted());
         }
     }
