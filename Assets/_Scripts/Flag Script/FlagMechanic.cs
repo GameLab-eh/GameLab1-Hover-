@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FlagMechanic : MonoBehaviour
@@ -36,6 +37,7 @@ public class FlagMechanic : MonoBehaviour
                 GameManager.Instance.AudioManager.PlayEffect("flag");
             }
             FlagHit?.Invoke(_isEnemy);
+            other.gameObject.GetComponent<CountFlag>().Increment();
             gameObject.SetActive(false);
         }
     }
