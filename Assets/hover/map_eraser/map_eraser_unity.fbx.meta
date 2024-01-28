@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 98c775f1aa73f174c849927883237317
+guid: 4ad276a5a57fedd46b781575478f5580
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: standardSurface1
-    second: {fileID: 2100000, guid: 22a0888f199ceb84a94f4fdda6dabf36, type: 2}
+      name: map_eraser_
+    second: {fileID: 2100000, guid: 23988892af0493047b66d87c363f3976, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
