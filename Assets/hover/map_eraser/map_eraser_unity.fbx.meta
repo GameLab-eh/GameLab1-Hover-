@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: map_eraser_
-    second: {fileID: 2100000, guid: 23988892af0493047b66d87c363f3976, type: 2}
+    second: {fileID: 2100000, guid: 1936593ede894e646975b83fb7d1551d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
