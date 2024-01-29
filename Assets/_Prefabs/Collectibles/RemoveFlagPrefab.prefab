@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 4254231073222982498}
   - component: {fileID: 6521815107417518336}
   m_Layer: 24
-  m_Name: RemuveFlagPrefab
+  m_Name: RemoveFlagPrefab
   m_TagString: Traps
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
