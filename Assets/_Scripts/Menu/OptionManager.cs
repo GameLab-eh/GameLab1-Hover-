@@ -14,24 +14,27 @@ public class OptionManager : MonoBehaviour
     [SerializeField] Slider _music;
     [SerializeField] Slider _effects;
 
+    [SerializeField] Slider _canvasGroup;
+
     public delegate void OptionManagerInt(int value);
-    public static event OptionManagerInt difficulty = null;
+    public static event OptionManagerInt Difficulty = null;
 
     public delegate void OptionManagerFloat(float value);
-    public static event OptionManagerFloat master = null;
-    public static event OptionManagerFloat music = null;
-    public static event OptionManagerFloat effects = null;
+    public static event OptionManagerFloat Master = null;
+    public static event OptionManagerFloat Music = null;
+    public static event OptionManagerFloat Effects = null;
 
     public delegate void OptionManagerBool(bool value);
-    public static event OptionManagerBool input = null;
+    public static event OptionManagerBool Input = null;
 
     private void OnEnable()
     {
-        if(_difficulty != null) _difficulty.onValueChanged.AddListener(SliderDifficulty);
+        if (_difficulty != null) _difficulty.onValueChanged.AddListener(SliderDifficulty);
         _input.onValueChanged.AddListener(SliderInputSystem);
         _master.onValueChanged.AddListener(SliderMaster);
         _music.onValueChanged.AddListener(SliderMusic);
         _effects.onValueChanged.AddListener(SliderEffects);
+        _canvasGroup.onAlphaChanged.AddListener(OnAlphaChanged);
 
         AudioManager.VolumeChanged += SliderUpdate;
     }
@@ -43,29 +46,20 @@ public class OptionManager : MonoBehaviour
         _master.onValueChanged.RemoveListener(SliderMaster);
         _music.onValueChanged.RemoveListener(SliderMusic);
         _effects.onValueChanged.RemoveListener(SliderEffects);
+        _canvasGroup.onAlphaChanged.RemoveListener(OnAlphaChanged);
     }
 
-    public void SliderDifficulty(float value)
-    {
-        difficulty?.Invoke((int)value);
-    }
+    void OnAlphaChanged(float alpha) { }
 
-    public void SliderInputSystem(float value)
-    {
-        input?.Invoke((int)value > 0);
-    }
-    public void SliderMaster(float value)
-    {
-        master?.Invoke(value);
-    }
-    public void SliderMusic(float value)
-    {
-        music?.Invoke(value);
-    }
-    public void SliderEffects(float value)
-    {
-        effects?.Invoke(value);
-    }
+    public void SliderDifficulty(float value) => Difficulty?.Invoke((int)value);
+
+    public void SliderInputSystem(float value) => Input?.Invoke((int)value > 0);
+
+    public void SliderMaster(float value) => Master?.Invoke(value);
+
+    public void SliderMusic(float value) => Music?.Invoke(value);
+
+    public void SliderEffects(float value) => Effects?.Invoke(value);
 
     void SliderUpdate(float master, float music, float effects)
     {
