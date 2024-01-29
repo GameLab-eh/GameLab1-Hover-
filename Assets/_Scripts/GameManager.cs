@@ -175,7 +175,7 @@ public class GameManager : MonoBehaviour
     IEnumerator EndGameTimer(bool isWin)
     {
         GameObject panel = isWin ? _gameWin : _gameOver;
-        GameManager.Instance.AudioManager.PlayEffect(isWin ? "" : "");
+        GameManager.Instance.AudioManager.PlayEffect(isWin ? "gamewin" : "gameover");
         gameIsPaused = true;
         panel.SetActive(gameIsPaused);
         Time.timeScale = gameIsPaused ? 0f : 1f;
