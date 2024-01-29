@@ -1,15 +1,16 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
 
-    //for designer
+    public List<Transform> spawnPoints = new List<Transform>();
     [Header("Input")]
-    [SerializeField] KeyCode keyJump1 = KeyCode.J;
-    [SerializeField] KeyCode keyWall1 = KeyCode.K;
-    [SerializeField] KeyCode keyInvisibility1 = KeyCode.L;
+    KeyCode keyJump1;
+    KeyCode keyWall1;
+    KeyCode keyInvisibility1;
     
     //checks
     private bool _isAbleToMove = true;
@@ -98,7 +99,12 @@ public class PlayerController : MonoBehaviour
 
 
     private void Awake()
-    {
+    {    
+        GameObject[] spawnPointObjects = GameObject.FindGameObjectsWithTag("PlayerSpawnPoint");
+        foreach (var spawnPointObject in spawnPointObjects)
+        {
+            spawnPoints.Add(spawnPointObject.transform);
+        }
         Rb = GetComponent<Rigidbody>();
         _normalMaxSpeed = _maxSpeed;
         _camerasGO = GameObject.Find("PlayerCameras");
@@ -108,6 +114,12 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         _invisibilityDuration = GameManager.Instance.GetInvisibilityDuration();
+        SpawnPlayer();
+    }
+    private void SpawnPlayer()
+    {
+        Transform randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
+        transform.position = randomSpawnPoint.position;
     }
 
     private void Update()

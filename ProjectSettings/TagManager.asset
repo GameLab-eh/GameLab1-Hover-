@@ -9,6 +9,7 @@ TagManager:
   - Traps
   - MiniMapCamera
   - Wood
+  - PlayerSpawnPoint
   layers:
   - Default
   - TransparentFX

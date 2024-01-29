@@ -342,14 +342,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1528ec0f77b108e41a605861e3e761cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyJump1: 106
-  keyWall1: 107
-  keyInvisibility1: 108
+  _spawnLocations: []
   _movementSpeed: 15
   _maxSpeed: 20
   _rotationSpeed: 69
   _rotationDecayRate: 4.5
-  _playerHeight: 1.2
   <Rb>k__BackingField: {fileID: 0}
   _knockBackForce: 10
   _jumpPower: 10
@@ -368,7 +365,6 @@ MonoBehaviour:
     m_Bits: 8
   rotateTowardsSpeed: 3
   _boostForce: 30
-  _secondBeforeBoost: 2
   _blockHeight: -1
   _blockDuration: 3
   _descentSpeed: 35
@@ -385,7 +381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e45ab2940db774d9801adc30366fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flagCount: 0
+  _flag: []
 --- !u!136 &7249026048362283003
 CapsuleCollider:
   m_ObjectHideFlags: 0
