@@ -1,12 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.Rendering;
-using static OptionManager;
-using static UnityEngine.Rendering.DebugUI;
 
 [RequireComponent(typeof(AudioManager))]
 public class AudioManager : MonoBehaviour
@@ -66,9 +60,6 @@ public class AudioManager : MonoBehaviour
         {
             if (track.trackName == index)
             {
-                //_effect.clip = track.track;
-                //_effect.time = _advance;
-                //_music.volume = _volumeMaster * _volumeEffects;
                 _effect.PlayOneShot(track.track);
             }
         }
