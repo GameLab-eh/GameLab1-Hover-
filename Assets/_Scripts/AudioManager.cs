@@ -26,8 +26,13 @@ public class AudioManager : MonoBehaviour
     public static event AudioManagerVolumeChanged VolumeChanged;
     private void Start()
     {
+        //_music = gameObject.AddComponent<AudioSource>();
+        //_effect = gameObject.AddComponent<AudioSource>();
+
+        //PlaySoundtrack();
+
         _music = gameObject.AddComponent<AudioSource>();
-        _effect = gameObject.AddComponent<AudioSource>();
+        _effect = _music;  // Usiamo lo stesso AudioSource per effetti e musica
 
         PlaySoundtrack();
     }
@@ -56,11 +61,19 @@ public class AudioManager : MonoBehaviour
 
     public void PlayEffect(string index)
     {
+        //foreach (SoundTrack track in _tracks)
+        //{
+        //    if (track.trackName == index)
+        //    {
+        //        _effect.PlayOneShot(track.track);
+        //    }
+        //}
+
         foreach (SoundTrack track in _tracks)
         {
             if (track.trackName == index)
             {
-                _effect.PlayOneShot(track.track);
+                _effect.PlayOneShot(track.track, _volumeMaster * _volumeEffects * 2f);
             }
         }
     }
