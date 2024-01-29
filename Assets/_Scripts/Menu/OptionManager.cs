@@ -34,7 +34,7 @@ public class OptionManager : MonoBehaviour
         _master.onValueChanged.AddListener(SliderMaster);
         _music.onValueChanged.AddListener(SliderMusic);
         _effects.onValueChanged.AddListener(SliderEffects);
-        //_canvasGroup.onAlphaChanged.AddListener(OnAlphaChanged);
+        _canvasGroup.onAlphaChanged.AddListener(OnAlphaChanged);
 
         AudioManager.VolumeChanged += SliderUpdate;
     }
@@ -46,7 +46,7 @@ public class OptionManager : MonoBehaviour
         _master.onValueChanged.RemoveListener(SliderMaster);
         _music.onValueChanged.RemoveListener(SliderMusic);
         _effects.onValueChanged.RemoveListener(SliderEffects);
-        //_canvasGroup.onAlphaChanged.RemoveListener(OnAlphaChanged);
+        _canvasGroup.onAlphaChanged.RemoveListener(OnAlphaChanged);
     }
 
     void OnAlphaChanged(float alpha) { }
