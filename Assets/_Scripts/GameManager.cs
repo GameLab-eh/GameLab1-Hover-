@@ -189,8 +189,11 @@ public class GameManager : MonoBehaviour
 #endif
             }
         }
-        Reset();
-        
+        else Reset();
+
+        flagPlayer = 0;
+        flagEnemy = 0;
+
         gameIsPaused = false;
         Time.timeScale = gameIsPaused ? 0f : 1f;
         SceneManager.LoadScene(nextScene);
