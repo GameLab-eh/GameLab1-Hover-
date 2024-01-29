@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Windows;
 
 public class MenuManager : MonoBehaviour
 {
@@ -12,12 +13,16 @@ public class MenuManager : MonoBehaviour
     [SerializeField] Button _option;
     [SerializeField] Button _quit;
 
+    [SerializeField] Slider _input;
+
     [Header("Option Panel")]
     [SerializeField] CanvasGroup _panel;
     [SerializeField, Min(0)] float _duration = 0.5f;
     bool _isVisible = true;
 
     bool _checkOption;
+
+    bool _checkInput;
 
     private void Start()
     {
@@ -52,8 +57,10 @@ public class MenuManager : MonoBehaviour
 
     public void Option()
     {
+        _checkInput = !_checkInput;
         if (!_checkOption)
         {
+            if (_checkInput) _input.value = GameManager.Instance.GetInputSystem() ? 1 : 0;
             StartCoroutine(OptionCoroutine());
         }
     }
