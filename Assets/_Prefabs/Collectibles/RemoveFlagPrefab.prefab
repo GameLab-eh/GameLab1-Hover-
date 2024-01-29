@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 4254231073222982498}
   - component: {fileID: 6521815107417518336}
   m_Layer: 24
-  m_Name: RemuveFlagPrefab
+  m_Name: RemoveFlagPrefab
   m_TagString: Traps
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,7 +86,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7430745, y: 0.7430745, z: 0.7430745}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7108841277176569173}
