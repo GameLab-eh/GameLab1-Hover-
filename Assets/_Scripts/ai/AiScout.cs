@@ -5,6 +5,10 @@ using Random = UnityEngine.Random;
 
 public class AiScout : MonoBehaviour
 {
+    [SerializeField] private float[] _visualAngleSettings;
+    [SerializeField] private float[] _visualRangeSettings;
+    [SerializeField] private float[] _navMeshSpeedSettings;
+    [SerializeField] private float[] _navMeshAngularSpeedSettings;
     private Rigidbody rb;
     [SerializeField] private NavMeshAgent _navMeshAgent;
     private bool isArraySet;
@@ -31,6 +35,11 @@ public class AiScout : MonoBehaviour
     private void Start()
     {
         StartCoroutine(FlagsToArray());
+        int _difficultyValue = GameManager.Instance.GetDifficulty();
+        _visualAngle = _visualAngleSettings[_difficultyValue];
+        _visualRange = _visualRangeSettings[_difficultyValue];
+        _navMeshAgent.speed = _navMeshSpeedSettings[_difficultyValue];
+        _navMeshAgent.angularSpeed = _navMeshAngularSpeedSettings[_difficultyValue];
     }
 
     private void Update()
