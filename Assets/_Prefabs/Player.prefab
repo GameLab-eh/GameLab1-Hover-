@@ -275,6 +275,7 @@ GameObject:
   - component: {fileID: 203139575034035075}
   - component: {fileID: 5166136890509081262}
   - component: {fileID: 7249026048362283003}
+  - component: {fileID: 163568148361688771}
   m_Layer: 31
   m_Name: Player
   m_TagString: Untagged
@@ -325,7 +326,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -342,14 +343,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1528ec0f77b108e41a605861e3e761cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnLocations: []
+  spawnPoints: []
   _movementSpeed: 15
   _maxSpeed: 20
   _rotationSpeed: 69
   _rotationDecayRate: 4.5
   <Rb>k__BackingField: {fileID: 0}
   _knockBackForce: 10
-  _jumpPower: 10
+  _jumpPower: 20
   _jumpStack: 0
   _invisibilityStack: 0
   _wallStack: 0
@@ -405,6 +406,18 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!75 &163568148361688771
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3806008941825947721}
+  m_Enabled: 1
+  m_Force: {x: 0, y: -20, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!1 &5171695600269904271
 GameObject:
   m_ObjectHideFlags: 0
