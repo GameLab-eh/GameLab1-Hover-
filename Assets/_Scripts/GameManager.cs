@@ -110,26 +110,17 @@ public class GameManager : MonoBehaviour
 
     #region Get
 
+    public int GetDifficulty() => difficulty;
     public float GetShieldDuration() => _invisibilityDuration;
-
     public float GetStoplightDuration() => _invisibilityDuration;
-
     public float GetInvisibilityDuration() => _invisibilityDuration;
-
     public float GetWallDelayDestroy() => _wallDelayDestroy;
-
     public bool GetInputSystem() => inputSystem;
-
     public int GetScore() => score;
-
     public float GetPlayerSpeed() => playerSpeed;
-
     public int GetFlagsToCapture() => flagPlayer;
-
     public int GetFlagsEnemy() => flagEnemy;
-
     public int GetNumberFlagsToCapture() => Levels[_currentLevel].flags;
-
     public int GetNumberFlags() => Levels[_currentLevel].flags;
     public int GetNumberPowerUp() => Levels[_currentLevel].powerUp;
     public int GetNumberChaserBot() => Levels[_currentLevel].chaserBot;
