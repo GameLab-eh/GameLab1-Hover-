@@ -15334,6 +15334,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 6648139206488555221}
     m_Modifications:
     - target: {fileID: 203139575034035075, guid: 67daae85f2c41d14cbd076334306ac5f, type: 3}
+      propertyPath: _blockHeight
+      value: -0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 203139575034035075, guid: 67daae85f2c41d14cbd076334306ac5f, type: 3}
+      propertyPath: _descentSpeed
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 203139575034035075, guid: 67daae85f2c41d14cbd076334306ac5f, type: 3}
       propertyPath: spawnPoints.Array.size
       value: 9
       objectReference: {fileID: 0}
