@@ -9,6 +9,7 @@ TagManager:
   - Traps
   - MiniMapCamera
   - Wood
+  - PlayerSpawnPoint
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - Red Light
   - Green Light
   - EraseMap
-  - 
+  - decorations
   - 
   - 
   - 
