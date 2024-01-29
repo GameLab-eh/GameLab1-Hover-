@@ -40,16 +40,16 @@ public class AudioManager : MonoBehaviour
 
     private void OnEnable()
     {
-        OptionManager.master += ChangeVolumeMaster;
-        OptionManager.music += ChangeVolumeMusic;
-        OptionManager.effects += ChangeVolumeEffects;
+        OptionManager.Master += ChangeVolumeMaster;
+        OptionManager.Music += ChangeVolumeMusic;
+        OptionManager.Effects += ChangeVolumeEffects;
     }
 
     private void OnDisable()
     {
-        OptionManager.master -= ChangeVolumeMaster;
-        OptionManager.music -= ChangeVolumeMusic;
-        OptionManager.effects -= ChangeVolumeEffects;
+        OptionManager.Master -= ChangeVolumeMaster;
+        OptionManager.Music -= ChangeVolumeMusic;
+        OptionManager.Effects -= ChangeVolumeEffects;
     }
 
     void PlaySoundtrack()

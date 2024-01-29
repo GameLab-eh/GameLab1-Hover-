@@ -77,16 +77,16 @@ public class GameManager : MonoBehaviour
     {
         FlagMechanic.FlagHit += IncrementFlagCount;
         PlayerController.PlayerSpeed += PlayerSpeed;
-        OptionManager.difficulty += SetDifficulty;
-        OptionManager.input += SetInputSystem;
+        OptionManager.Difficulty += SetDifficulty;
+        OptionManager.Input += SetInputSystem;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
     public void OnDisable()
     {
         FlagMechanic.FlagHit -= IncrementFlagCount;
         PlayerController.PlayerSpeed -= PlayerSpeed;
-        OptionManager.difficulty -= SetDifficulty;
-        OptionManager.input -= SetInputSystem;
+        OptionManager.Difficulty -= SetDifficulty;
+        OptionManager.Input -= SetInputSystem;
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
