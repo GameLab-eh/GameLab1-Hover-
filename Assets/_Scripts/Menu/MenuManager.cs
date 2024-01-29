@@ -49,7 +49,7 @@ public class MenuManager : MonoBehaviour
 #if UNITY_EDITOR
         SceneManager.LoadScene("Level 1");
 #else
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
 #endif
         GameManager.Instance.IncrementCurrentLeve();
     }
