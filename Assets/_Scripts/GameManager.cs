@@ -110,26 +110,17 @@ public class GameManager : MonoBehaviour
 
     #region Get
 
+    public int GetDifficulty() => difficulty;
     public float GetShieldDuration() => _invisibilityDuration;
-
     public float GetStoplightDuration() => _invisibilityDuration;
-
     public float GetInvisibilityDuration() => _invisibilityDuration;
-
     public float GetWallDelayDestroy() => _wallDelayDestroy;
-
     public bool GetInputSystem() => inputSystem;
-
     public int GetScore() => score;
-
     public float GetPlayerSpeed() => playerSpeed;
-
     public int GetFlagsToCapture() => flagPlayer;
-
     public int GetFlagsEnemy() => flagEnemy;
-
     public int GetNumberFlagsToCapture() => Levels[_currentLevel].flags;
-
     public int GetNumberFlags() => Levels[_currentLevel].flags;
     public int GetNumberPowerUp() => Levels[_currentLevel].powerUp;
     public int GetNumberChaserBot() => Levels[_currentLevel].chaserBot;
@@ -175,7 +166,7 @@ public class GameManager : MonoBehaviour
     IEnumerator EndGameTimer(bool isWin)
     {
         GameObject panel = isWin ? _gameWin : _gameOver;
-        GameManager.Instance.AudioManager.PlayEffect(isWin ? "" : "");
+        GameManager.Instance.AudioManager.PlayEffect(isWin ? "gamewin" : "gameover");
         gameIsPaused = true;
         panel.SetActive(gameIsPaused);
         Time.timeScale = gameIsPaused ? 0f : 1f;

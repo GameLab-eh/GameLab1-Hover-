@@ -7,7 +7,7 @@ public class AnimationRotation : MonoBehaviour
 
     private float rotationSpeed = 30f;
     private float oscillationSpeed = 1f;
-    private float oscillationHeight = 0.1f; 
+    private float oscillationHeight = 0.2f; 
 
     private float initialY;
 

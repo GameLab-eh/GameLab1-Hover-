@@ -22,7 +22,7 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.SetCurrentLevel(0);
-        GameManager.Instance.AudioManager.PlayEffect("levelStart");
+        //GameManager.Instance.AudioManager.PlayEffect("levelStart");
     }
 
     private void OnEnable()
@@ -41,8 +41,9 @@ public class MenuManager : MonoBehaviour
 
     public void Play()
     {
+        GameManager.Instance.AudioManager.PlayEffect("levelStart");
 #if UNITY_EDITOR
-        SceneManager.LoadScene("Build 0.8");
+        SceneManager.LoadScene("Build 0.9");
 #else
         SceneManager.LoadScene(1);
 #endif
