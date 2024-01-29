@@ -53,7 +53,7 @@ public class MenuInGame : MonoBehaviour
 #if UNITY_EDITOR
         SceneManager.LoadScene("MainMenu");
 #else
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
 #endif
     }
 

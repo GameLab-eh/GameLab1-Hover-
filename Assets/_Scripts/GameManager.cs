@@ -175,7 +175,7 @@ public class GameManager : MonoBehaviour
 #if UNITY_EDITOR
         String nextScene = "MainMenu";
 #else
-        int nextScene = 0;
+        int nextScene = 1;
 #endif
         if (isWin)
         {
