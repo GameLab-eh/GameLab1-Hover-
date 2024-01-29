@@ -14,8 +14,6 @@ public class OptionManager : MonoBehaviour
     [SerializeField] Slider _music;
     [SerializeField] Slider _effects;
 
-    [SerializeField] Slider _canvasGroup;
-
     public delegate void OptionManagerInt(int value);
     public static event OptionManagerInt Difficulty = null;
 
@@ -34,7 +32,6 @@ public class OptionManager : MonoBehaviour
         _master.onValueChanged.AddListener(SliderMaster);
         _music.onValueChanged.AddListener(SliderMusic);
         _effects.onValueChanged.AddListener(SliderEffects);
-        _canvasGroup.onAlphaChanged.AddListener(OnAlphaChanged);
 
         AudioManager.VolumeChanged += SliderUpdate;
     }
@@ -46,7 +43,6 @@ public class OptionManager : MonoBehaviour
         _master.onValueChanged.RemoveListener(SliderMaster);
         _music.onValueChanged.RemoveListener(SliderMusic);
         _effects.onValueChanged.RemoveListener(SliderEffects);
-        _canvasGroup.onAlphaChanged.RemoveListener(OnAlphaChanged);
     }
 
     void OnAlphaChanged(float alpha) { }
