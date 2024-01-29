@@ -26,7 +26,7 @@ public class EasterEgg : MonoBehaviour
 #if UNITY_EDITOR
             SceneManager.LoadScene("EasterEgg");
 #else
-            SceneManager.LoadScene(GameManager.Instance.GetLevel());
+            SceneManager.LoadScene(GameManager.Instance.GetLevel() + 1);
 #endif
             GameManager.Instance.SetCurrentLevel(999);
         }
