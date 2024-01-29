@@ -5566,6 +5566,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7875408685313520064, guid: e71023668b55b5e4591205b66e4b5952, type: 3}
+      propertyPath: m_fontSize
+      value: 24.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 7875408685313520064, guid: e71023668b55b5e4591205b66e4b5952, type: 3}
+      propertyPath: m_margin.y
+      value: -3.022283
+      objectReference: {fileID: 0}
     - target: {fileID: 7984644306703444035, guid: e71023668b55b5e4591205b66e4b5952, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
