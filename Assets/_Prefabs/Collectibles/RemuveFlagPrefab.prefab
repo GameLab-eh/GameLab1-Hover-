@@ -69,7 +69,7 @@ GameObject:
   - component: {fileID: 6581276675049273021}
   - component: {fileID: 4254231073222982498}
   - component: {fileID: 6521815107417518336}
-  m_Layer: 25
+  m_Layer: 24
   m_Name: RemuveFlagPrefab
   m_TagString: Traps
   m_Icon: {fileID: 0}
