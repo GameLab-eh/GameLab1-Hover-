@@ -344,12 +344,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
-  _movementSpeed: 15
+  _movementSpeed: 20
   _maxSpeed: 20
   _rotationSpeed: 69
   _rotationDecayRate: 4.5
   <Rb>k__BackingField: {fileID: 0}
-  _knockBackForce: 10
+  _knockBackForce: 15
   _jumpPower: 20
   _jumpStack: 0
   _invisibilityStack: 0
