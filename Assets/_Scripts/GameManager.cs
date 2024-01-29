@@ -190,10 +190,10 @@ public class GameManager : MonoBehaviour
             }
         }
         Reset();
-        SceneManager.LoadScene(nextScene);
-
+        
         gameIsPaused = false;
-        Time.timeScale = gameIsPaused ? 1f : 0f;
+        Time.timeScale = gameIsPaused ? 0f : 1f;
+        SceneManager.LoadScene(nextScene);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
