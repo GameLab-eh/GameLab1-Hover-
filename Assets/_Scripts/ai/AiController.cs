@@ -8,8 +8,15 @@ using Random = UnityEngine.Random;
 
 public class AiController : MonoBehaviour
 {
+    [SerializeField] private float[] _secondsBeforeChasingAgainSettings;
+    [SerializeField] private float[] _visualAngleSettings;
+    [SerializeField] private float[] _visualRangeSettings;
+    [SerializeField] private float[] _navMeshSpeedSettings;
+    [SerializeField] private float[] _navMeshAngularSpeedSettings;
+    
+    
     //generals and checks
-
+    [Header("General variables")]
     private Rigidbody rb;
     [SerializeField] private NavMeshAgent _navMeshAgent;
     [SerializeField] private Transform _player;
@@ -27,14 +34,15 @@ public class AiController : MonoBehaviour
 
 
     [Header("checks and states of the patrolling/chasing")]
-    [SerializeField, Tooltip("always set it to half the angle u want (if u want 45° set it to 22.5)")]
-    private float _visualAngle = 22.5f;
 
     private bool _isPlayerHitted = false;
-    [SerializeField] private float secondsBeforeChasingAgain = 1f;
     public static bool _isPlayerInvisible = false;
 
-    [SerializeField] private float _visualRange;
+    //enemyStats
+    private float secondsBeforeChasingAgain = 1f;
+    private float _visualAngle = 22.5f;
+    private float _visualRange;
+    
     
 
     private void Awake()
@@ -42,6 +50,15 @@ public class AiController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         _player = GameObject.Find("Player").transform;
         _navMeshAgent = GetComponent<NavMeshAgent>();
+    }
+    private void Start()
+    {
+        int _difficultyValue = GameManager.Instance.GetDifficulty();
+        secondsBeforeChasingAgain = _secondsBeforeChasingAgainSettings[_difficultyValue];
+        _visualAngle = _visualAngleSettings[_difficultyValue];
+        _visualRange = _visualRangeSettings[_difficultyValue];
+        _navMeshAgent.speed = _navMeshSpeedSettings[_difficultyValue];
+        _navMeshAgent.angularSpeed = _navMeshAngularSpeedSettings[_difficultyValue];
     }
     private void Update()
     {

@@ -284,6 +284,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 090a9d9a285857d408394830524b73f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _visualAngleSettings:
+  - 45
+  - 90
+  - 130
+  _visualRangeSettings:
+  - 50
+  - 70
+  - 100
+  _navMeshSpeedSettings:
+  - 14
+  - 16
+  - 18
+  _navMeshAngularSpeedSettings:
+  - 120
+  - 150
+  - 200
   _navMeshAgent: {fileID: 0}
   _walkRadius: 180
   walkRange: 20
