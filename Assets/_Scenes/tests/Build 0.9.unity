@@ -1173,6 +1173,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 511569687576905458, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 993711805632416842, guid: bf663340d2644304090712d3516f793f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -1344,7 +1348,7 @@ PrefabInstance:
     - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
       propertyPath: _menu
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1466400434}
     - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
       propertyPath: _currentLevel
       value: 1
@@ -1397,7 +1401,8 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -419.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 582018489020279785, guid: bf663340d2644304090712d3516f793f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -11804,6 +11809,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6814281871094462504, guid: 47cd729ad065543448f04a0034bb135c, type: 3}
   m_PrefabInstance: {fileID: 1466023750}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1466400434 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5408547681526358330, guid: bf663340d2644304090712d3516f793f, type: 3}
+  m_PrefabInstance: {fileID: 185080710}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1473048357
 PrefabInstance:
