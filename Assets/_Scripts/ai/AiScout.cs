@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -44,6 +45,7 @@ public class AiScout : MonoBehaviour
 
     private void Update()
     {
+        StartCoroutine(FlagsToArray());
         if (isArraySet)
         {
             if (IsFlagInRange())
@@ -163,13 +165,19 @@ public class AiScout : MonoBehaviour
         _enemyFlagArray = GameObject.FindGameObjectsWithTag("Flag");
         isArraySet = true;
     }
-    private void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.layer == 31)
+        if (collision.gameObject.layer == 9)
         {
-            Vector3 knockbackDirection = (transform.position - other.transform.position).normalized;
+            _isWalkSet = false;
+            Patroling();
+        }
+        if (collision.gameObject.layer == 31)
+        {
+            Vector3 knockbackDirection = (transform.position - collision.transform.position).normalized;
             rb.AddForce(knockbackDirection * _knockBackForce, ForceMode.Impulse);
         }
     }
+    
 }
     
