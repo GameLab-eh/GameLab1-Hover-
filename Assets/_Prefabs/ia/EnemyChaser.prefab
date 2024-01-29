@@ -49,10 +49,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1.2
-  m_Speed: 10
-  m_Acceleration: 8
+  m_Speed: 13
+  m_Acceleration: 9
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 150
   m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -121,6 +121,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9736f233864fc6241a1dfaf33000d751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _secondsBeforeChasingAgainSettings:
+  - 3
+  - 2
+  - 0
+  _visualAngleSettings:
+  - 45
+  - 90
+  - 130
+  _visualRangeSettings:
+  - 50
+  - 70
+  - 100
+  _navMeshSpeedSettings:
+  - 12
+  - 14
+  - 16
+  _navMeshAngularSpeedSettings:
+  - 120
+  - 150
+  - 200
   _navMeshAgent: {fileID: 0}
   _player: {fileID: 0}
   _knockBackForce: 20
@@ -129,9 +149,6 @@ MonoBehaviour:
   _playerLayer:
     serializedVersion: 2
     m_Bits: 2147483648
-  _visualAngle: 90
-  secondsBeforeChasingAgain: 2
-  _visualRange: 30
 --- !u!114 &979260889341785555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,6 +185,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2351663297371520602}
     m_Modifications:
+    - target: {fileID: 4146700506923072342, guid: 29d75a7aa6c77d640847cdd7cf5daad6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d35f3ff85cf5aae40bcb69db3a93f97d, type: 2}
     - target: {fileID: 6549200326671258362, guid: 29d75a7aa6c77d640847cdd7cf5daad6, type: 3}
       propertyPath: m_Name
       value: MiniMapMesh
