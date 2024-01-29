@@ -43,7 +43,7 @@ public class MenuManager : MonoBehaviour
     {
         GameManager.Instance.AudioManager.PlayEffect("levelStart");
 #if UNITY_EDITOR
-        SceneManager.LoadScene("Build 0.9");
+        SceneManager.LoadScene("Build 0.8");
 #else
         SceneManager.LoadScene(1);
 #endif
