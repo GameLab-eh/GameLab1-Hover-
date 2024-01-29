@@ -7581,6 +7581,10 @@ PrefabInstance:
       propertyPath: _menu
       value: 
       objectReference: {fileID: 984590260}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[1].flags
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6126132527202308088, guid: bf663340d2644304090712d3516f793f, type: 3}
       propertyPath: m_IsActive
       value: 0

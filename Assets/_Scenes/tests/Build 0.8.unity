@@ -2266,6 +2266,10 @@ PrefabInstance:
       propertyPath: _currentLevel
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[1].flags
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7066849261400402043, guid: bf663340d2644304090712d3516f793f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
