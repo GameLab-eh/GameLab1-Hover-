@@ -7453,6 +7453,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -162.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2234116328474671485, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2395473225869379518, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2496565844395470215, guid: bf663340d2644304090712d3516f793f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -7472,6 +7480,14 @@ PrefabInstance:
     - target: {fileID: 2917124075412094667, guid: bf663340d2644304090712d3516f793f, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3082424037195710319, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 3722294973422972193, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3980065763933416245, guid: bf663340d2644304090712d3516f793f, type: 3}
       propertyPath: m_AnchorMax.x
