@@ -9117,6 +9117,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3472435506843739018, guid: 67daae85f2c41d14cbd076334306ac5f, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 1191190527
+      objectReference: {fileID: 0}
     - target: {fileID: 3806008941825947721, guid: 67daae85f2c41d14cbd076334306ac5f, type: 3}
       propertyPath: m_Name
       value: Player
@@ -9160,6 +9164,10 @@ PrefabInstance:
     - target: {fileID: 7356426103808311798, guid: 67daae85f2c41d14cbd076334306ac5f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8753090218903501803, guid: 67daae85f2c41d14cbd076334306ac5f, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 1191190527
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
