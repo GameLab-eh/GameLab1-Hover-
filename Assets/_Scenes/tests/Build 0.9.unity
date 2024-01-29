@@ -1276,7 +1276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2917124075412094667, guid: bf663340d2644304090712d3516f793f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3980065763933416245, guid: bf663340d2644304090712d3516f793f, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1357,7 +1357,7 @@ PrefabInstance:
     - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
       propertyPath: _menu
       value: 
-      objectReference: {fileID: 1466400434}
+      objectReference: {fileID: 0}
     - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
       propertyPath: _currentLevel
       value: 1
@@ -12101,11 +12101,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6814281871094462504, guid: 47cd729ad065543448f04a0034bb135c, type: 3}
   m_PrefabInstance: {fileID: 1466023750}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1466400434 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5408547681526358330, guid: bf663340d2644304090712d3516f793f, type: 3}
-  m_PrefabInstance: {fileID: 185080710}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1473048357
 PrefabInstance:
