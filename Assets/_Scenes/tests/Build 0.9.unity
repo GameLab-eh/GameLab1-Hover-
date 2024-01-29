@@ -16536,8 +16536,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _flagPlayer: {fileID: 7223119933681789597}
   _flagEnemy: {fileID: 8289401122983906301}
-  _flagEmpty: f
-  _flagFill: F
+  _flagEmpty: a
+  _flagFill: A
 --- !u!222 &236530317843437887
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -36539,8 +36539,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9a4b436161b3c264eb610b4a892254dc, type: 2}
+  m_sharedMaterial: {fileID: 6714689172143388337, guid: 9a4b436161b3c264eb610b4a892254dc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -40329,8 +40329,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9a4b436161b3c264eb610b4a892254dc, type: 2}
+  m_sharedMaterial: {fileID: 6714689172143388337, guid: 9a4b436161b3c264eb610b4a892254dc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
