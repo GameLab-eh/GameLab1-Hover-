@@ -34,6 +34,8 @@ public class PowerUpsInventory : MonoBehaviour
     float _shieldDuration;
     float _stoplightDuration;
 
+    private Coroutine currentCoroutine;
+
     private void Start()
     {
         _inputSystem = GameManager.Instance.GetInputSystem();
@@ -70,8 +72,16 @@ public class PowerUpsInventory : MonoBehaviour
 
     void SetStoplightSlider(bool value)
     {
-        if (!value) StartCoroutine(DecrementSlider(_indicatorStoplight[0], _stoplightDuration)); //red
-        else StartCoroutine(DecrementSlider(_indicatorStoplight[1], _stoplightDuration)); //green
+        if (currentCoroutine != null)
+        {
+            StopCoroutine(currentCoroutine);
+        }
+
+        _indicatorStoplight[0].value = 0f;
+        _indicatorStoplight[1].value = 0f;
+
+        if (!value) currentCoroutine = StartCoroutine(DecrementSlider(_indicatorStoplight[0], _stoplightDuration));
+        else currentCoroutine = StartCoroutine(DecrementSlider(_indicatorStoplight[1], _stoplightDuration));
     }
 
     void SetStack(int t, int value) => _numberDisplay[t].text = "" + value;

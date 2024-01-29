@@ -3356,7 +3356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inputField: {fileID: 1247014585}
-  _password: 123
+  _password: tneve
 --- !u!1 &1219178341
 GameObject:
   m_ObjectHideFlags: 0
