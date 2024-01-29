@@ -7598,8 +7598,132 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 984590260}
     - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[2].maze
+      value: Level 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[3].maze
+      value: Level 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
       propertyPath: Levels.Array.data[1].flags
-      value: 1
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[2].flags
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[3].flags
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[2].powerUp
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[3].powerUp
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[1].scoutBot
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[2].scoutBot
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[3].scoutBot
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[1].chaserBot
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[2].chaserBot
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[3].chaserBot
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[2].levelBonus.easy
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[2].levelBonus.hard
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[3].levelBonus.easy
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[3].levelBonus.hard
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[2].levelBonus.medium
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[3].levelBonus.medium
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[2].flagRemainBonus.easy
+      value: 2250
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[2].flagRemainBonus.hard
+      value: 2750
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[3].flagRemainBonus.easy
+      value: 2250
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[3].flagRemainBonus.hard
+      value: 2750
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[2].flagCaptureBonus.easy
+      value: 900
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[2].flagCaptureBonus.hard
+      value: 1100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[3].flagCaptureBonus.easy
+      value: 900
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[3].flagCaptureBonus.hard
+      value: 1100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[2].flagRemainBonus.medium
+      value: 2500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[3].flagRemainBonus.medium
+      value: 2500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[2].flagCaptureBonus.medium
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118568730038493863, guid: bf663340d2644304090712d3516f793f, type: 3}
+      propertyPath: Levels.Array.data[3].flagCaptureBonus.medium
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 6126132527202308088, guid: bf663340d2644304090712d3516f793f, type: 3}
       propertyPath: m_IsActive
