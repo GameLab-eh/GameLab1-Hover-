@@ -16,10 +16,10 @@ EditorBuildSettings:
     guid: d05b219be5c79fa4db47323cf61f9304
   - enabled: 1
     path: Assets/_Scenes/tests/Level 2.unity
-    guid: e407871ad2ac0404cbd792b037941c60
+    guid: e67a79b93ad381b44ac840e7fd8f9a64
   - enabled: 1
     path: Assets/_Scenes/tests/Level 3.unity
-    guid: df2ce5e3ca414fb4f8d40f668474bebf
+    guid: 2ababbbe6c40ac74e9698852d7c83aaa
   - enabled: 1
     path: Assets/_Scenes/EasterEgg.unity
     guid: 06524480b0095ff44818c63558cdc8a4
