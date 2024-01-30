@@ -218,7 +218,7 @@ MonoBehaviour:
   - 200
   _navMeshAgent: {fileID: 0}
   _player: {fileID: 0}
-  _knockBackForce: 15
+  _knockBackForce: 20
   _walkRadius: 180
   walkRange: 20
   _playerLayer:

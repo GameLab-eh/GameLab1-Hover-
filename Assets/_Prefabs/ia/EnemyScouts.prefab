@@ -362,16 +362,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _visualAngleSettings:
   - 45
-  - 90
-  - 130
+  - 75
+  - 110
   _visualRangeSettings:
   - 50
   - 70
   - 100
   _navMeshSpeedSettings:
-  - 14
-  - 16
-  - 18
+  - 13
+  - 15
+  - 17
   _navMeshAngularSpeedSettings:
   - 120
   - 150
