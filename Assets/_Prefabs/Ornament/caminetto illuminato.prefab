@@ -272,7 +272,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 354e93e38ea076040bef16eb48459558, type: 3}
       propertyPath: m_Name
-      value: caminetto 1
+      value: caminetto illuminato
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 354e93e38ea076040bef16eb48459558, type: 3}
       propertyPath: m_Layer
@@ -344,8 +344,37 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 354e93e38ea076040bef16eb48459558, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1490206651419560008}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 354e93e38ea076040bef16eb48459558, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6312944311912222724}
   m_SourcePrefab: {fileID: 100100000, guid: 354e93e38ea076040bef16eb48459558, type: 3}
+--- !u!1 &3830034933262504024 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 354e93e38ea076040bef16eb48459558, type: 3}
+  m_PrefabInstance: {fileID: 4172142687597620489}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &6312944311912222724
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3830034933262504024}
+  m_Material: {fileID: 13400000, guid: 3b458886323352c40a0d6fd290163110, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.09, y: 0.07, z: 0.03}
+  m_Center: {x: 1.3210351e-16, y: -0.002693405, z: -0.009402286}
 --- !u!4 &4498204143973993186 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 354e93e38ea076040bef16eb48459558, type: 3}
